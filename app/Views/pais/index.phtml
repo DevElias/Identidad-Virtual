@@ -1,0 +1,12 @@
+<div class="content-wrapper">
+
+   <?php foreach ($this->view->pais as $pais): ?>
+     
+    <h3 class="h3"><?php echo($pais->title)?></h3>
+    <p class="text-justify"><?php echo($pais->nombre);?></p>
+    </hr>
+    
+     <?php endforeach; ?>
+</div>
+
+<div class="control-sidebar-bg"></div>

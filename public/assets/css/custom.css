@@ -1,0 +1,38 @@
+.dataTables_filter label, .dataTables_filter label input{width:100%;}
+.box-body input {
+	line-height: 20px!important;
+}
+.box-body  .checkbox-inline {
+	display: block;
+	padding-bottom: 10px;
+	margin-left: 0px!important;
+
+}
+.skin-blue .main-header .logo:hover {
+	background: #fff!important;
+}
+.sidebar-menu .treeview-menu>li>a {
+	padding: 10px 5px 10px 15px!important;
+}
+td .btn {
+	margin-left: 10px; 
+}
+.user-panel {
+	margin-top: 21px;
+}
+.btn-app {
+	min-width: 130px!important;
+	height: 90px!important;
+	padding: 26px 5px!important;
+	font-weight: 600!important;
+}
+.alert {
+    margin-top: 20px;
+}
+#loading {
+	position:fixed;
+    top:50%; 
+    left: 50%;
+    z-index:999;
+	margin-left:-100px;
+}

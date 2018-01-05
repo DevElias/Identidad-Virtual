@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ID Virtual | Login</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/assets/js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/assets/js/iCheck/square/blue.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/jquery-confirm.css"/>
+
+</head>
+<body class="hold-transition">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><img src="/assets/img/logo-180.jpg"  alt="User Image"></a>
+  </div>
+  <div class="login-box-body" id="form-login">
+    <p class="login-box-msg">Iniciar sesión para acceder al sistema</p>
+
+    <form>
+      <div class="row">
+        <div class="">
+          <button type="button" class="btn btn-primary btn-block btn-flat"  id="login">Entrar</button>
+        </div>
+      </div>
+    </form>
+
+    
+
+    <a href="#" class="col-xs-offset-4" id="esqueci-senha">Olvidé la contraseña</a><br>
+
+  </div>
+
+  <div class="login-box-body hide" id="form-esqueci">
+      <form action="#" method="get">
+        <p class="login-box-msg">Introduzca su dirección de e-mail para enviar una nueva contraseña</p>
+
+          <div class="form-group has-feedback">
+            <input type="email" class="form-control" id="esqueci-email" placeholder="Email">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="button" id="btn-esqueci" class="btn btn-primary btn-block btn-flat">Enviar correo electrónico</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+         <a href="#" id="voltar-login">Volver al inicio</a><br>
+      </div>
+</div>
+
+<script src="/assets/js/jQuery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/assets/js/main.js"></script>
+<script src="/assets/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/iCheck/icheck.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
+<script>
+  $(function () {
+    $('#esqueci-senha').click(function() {
+      $('#form-login').addClass('hide');
+      $('#form-esqueci').removeClass('hide');
+    });
+    $('#voltar-login').click(function() {
+      $('#form-login').removeClass('hide');
+      $('#form-esqueci').addClass('hide');
+    });
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+  
+  $( "#btn-esqueci" ).click(function() {
+	  EsqueciSenha();
+	});
+</script>
+</body>
+</html>
