@@ -7,9 +7,17 @@ class HomeController extends BaseController
 {
     public function index()
     {
-        $this->setPageTitle('Home');
-        $this->renderView('home/dashboard', 'layout');
+        session_start();
+        if(!isset($_SESSION['access_token']))
+        {
+            header('Location: /');
+        }
+        else
+        {
+            $this->setPageTitle('Home');
+            $this->renderView('home/dashboard', 'layout');
+        }
+        
+      
     }
-    
-    
 }

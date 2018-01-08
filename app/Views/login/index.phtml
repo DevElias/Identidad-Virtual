@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿<?php
+    $googleClient = new Google_Client();
+    $auth = new GoogleAuth($googleClient);
+    
+    if($auth->checkRedirectCode())
+    {
+        header('Location: /home');
+    }
+?>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -15,43 +24,43 @@
 </head>
 <body class="hold-transition">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="#"><img src="/assets/img/logo-180.jpg"  alt="User Image"></a>
-  </div>
-  <div class="login-box-body" id="form-login">
-    <p class="login-box-msg">Iniciar sesión para acceder al sistema</p>
 
-    <form>
-      <div class="row">
-        <div class="">
-          <button type="button" class="btn btn-primary btn-block btn-flat"  id="login">Entrar</button>
+<?php if(!$auth->isLoggedIn()): ?>
+		<div class="login-logo">
+            <a href="#"><img src="/assets/img/logo-180.jpg"  alt="User Image"></a>
         </div>
-      </div>
-    </form>
-
-    
-
-    <a href="#" class="col-xs-offset-4" id="esqueci-senha">Olvidé la contraseña</a><br>
-
-  </div>
-
-  <div class="login-box-body hide" id="form-esqueci">
-      <form action="#" method="get">
-        <p class="login-box-msg">Introduzca su dirección de e-mail para enviar una nueva contraseña</p>
-
-          <div class="form-group has-feedback">
-            <input type="email" class="form-control" id="esqueci-email" placeholder="Email">
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          <div class="login-box-body" id="form-login">
+            <p class="login-box-msg">Iniciar sesión para acceder al sistema</p>
+                <form>
+                  <div class="row">
+                    <div class="">
+                      <a type="button" class="btn btn-primary btn-block btn-flat" href="<?php echo $auth->getAuthUrl();?>">Entrar</a>
+                    </div>
+                  </div>
+                </form>
+            <a href="#" class="col-xs-offset-4" id="esqueci-senha">Olvidé la contraseña</a><br>
           </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <button type="button" id="btn-esqueci" class="btn btn-primary btn-block btn-flat">Enviar correo electrónico</button>
-            </div>
-            <!-- /.col -->
-          </div>
-        </form>
-         <a href="#" id="voltar-login">Volver al inicio</a><br>
-      </div>
+        
+          <div class="login-box-body hide" id="form-esqueci">
+              <form action="#" method="get">
+                    <p class="login-box-msg">Introduzca su dirección de e-mail para enviar una nueva contraseña</p>
+                      <div class="form-group has-feedback">
+                        <input type="email" class="form-control" id="esqueci-email" placeholder="Email">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <button type="button" id="btn-esqueci" class="btn btn-primary btn-block btn-flat">Enviar correo electrónico para PyT</button>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                </form>
+                 <a href="#" id="voltar-login">Volver al inicio</a><br>
+           </div>
+<?php else:?>		
+	<?php header('Location: /home');?>	
+<?php endif;?>	
+  
 </div>
 
 <script src="/assets/js/jQuery/jquery-2.2.3.min.js"></script>
