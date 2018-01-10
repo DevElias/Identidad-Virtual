@@ -6,36 +6,91 @@ use Core\Container;
 
 class PaisesController extends BaseController
 {
-    public function index()
+    public function index($request)
     {
-        $this->setPageTitle('Paises');
+        $this->setPageTitle('Pais');
         $model = Container::getModel("Pais");
         $this->view->pais = $model->select();
+        
+        /* Api Paises */
+        /* URL de Cosumo:  http://localhost:8080/pais?api=true */
+        
+        $aRequest = (array) $request;
+        if($aRequest['api'] === 'true'&& $aRequest['method'] == 'GET')
+        {
+            die(print_r(json_encode($this->view->pais), true));
+        }
+        
+        /* Render View Paises */
         $this->renderView('pais/index', 'layout');
     }
     
-    public function show($id, $request)
+    public function add()
+    {
+        $this->setPageTitle('Pais');
+        $this->renderView('pais/add', 'layout');
+    }
+    
+    public function save($aParam)
+    {
+        $aParam = (array) $aParam;
+        
+        $aParam['nombre'] = filter_var($aParam['nombre'], FILTER_SANITIZE_STRING);
+        $aParam['codigo'] = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
+        $aParam['status'] = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
+        
+        $model  = Container::getModel("Pais");
+        $result = $model->GuardarPais($aParam);
+        
+        if($result)
+        {
+            echo json_encode(array("results" => true));
+        }
+        else 
+        {
+            echo json_encode(array("results" => false));
+        }
+    }
+    
+    public function delete($id)
+    {
+        $model  = Container::getModel("Pais");
+        $result = $model->delete($id);
+        
+        if($result)
+        {
+            header('Location: /pais');
+        }
+    }
+    
+    public function show($id)
     {
         $model = Container::getModel("Pais");
-        $aPais = $model->search($id);
+        $this->view->pais = $model->search($id);
         
-        echo('<pre>');
-        die(print_r($aPais, true));
+        /* Render View Paises */
+        $this->renderView('pais/edit', 'layout');
     }
     
-    public function teste($id, $sexo, $idade, $request)
-    {  
-        $aRequest = (array) $request;
+    public function edit($aParam)
+    {
+        $aParam = (array) $aParam;
         
-        if($aRequest['api'] === 'true')
+        $aParam['id']     = filter_var($aParam['id'], FILTER_SANITIZE_STRING);
+        $aParam['nombre'] = filter_var($aParam['nombre'], FILTER_SANITIZE_STRING);
+        $aParam['codigo'] = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
+        $aParam['status'] = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
+        
+        $model  = Container::getModel("Pais");
+        $result = $model->ActualizarPais($aParam);
+        
+        if($result)
         {
-            $data = json_decode(file_get_contents('php://input'), true);
-            die(print_r($data, true));
+            echo json_encode(array("results" => true));
         }
-        else {
-            die(print_r($id, true));
+        else
+        {
+            echo json_encode(array("results" => false));
         }
-        
     }
-    
 }

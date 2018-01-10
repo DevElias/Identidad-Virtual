@@ -1,12 +1,54 @@
-<div class="content-wrapper">
-
-   <?php foreach ($this->view->pais as $pais): ?>
-     
-    <h3 class="h3"><?php echo($pais->title)?></h3>
-    <p class="text-justify"><?php echo($pais->nombre);?></p>
-    </hr>
-    
-     <?php endforeach; ?>
+<div class="wrapper">
+	<div class="content-wrapper">
+		<section class="content">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box">
+						<div class="box-header">
+							<h3 class="box-title">Listado Pa&iacute;ses</h3>
+							<div class="box-body">
+							<a type="button" class="btn btn-primary btn-block btn-padrao bg-green" href="/pais/add"><i class="fa fa-plus"></i>&nbsp;&nbsp;Agregar Pa&iacute;s</a></br>
+								<table id="listagem" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>C&oacute;digo</th>
+											<th>Status</th>
+											<th></th>
+										</tr>
+										<tbody>
+											 <?php foreach ($this->view->pais as $pais):?>
+    											 <tr>
+    											 <td><?php echo($pais->Nombre_Pais);?></td>
+    											 <td><?php echo($pais->Codigo_Pais);?></td>
+    											 <td><?php ($pais->Status_Pais == '1' ? $pais->Status_Pais = 'Activo' : $pais->Status_Pais = 'Inactivo'); echo($pais->Status_Pais);?></td>
+    											 <td>
+    											 	<a type="button" href="/pais/show/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
+    											 	<a type="button" href="/pais/delete/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+    											 </td>
+    										 <?php endforeach; ?>
+                                        </tbody>
+									</thead>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
 </div>
 
-<div class="control-sidebar-bg"></div>
+<!-- require Scripts Jquery -->
+
+<script type="text/javascript" src="/assets/js/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/assets/js/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#listagem').DataTable({
+      "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+    });
+  });
+</script>

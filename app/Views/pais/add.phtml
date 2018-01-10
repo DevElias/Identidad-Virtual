@@ -1,0 +1,52 @@
+<div class="wrapper">
+	 <div class="content-wrapper">
+	 	<section class="content">
+	 		<div class="row">
+	 			<div class="col-xs-12">
+	 				<div class="box box-primary">
+	 					<div class="box-header with-border">
+	 						<h3 class="box-title">Agregar Pa&iacute;s</h3>
+	 					</div>
+	 					<form role="form">
+	 						<div class="box-body">
+	 							<div class="form-group">
+        	 						<label for="exampleInputEmail1">Nombre</label>
+        	 						<input type="nome" class="form-control" placeholder="nombre" id="nombre">
+	 							</div>
+        	 					<div class="form-group">
+        	 						<label for="exampleInputPassword1">C&oacute;digo</label>
+                                    <input type="codigo" class="form-control" placeholder="codigo" id="codigo">
+                                </div>
+                                <div class="form-group">
+                                	<label for="status">Status</label>
+                               		<select  id="status" class="form-control" >
+                                    	<option value="1">Activo</option>
+                                    	<option value="2">Inactivo</option>
+                                    </select>
+                               </div>
+                               <div class="box-footer">
+                               <div class="col-xs-6">
+                               		<a id="guardar-pais" class="btn btn-block btn-primary bg-green"><i></i>Guardar</a>
+                               </div>
+                               <div class="col-xs-6">
+                               		<a class="btn btn-block btn-primary bg-red" href="/pais"><i></i>Cancelar</a>
+                               </div>
+                               </div>
+	 						</div>
+	 					</form>
+	 				</div>
+	 			</div>
+	 		</div>
+	 	</section>
+	 </div>
+</div>
+
+<!-- require Scripts Jquery -->
+
+<script type="text/javascript" src="/assets/js/pais/pais.js""></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
+<script>
+	$("#guardar-pais").click(function() {
+		GuardarPais();
+	});
+</script>

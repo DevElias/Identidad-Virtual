@@ -2,12 +2,12 @@
 
 return [
     
-    /* Modificar quando mudar o tipo de conexao (mysql) */
+    /* Modify when changing the connection type (mysql) */
     'driver' => 'mysql',
     
     'mysql' => [
         'host' => 'localhost',
-        'database' => 'techo_framework',
+        'database' => 'id_virtual',
         'user' => 'root',
         'pass' => 'mysql',
         'charset' => 'utf8',

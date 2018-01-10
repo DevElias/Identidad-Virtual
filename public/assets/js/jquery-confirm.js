@@ -1190,13 +1190,13 @@ var jconfirm, Jconfirm;
         '</div>' +
         '<div class="jconfirm-clear">' +
         '</div></div></div></div></div></div></div>',
-        title: 'Alerta de Segurança',
+        title: 'Alerta de seguridad',
         titleClass: '',
         type: 'default',
         typeAnimated: true,
         draggable: false,
         alignMiddle: true,
-        content: 'Gravado com Sucesso.',
+        content: 'Grabado con éxito.',
         buttons: {},
         defaultButtons: {
             ok: {

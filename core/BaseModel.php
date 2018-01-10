@@ -9,11 +9,6 @@ abstract class BaseModel
     private $pdo;
     protected $table;
     
-    public function __construct(PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
-    
     public function select()
     {
         $query = "SELECT * FROM {$this->table}";
@@ -32,6 +27,16 @@ abstract class BaseModel
         $stmt->execute();
         $result = $stmt->fetch();
         $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function execute($query)
+    {
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
         return $result;
     }
 }
