@@ -65,7 +65,7 @@ class AreasController extends BaseController
     
     public function show($id)
     {
-        $model = Container::getModel("area");
+        $model = Container::getModel("Area");
         $this->view->area = $model->search($id);
         
         /* Render View Paises */
