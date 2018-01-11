@@ -1,4 +1,4 @@
-USE id_virtual;
+USE techo_id;
 
 CREATE TABLE pais (
    id INT(10) NOT NULL AUTO_INCREMENT,

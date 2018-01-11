@@ -1,6 +1,8 @@
 <?php 
 namespace Core;
 
+use Core\Database;
+
 class Container
 {
     public static function newController($controller)

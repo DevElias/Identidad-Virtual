@@ -7,7 +7,7 @@ return [
     
     'mysql' => [
         'host' => 'localhost',
-        'database' => 'id_virtual',
+        'database' => 'techo_id',
         'user' => 'root',
         'pass' => 'mysql',
         'charset' => 'utf8',
