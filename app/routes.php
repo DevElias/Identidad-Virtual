@@ -27,6 +27,17 @@ $route[] = ['/area/delete/{id}', 'AreasController@delete'];
 $route[] = ['/area/show/{id}', 'AreasController@show'];
 
 /* API Areas */
-$route[] = ['/are?api=true', 'AreasController@index'];
+$route[] = ['/area?api=true', 'AreasController@index'];
+
+/*Cargos Controller*/
+$route[] = ['/cargo', 'CargosController@index'];
+$route[] = ['/cargo/add', 'CargosController@add'];
+$route[] = ['/cargo/save', 'CargosController@save'];
+$route[] = ['/cargo/edit', 'CargosController@edit'];
+$route[] = ['/cargo/delete/{id}', 'CargosController@delete'];
+$route[] = ['/cargo/show/{id}', 'CargosController@show'];
+
+/* API Cargos */
+$route[] = ['/cargo?api=true', 'CargosController@index'];
 
 return $route;

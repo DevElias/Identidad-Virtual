@@ -5,7 +5,7 @@
 	 			<div class="col-xs-12">
 	 				<div class="box box-primary">
 	 					<div class="box-header with-border">
-	 						<h3 class="box-title">Agregar &Aacute;rea</h3>
+	 						<h3 class="box-title">Agregar Cargo</h3>
 	 					</div>
 	 					<form role="form">
 	 						<div class="box-body">
@@ -13,12 +13,8 @@
         	 						<label for="exampleInputEmail1">Nombre</label>
         	 						<input type="nome" class="form-control" placeholder="nombre" id="nombre">
 	 							</div>
-        	 					<div class="form-group">
-        	 						<label for="exampleInputPassword1">C&oacute;digo</label>
-                                    <input type="codigo" class="form-control" placeholder="codigo" id="codigo">
-                                </div>
                                 <div class="form-group">
-                                	<label for="area">Status</label>
+                                	<label for="cargo">Status</label>
                                		<select  id="status" class="form-control" >
                                     	<option value="1">Activo</option>
                                     	<option value="2">Inactivo</option>
@@ -26,7 +22,7 @@
                                </div>
                                <div class="box-footer">
                                <div class="col-xs-6">
-                               		<a id="guardar-area" class="btn btn-block btn-primary bg-green"><i></i>Guardar</a>
+                               		<a id="guardar-cargo" class="btn btn-block btn-primary bg-green"><i></i>Guardar</a>
                                </div>
                                <div class="col-xs-6">
                                		<a class="btn btn-block btn-primary bg-red" href="/area"><i></i>Cancelar</a>
@@ -43,10 +39,10 @@
 
 <!-- require Scripts Jquery -->
 
-<script type="text/javascript" src="/assets/js/area/area.js""></script>
+<script type="text/javascript" src="/assets/js/cargo/cargo.js""></script>
 <script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
 <script>
-	$("#guardar-area").click(function() {
-		GuardarArea();
+	$("#guardar-cargo").click(function() {
+		GuardarCargo();
 	});
 </script>

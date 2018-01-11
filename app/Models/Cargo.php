@@ -5,9 +5,9 @@ use Core\BaseModel;
 use PDO;
 
 
-class Pais extends BaseModel
+class Cargo extends BaseModel
 {
-    protected $table = "pais";
+    protected $table = "cargo";
     private $pdo;
     
     public function __construct(PDO $pdo)
@@ -19,10 +19,9 @@ class Pais extends BaseModel
     {
         $sql  = "";
         $sql .= "SELECT ";
-        $sql .= "id     as 'ID_Pais', ";
-        $sql .= "nombre as 'Nombre_Pais', ";
-        $sql .= "codigo as 'Codigo_Pais', ";
-        $sql .= "status as 'Status_Pais', ";
+        $sql .= "id     as 'ID_Cargo', ";
+        $sql .= "nombre as 'Nombre_Cargo', ";
+        $sql .= "status as 'Status_Cargo', ";
         $sql .= "fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table}";
@@ -30,6 +29,32 @@ class Pais extends BaseModel
         $stmt->execute();
         $result = $stmt->fetchAll();
         $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function GuardarCargo($aParam)
+    {
+        $sql  = "";
+        $sql .= "INSERT INTO {$this->table} (";
+        $sql .= "id, ";
+        $sql .= "nombre, ";
+        $sql .= "status, ";
+        $sql .= "id_creador, ";
+        $sql .= "id_alterador, ";
+        $sql .= "fecha_inc, ";
+        $sql .= "fecha_alt) VALUES (";
+        $sql .= " NULL, ";
+        $sql .= "'". $aParam['nombre']."', ";
+        $sql .= "'". $aParam['status']."', ";
+        $sql .= " 0, ";
+        $sql .= " 0, ";
+        $sql .= " NOW(), ";
+        $sql .= " '0000-00-00 00:00:00')";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
         return $result;
     }
     
@@ -54,40 +79,11 @@ class Pais extends BaseModel
         return $result;
     }
     
-    public function GuardarPais($aParam)
-    {
-        $sql  = "";
-        $sql .= "INSERT INTO {$this->table} (";
-        $sql .= "id, ";
-        $sql .= "nombre, ";
-        $sql .= "codigo, ";
-        $sql .= "status, ";
-        $sql .= "id_creador, ";
-        $sql .= "id_alterador, ";
-        $sql .= "fecha_inc, ";
-        $sql .= "fecha_alt) VALUES (";
-        $sql .= " NULL, ";
-        $sql .= "'". $aParam['nombre']."', ";
-        $sql .= "'". $aParam['codigo']."', ";
-        $sql .= "'". $aParam['status']."', ";
-        $sql .= " 0, ";
-        $sql .= " 0, ";
-        $sql .= " NOW(), ";
-        $sql .= " '0000-00-00 00:00:00')";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->rowCount();
-        $stmt->closeCursor();
-        
-        return $result;
-    }
-    
-    public function ActualizarPais($aParam)
+    public function ActualizarCargo($aParam)
     {
         $sql  = "";
         $sql .= "UPDATE {$this->table} SET ";
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
-        $sql .= "codigo            = '" . $aParam['codigo']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
         $sql .= "id_alterador      = 0, ";
         $sql .= "fecha_alt         = NOW() ";
