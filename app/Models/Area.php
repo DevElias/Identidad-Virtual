@@ -7,7 +7,7 @@ use PDO;
 
 class Area extends BaseModel
 {
-    protected $table = "area";
+    protected $table = "AREA";
     private $pdo;
     
     public function __construct(PDO $pdo)
