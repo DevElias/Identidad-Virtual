@@ -81,12 +81,22 @@ class Route
             }
         }
         
+        if(count($aparam) > 3)
+        {
+            $k = count($aparam) - 1;
+            $valor = $aparam[$k];
+        }
+        
         if($found)
         {
             $controller = Container::NewController($controller);
             
             switch (count($aparam))
             {
+                case 0:
+                    $controller->$action($this->getRequest());
+                break;
+                
                 case 1:
                     $controller->$action($aparam[0], $this->getRequest());
                 break;
@@ -100,7 +110,7 @@ class Route
                 break;
                 
                 default:
-                    $controller->$action($this->getRequest());
+                    $controller->$action($valor, $this->getRequest());
             }
         }
         else

@@ -18,4 +18,15 @@ $route[] = ['/pais/show/{id}', 'PaisesController@show'];
 /* API Paises */
 $route[] = ['/pais?api=true', 'PaisesController@index'];
 
+/*Areas Controller*/
+$route[] = ['/area', 'AreasController@index'];
+$route[] = ['/area/add', 'AreasController@add'];
+$route[] = ['/area/save', 'AreasController@save'];
+$route[] = ['/area/edit', 'AreasController@edit'];
+$route[] = ['/area/delete/{id}', 'AreasController@delete'];
+$route[] = ['/area/show/{id}', 'AreasController@show'];
+
+/* API Areas */
+$route[] = ['/are?api=true', 'AreasController@index'];
+
 return $route;
