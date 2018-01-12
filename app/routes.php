@@ -40,4 +40,15 @@ $route[] = ['/cargo/show/{id}', 'CargosController@show'];
 /* API Cargos */
 $route[] = ['/cargo?api=true', 'CargosController@index'];
 
+/*Sedes Controller*/
+$route[] = ['/sede', 'SedesController@index'];
+$route[] = ['/sede/add', 'SedesController@add'];
+$route[] = ['/sede/save', 'SedesController@save'];
+$route[] = ['/sede/edit', 'SedesController@edit'];
+$route[] = ['/sede/delete/{id}', 'SedesController@delete'];
+$route[] = ['/sede/show/{id}', 'SedesController@show'];
+
+/* API Sedes */
+$route[] = ['/sede?api=true', 'SedesController@index'];
+
 return $route;

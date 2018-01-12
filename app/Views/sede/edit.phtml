@@ -1,0 +1,85 @@
+<div class="wrapper">
+	 <div class="content-wrapper">
+	 	<section class="content">
+	 		<div class="row">
+	 			<div class="col-xs-12">
+	 				<div class="box box-primary">
+	 					<div class="box-header with-border">
+	 						<h3 class="box-title">Actualizar Sede</h3>
+	 						<div class="box-body">
+	 							<div class="form-group">
+        	 						<label for="exampleInputEmail1">Nombre</label>
+        	 						<input type="nome" class="form-control" placeholder="nombre" id="nombre" value="<?php echo($this->view->sede->Nombre_Sede);?>">
+	 							</div>
+        	 					<div class="form-group">
+	 								<label for="status">Pa&iacute;s</label>
+	 								<select  id="pais" class="form-control" >
+	 									<option value="0">-- Seleccionar --</option>
+        	 							<?php foreach ($this->view->pais as $paises):?>
+        	 							<?php 
+        	 							      if($this->view->sede->ID_Sede == $paises->id)
+        	 							      {
+        	 							          $select .= '<option selected value="'.$paises->id.'">'.$paises->nombre.'</option>';
+        	 							      }
+        	 							      else
+        	 							      {
+        	 							          $select .= '<option value="'.$paises->id.'">'.$paises->nombre.'</option>';
+        	 							      }
+        	 							 ?>
+        	 							<?php endforeach; ?>
+        	 							<?php echo($select);?>
+        	 						</select>
+        	 					</div>
+                                <div class="form-group">
+                                <?php 
+                                    if($this->view->sede->Status_Sede== 0)
+                                    {
+                                        $selecionar = 'selected';
+                                    }
+                                    
+                                    if($this->view->sede->Status_Sede== 1)
+                                    {
+                                        $activo = 'selected';
+                                    }
+                                    
+                                    if($this->view->sede->Status_Sede== 2)
+                                    {
+                                        $inactivo = 'selected';
+                                    }
+                                ?>
+                                	<label for="status">Status</label>
+                               		<select  id="status" class="form-control" >
+                               			<option <?php echo ($selecionar);?> value="0">-- Seleccionar --</option>
+                                    	<option <?php echo ($activo);?> value="1">Activo</option>
+                                    	<option <?php echo ($inactivo);?> value="2">Inactivo</option>
+                                    </select>
+                               </div>
+                               <div class="form-group">
+                                    <input type="hidden" class="form-control" placeholder="id" id="id" value="<?php echo($this->view->sede->ID_Sede);?>">
+                                </div>
+                               <div class="box-footer">
+                               <div class="col-xs-6">
+                               		<a id="actualizar-sede" class="btn btn-block btn-primary bg-green"><i></i>Actualizar</a>
+                               </div>
+                               <div class="col-xs-6">
+                               		<a class="btn btn-block btn-primary bg-red" href="/sede"><i></i>Cancelar</a>
+                               </div>
+                               </div>
+	 						</div>
+	 					</form>
+	 				</div>
+	 			</div>
+	 		</div>
+	 	</section>
+	 </div>
+</div>
+
+<!-- require Scripts Jquery -->
+
+<script type="text/javascript" src="/assets/js/sede/sede.js""></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
+<script>
+	$("#actualizar-sede").click(function() {
+		ActualizarSede();
+	});
+</script>

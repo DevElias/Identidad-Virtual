@@ -5,26 +5,26 @@
 				<div class="col-xs-12">
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title">Listado &Aacute;reas</h3>
+							<h3 class="box-title">Listado Sedes</h3>
 							<div class="box-body">
-							<a type="button" class="btn btn-primary btn-block btn-padrao bg-green" href="/area/add"><i class="fa fa-plus"></i>&nbsp;&nbsp;Agregar &Aacute;reas</a></br>
+							<a type="button" class="btn btn-primary btn-block btn-padrao bg-green" href="/sede/add"><i class="fa fa-plus"></i>&nbsp;&nbsp;Agregar Sede</a></br>
 								<table id="listagem" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>&Aacute;rea</th>
-											<th>C&oacute;digo</th>
+											<th>Sede</th>
+											<th>Pa&iacute;s</th>
 											<th>Status</th>
 											<th></th>
 										</tr>
 										<tbody>
-											 <?php foreach ($this->view->area as $area):?>
+											 <?php foreach ($this->view->sede as $sede):?>
     											 <tr>
-    											 <td><?php echo($area->Nombre_Area);?></td>
-    											 <td><?php echo($area->Codigo_Area);?></td>
-    											 <td><?php ($area->Status_Area == '1' ? $area->Status_Area= 'Activo' : $area->Status_Area= 'Inactivo'); echo($area->Status_Area);?></td>
+    											 <td><?php echo($sede->Nombre_Sede);?></td>
+    											 <td><?php echo($sede->Pais_Nombre);?></td>
+    											 <td><?php ($sede->Status_Sede == '1' ? $sede->Status_Sede = 'Activo' : $sede->Status_Sede = 'Inactivo'); echo($sede->Status_Sede);?></td>
     											 <td>
-    											 	<a type="button" href="/area/show/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
-    											 	<a type="button" href="/area/delete/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+    											 	<a type="button" href="/sede/show/<?php echo($sede->ID_Sede);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
+    											 	<a type="button" href="/sede/delete/<?php echo($sede->ID_Sede);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
     											 </td>
     										 <?php endforeach; ?>
                                         </tbody>
