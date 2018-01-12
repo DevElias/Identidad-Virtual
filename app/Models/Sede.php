@@ -21,12 +21,12 @@ class Sede extends BaseModel
         $sql .= "SELECT ";
         $sql .= "{$this->table}.id     as 'ID_Sede', ";
         $sql .= "{$this->table}.nombre as 'Nombre_Sede', ";
-        $sql .= "Pais.nombre as 'Pais_Nombre', ";
+        $sql .= "pais.nombre as 'Pais_Nombre', ";
         $sql .= "{$this->table}.status as 'Status_Sede', ";
         $sql .= "{$this->table}.fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "{$this->table}.fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table} ";
-        $sql .= "Inner Join Pais on Pais.id = {$this->table}.id_pais";
+        $sql .= "Inner Join pais on pais.id = {$this->table}.id_pais";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -77,10 +77,10 @@ class Sede extends BaseModel
         $sql .= "SELECT ";
         $sql .= "{$this->table}.id     as 'ID_Sede', ";
         $sql .= "{$this->table}.nombre as 'Nombre_Sede', ";
-        $sql .= "Pais.nombre as 'Pais_Nombre', ";
+        $sql .= "pais.nombre as 'Pais_Nombre', ";
         $sql .= "{$this->table}.status as 'Status_Sede' ";
         $sql .= "FROM {$this->table} ";
-        $sql .= "Inner Join Pais on Pais.id = {$this->table}.id_pais ";
+        $sql .= "Inner Join pais on pais.id = {$this->table}.id_pais ";
         $sql .= "WHERE {$this->table}.id = " . $id;
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
