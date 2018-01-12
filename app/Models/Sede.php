@@ -26,7 +26,8 @@ class Sede extends BaseModel
         $sql .= "{$this->table}.fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "{$this->table}.fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table} ";
-        $sql .= "Inner Join pais on pais.id = {$this->table}.id_pais";
+        $sql .= "Inner Join pais on pais.id = {$this->table}.id_pais ";
+        $sql .= "WHERE {$this->table}.borrado = 0 ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -42,6 +43,7 @@ class Sede extends BaseModel
         $sql .= "nombre, ";
         $sql .= "id_pais, ";
         $sql .= "status, ";
+        $sql .= "borrado, ";
         $sql .= "id_creador, ";
         $sql .= "id_alterador, ";
         $sql .= "fecha_inc, ";
@@ -50,6 +52,7 @@ class Sede extends BaseModel
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['pais']."', ";
         $sql .= "'". $aParam['status']."', ";
+        $sql .= " 0, ";
         $sql .= " 0, ";
         $sql .= " 0, ";
         $sql .= " NOW(), ";
@@ -64,7 +67,9 @@ class Sede extends BaseModel
     
     public function delete($id)
     {
-        $query = "DELETE FROM {$this->table} WHERE id=:id";
+        $query .= "UPDATE {$this->table} SET ";
+        $query .= "borrado = 1 ";
+        $query .= "WHERE id=:id ";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
         $result = $stmt->execute();
@@ -78,6 +83,7 @@ class Sede extends BaseModel
         $sql .= "{$this->table}.id     as 'ID_Sede', ";
         $sql .= "{$this->table}.nombre as 'Nombre_Sede', ";
         $sql .= "pais.nombre as 'Pais_Nombre', ";
+        $sql .= "pais.id as 'ID_Pais', ";
         $sql .= "{$this->table}.status as 'Status_Sede' ";
         $sql .= "FROM {$this->table} ";
         $sql .= "Inner Join pais on pais.id = {$this->table}.id_pais ";
@@ -106,6 +112,7 @@ class Sede extends BaseModel
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
         $sql .= "id_pais           = '" . $aParam['pais']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
+        $sql .= "borrado           = 0, ";
         $sql .= "id_alterador      = 0, ";
         $sql .= "fecha_alt         = NOW() ";
         $sql .= "WHERE id          = '" . $aParam['id']."'";

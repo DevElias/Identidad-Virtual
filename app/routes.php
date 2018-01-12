@@ -51,4 +51,7 @@ $route[] = ['/sede/show/{id}', 'SedesController@show'];
 /* API Sedes */
 $route[] = ['/sede?api=true', 'SedesController@index'];
 
+/*Usuarios Controller*/
+$route[] = ['/usuario', 'UsuariosController@index'];
+
 return $route;

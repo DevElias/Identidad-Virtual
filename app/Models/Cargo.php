@@ -24,7 +24,8 @@ class Cargo extends BaseModel
         $sql .= "status as 'Status_Cargo', ";
         $sql .= "fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "fecha_alt as 'Fecha de Cambio' ";
-        $sql .= "FROM {$this->table}";
+        $sql .= "FROM {$this->table} ";
+        $sql .= "WHERE borrado = 0 ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -39,6 +40,7 @@ class Cargo extends BaseModel
         $sql .= "id, ";
         $sql .= "nombre, ";
         $sql .= "status, ";
+        $sql .= "borrado, ";
         $sql .= "id_creador, ";
         $sql .= "id_alterador, ";
         $sql .= "fecha_inc, ";
@@ -46,6 +48,7 @@ class Cargo extends BaseModel
         $sql .= " NULL, ";
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['status']."', ";
+        $sql .= " 0, ";
         $sql .= " 0, ";
         $sql .= " 0, ";
         $sql .= " NOW(), ";
@@ -60,7 +63,9 @@ class Cargo extends BaseModel
     
     public function delete($id)
     {
-        $query = "DELETE FROM {$this->table} WHERE id=:id";
+        $query .= "UPDATE {$this->table} SET ";
+        $query .= "borrado = 1 ";
+        $query .= "WHERE id=:id ";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
         $result = $stmt->execute();
@@ -85,6 +90,7 @@ class Cargo extends BaseModel
         $sql .= "UPDATE {$this->table} SET ";
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
+        $sql .= "borrado           = 0, ";
         $sql .= "id_alterador      = 0, ";
         $sql .= "fecha_alt         = NOW() ";
         $sql .= "WHERE id          = '" . $aParam['id']."'";

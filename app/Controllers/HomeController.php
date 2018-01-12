@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use Core\BaseController;
+use Core\Container;
 
 class HomeController extends BaseController
 {
@@ -14,6 +15,15 @@ class HomeController extends BaseController
         }
         else
         {
+            
+            $model = Container::getModel("Usuario");
+            $result  = $model->SearchUser($_SESSION['user']['email']);
+            
+            if(!$result)
+            {
+                $user  = $model->InsertUser($_SESSION['user']);
+            }
+            
             $this->setPageTitle('Home');
             $this->renderView('home/dashboard', 'layout');
         }

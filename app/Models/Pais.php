@@ -25,7 +25,8 @@ class Pais extends BaseModel
         $sql .= "status as 'Status_Pais', ";
         $sql .= "fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "fecha_alt as 'Fecha de Cambio' ";
-        $sql .= "FROM {$this->table}";
+        $sql .= "FROM {$this->table} ";
+        $sql .= "WHERE borrado = 0 ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -35,7 +36,9 @@ class Pais extends BaseModel
     
     public function delete($id)
     {
-        $query = "DELETE FROM {$this->table} WHERE id=:id";
+        $query .= "UPDATE {$this->table} SET ";
+        $query .= "borrado = 1 ";
+        $query .= "WHERE id=:id ";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
         $result = $stmt->execute();
@@ -62,6 +65,7 @@ class Pais extends BaseModel
         $sql .= "nombre, ";
         $sql .= "codigo, ";
         $sql .= "status, ";
+        $sql .= "borrado, ";
         $sql .= "id_creador, ";
         $sql .= "id_alterador, ";
         $sql .= "fecha_inc, ";
@@ -70,6 +74,7 @@ class Pais extends BaseModel
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['codigo']."', ";
         $sql .= "'". $aParam['status']."', ";
+        $sql .= " 0, ";
         $sql .= " 0, ";
         $sql .= " 0, ";
         $sql .= " NOW(), ";
@@ -89,6 +94,7 @@ class Pais extends BaseModel
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
         $sql .= "codigo            = '" . $aParam['codigo']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
+        $sql .= "borrado           = 0, ";
         $sql .= "id_alterador      = 0, ";
         $sql .= "fecha_alt         = NOW() ";
         $sql .= "WHERE id          = '" . $aParam['id']."'";

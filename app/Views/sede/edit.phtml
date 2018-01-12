@@ -15,9 +15,10 @@
 	 								<label for="status">Pa&iacute;s</label>
 	 								<select  id="pais" class="form-control" >
 	 									<option value="0">-- Seleccionar --</option>
-        	 							<?php foreach ($this->view->pais as $paises):?>
         	 							<?php 
-        	 							      if($this->view->sede->ID_Sede == $paises->id)
+        	 							   foreach ($this->view->pais as $paises)
+        	 							   {
+        	 							      if($this->view->sede->ID_Pais == $paises->id)
         	 							      {
         	 							          $select .= '<option selected value="'.$paises->id.'">'.$paises->nombre.'</option>';
         	 							      }
@@ -25,8 +26,8 @@
         	 							      {
         	 							          $select .= '<option value="'.$paises->id.'">'.$paises->nombre.'</option>';
         	 							      }
+        	 							   }
         	 							 ?>
-        	 							<?php endforeach; ?>
         	 							<?php echo($select);?>
         	 						</select>
         	 					</div>
