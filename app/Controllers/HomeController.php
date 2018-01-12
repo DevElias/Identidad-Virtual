@@ -15,19 +15,27 @@ class HomeController extends BaseController
         }
         else
         {
+            $techo = strpos($_SESSION['user']['email'], '@techo.org');
+            $teto  = strpos($_SESSION['user']['email'], '@teto.org');
             
-            $model = Container::getModel("Usuario");
-            $result  = $model->SearchUser($_SESSION['user']['email']);
-            
-            if(!$result)
+            if($techo === false && $teto === false) 
             {
-                $user  = $model->InsertUser($_SESSION['user']);
+                unset($_SESSION['access_token']);
+                header('Location: /');
             }
-            
-            $this->setPageTitle('Home');
-            $this->renderView('home/dashboard', 'layout');
+            else 
+            {
+                $model = Container::getModel("Usuario");
+                $result  = $model->SearchUser($_SESSION['user']['email']);
+                
+                if(!$result)
+                {
+                    $user  = $model->InsertUser($_SESSION['user']);
+                }
+                
+                $this->setPageTitle('Home');
+                $this->renderView('home/dashboard', 'layout');
+            }
         }
-        
-      
     }
 }
