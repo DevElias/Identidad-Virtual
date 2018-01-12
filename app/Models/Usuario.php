@@ -23,6 +23,7 @@ class Usuario extends BaseModel
         $sql .= "usuario.nombre as 'Nombre_Usuario', ";
         $sql .= "usuario.email  as 'Email_Usuario', ";
         $sql .= "usuario.status as 'Status_Usuario', ";
+        $sql .= "usuario.picture as 'Picture_Usuario', ";
         $sql .= "AREA.nombre as 'Area_Usuario', ";
         $sql .= "cargo.nombre as 'Cargo_Usuario', ";
         $sql .= "usuario.fecha_inc as 'Fecha de Inclusion', ";
