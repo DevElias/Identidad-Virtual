@@ -30,8 +30,14 @@ class HomeController extends BaseController
                 
                 if(!$result)
                 {
-                    $user  = $model->InsertUser($_SESSION['user']);
+                    $user    = $model->InsertUser($_SESSION['user']);
                 }
+                
+                //Info del usuario
+                $result  = $model->DataUser($_SESSION['user']['email']);
+                $aUser   = (array) $result[0];
+                
+                $_SESSION['user']['id'] = $aUser['id'];
                 
                 $this->setPageTitle('Home');
                 $this->renderView('home/dashboard', 'layout');

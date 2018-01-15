@@ -75,7 +75,7 @@ class Pais extends BaseModel
         $sql .= "'". $aParam['codigo']."', ";
         $sql .= "'". $aParam['status']."', ";
         $sql .= " 0, ";
-        $sql .= " 0, ";
+        $sql .= "'". $_SESSION['user']['id']."', ";
         $sql .= " 0, ";
         $sql .= " NOW(), ";
         $sql .= " '0000-00-00 00:00:00')";
@@ -95,7 +95,7 @@ class Pais extends BaseModel
         $sql .= "codigo            = '" . $aParam['codigo']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
         $sql .= "borrado           = 0, ";
-        $sql .= "id_alterador      = 0, ";
+        $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
         $sql .= "fecha_alt         = NOW() ";
         $sql .= "WHERE id          = '" . $aParam['id']."'";
         $stmt = $this->pdo->prepare($sql);
