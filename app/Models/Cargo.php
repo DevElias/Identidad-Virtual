@@ -84,6 +84,28 @@ class Cargo extends BaseModel
         return $result;
     }
     
+    public function SearchAPI($aParam)
+    {
+        $query .= "SELECT * FROM {$this->table} WHERE ";
+        for($i=0; $i < count($aParam); $i++)
+        {
+            if($i == 0)
+            {
+                $query .= $aParam[$i]['field'] . " = '" . $aParam[$i]['value'] . "' ";
+            }
+            else
+            {
+                $query .= "AND " .$aParam[$i]['field'] . " = '" . $aParam[$i]['value'] . "'";
+            }
+            
+        }
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
     public function ActualizarCargo($aParam)
     {
         $sql  = "";

@@ -13,11 +13,34 @@ class AreasController extends BaseController
         $this->view->area = $model->select();
         
         /* Api Areas */
-        /* URL de Cosumo:  http://localhost:8080/area?api=true */
+        /* URL de Cosumo:  
+         * http://localhost:8080/area?api=true 
+         * http://localhost:8080/area?api=true&id=1&nombre=Procesos y Tecnologia
+         * */
         
         $aRequest = (array) $request;
         if($aRequest['api'] === 'true'&& $aRequest['method'] == 'GET')
         {
+            if(count($aRequest) > 2)
+            {
+                $i = 0;
+                foreach ($aRequest as $key => $value)
+                {
+                    if($key == 'api' || $key == 'method')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        $aDados[$i]['field'] = $key;
+                        $aDados[$i]['value'] = $value;
+                    }
+                    $i ++;
+                }
+                
+                $return = $model->SearchAPI($aDados);
+                die(print_r(json_encode($return), true));
+            }
             die(print_r(json_encode($this->view->area), true));
         }
         

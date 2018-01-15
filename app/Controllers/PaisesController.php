@@ -13,11 +13,34 @@ class PaisesController extends BaseController
         $this->view->pais = $model->select();
         
         /* Api Paises */
-        /* URL de Cosumo:  http://localhost:8080/pais?api=true */
+        /* URL de Cosumo:  
+         * http://localhost:8080/pais?api=true 
+         * http://localhost:8080/pais?api=true&id=2&nombre=Brasil
+         */
         
         $aRequest = (array) $request;
         if($aRequest['api'] === 'true'&& $aRequest['method'] == 'GET')
         {
+            if(count($aRequest) > 2)
+            {
+                $i = 0;
+                foreach ($aRequest as $key => $value)
+                {
+                    if($key == 'api' || $key == 'method')
+                    {
+                        continue;
+                    }
+                    else 
+                    {
+                        $aDados[$i]['field'] = $key;
+                        $aDados[$i]['value'] = $value;
+                    }
+                    $i ++;
+                }
+                
+                $return = $model->SearchAPI($aDados);
+                die(print_r(json_encode($return), true));
+            }
             die(print_r(json_encode($this->view->pais), true));
         }
         
