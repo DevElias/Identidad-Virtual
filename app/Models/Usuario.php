@@ -93,6 +93,18 @@ class Usuario extends BaseModel
         return $ret;
     }
     
+    public function DataUser($email)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE email=:email";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":email", $email);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+     
+        return $result;
+    }
+    
     public function delete($id)
     {
         $query .= "UPDATE {$this->table} SET ";
