@@ -19,7 +19,6 @@
 											 <?php foreach ($this->view->cargo as $cargo):?>
     											 <tr>
     											 <td><?php echo($cargo->Nombre_Cargo);?></td>
-    											 <td><?php echo($cargo->Codigo_Cargo);?></td>
     											 <td><?php ($cargo->Status_Cargo == '1' ? $cargo->Status_Cargo= 'Activo' : $cargo->Status_Cargo= 'Inactivo'); echo($cargo->Status_Cargo);?></td>
     											 <td>
     											 	<a type="button" href="/cargo/show/<?php echo($cargo->ID_Cargo);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
