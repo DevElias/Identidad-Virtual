@@ -1,0 +1,109 @@
+<div class="wrapper">
+	 <div class="content-wrapper">
+	 	<section class="content">
+	 		<div class="row">
+	 			<div class="col-xs-12">
+	 				<div class="box box-primary">
+	 					<div class="box-header with-border">
+	 						<h3 class="box-title">Actualizar Usuario</h3>
+	 						<div class="box-body">
+	 							<div class="form-group" align="center">
+	 								<img class="img-circle" src="<?php echo($this->view->usuario->picture);?>" alt="Smiley face" width="250" height="200" align="center">
+	 							</div>
+	 							<div class="form-group">
+        	 						<label for="exampleInputEmail1">Nombre</label>
+        	 						<input type="nome" disabled class="form-control" placeholder="nombre" id="nombre" value="<?php echo($this->view->usuario->nombre);?>">
+	 							</div>
+	 							<div class="form-group">
+        	 						<label for="exampleInputEmail1">Email</label>
+        	 						<input type="email" disabled class="form-control" placeholder="email" id="email" value="<?php echo($this->view->usuario->email);?>">
+	 							</div>
+	 							<div class="form-group">
+	 								<label for="sede">Sede</label>
+	 								<select  id="sede" class="form-control" >
+	 									<option value="0">-- Seleccionar --</option>
+        	 							<?php 
+        	 							foreach ($this->view->sedes as $sede)
+        	 							   {
+        	 							       if($this->view->usuario->id_sede == $sede->id)
+        	 							      {
+        	 							          $ComboSede .= '<option selected value="'.$sede->id.'">'.$sede->nombre.'</option>';
+        	 							      }
+        	 							      else
+        	 							      {
+        	 							          $ComboSede.= '<option value="'.$sede->id.'">'.$sede->nombre.'</option>';
+        	 							      }
+        	 							   }
+        	 							 ?>
+        	 							<?php echo($ComboSede);?>
+        	 						</select>
+        	 					</div>
+        	 					<div class="form-group">
+	 								<label for="area">&Aacute;rea</label>
+	 								<select  id="area" class="form-control" >
+	 									<option value="0">-- Seleccionar --</option>
+        	 							<?php 
+        	 							foreach ($this->view->areas as $area)
+        	 							   {
+        	 							       if($this->view->usuario->id_area == $area->id)
+        	 							      {
+        	 							          $ComboArea.= '<option selected value="'.$area->id.'">'.$area->nombre.'</option>';
+        	 							      }
+        	 							      else
+        	 							      {
+        	 							          $ComboArea.= '<option value="'.$area->id.'">'.$area->nombre.'</option>';
+        	 							      }
+        	 							   }
+        	 							 ?>
+        	 							<?php echo($ComboArea);?>
+        	 						</select>
+        	 					</div>
+        	 					<div class="form-group">
+	 								<label for="cargo">Cargo</label>
+	 								<select  id="cargo" class="form-control" >
+	 									<option value="0">-- Seleccionar --</option>
+        	 							<?php 
+        	 							foreach ($this->view->cargos as $cargo)
+        	 							   {
+        	 							       if($this->view->usuario->id_cargo == $cargo->id)
+        	 							      {
+        	 							          $ComboCargo.= '<option selected value="'.$cargo->id.'">'.$cargo->nombre.'</option>';
+        	 							      }
+        	 							      else
+        	 							      {
+        	 							          $ComboCargo.= '<option value="'.$cargo->id.'">'.$cargo->nombre.'</option>';
+        	 							      }
+        	 							   }
+        	 							 ?>
+        	 							<?php echo($ComboCargo);?>
+        	 						</select>
+        	 					</div>
+        	 					<div class="form-group">
+                                    <input type="hidden" class="form-control" placeholder="usuario" id="id" value="<?php echo($this->view->usuario->id);?>">
+                                </div>
+                               <div class="box-footer">
+                               <div class="col-xs-6">
+                               		<a id="actualizar-usuario" class="btn btn-block btn-primary bg-green"><i></i>Actualizar</a>
+                               </div>
+                               <div class="col-xs-6">
+                               		<a class="btn btn-block btn-primary bg-red" href="/usuario"><i></i>Cancelar</a>
+                               </div>
+                               </div>
+	 						</div>
+	 					</form>
+	 				</div>
+	 			</div>
+	 		</div>
+	 	</section>
+	 </div>
+</div>
+
+<!-- require Scripts Jquery -->
+
+<script type="text/javascript" src="/assets/js/usuario/usuario.js""></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
+<script>
+	$("#actualizar-usuario").click(function() {
+		ActualizarUsuario();
+	});
+</script>

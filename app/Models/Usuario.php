@@ -116,4 +116,65 @@ class Usuario extends BaseModel
         $stmt->closeCursor();
         return $result;
     }
+    
+    public function search($id)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function selectAreas()
+    {
+        $query = "SELECT * FROM area WHERE borrado = 0";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function selectSedes()
+    {
+        $query = "SELECT * FROM sede WHERE borrado = 0";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function selectCargos()
+    {
+        $query = "SELECT * FROM cargo WHERE borrado = 0";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function ActualizarUsuario($aParam)
+    {
+        $sql  = "";
+        $sql .= "UPDATE {$this->table} SET ";
+        $sql .= "id_sede           = '" . $aParam['sede']."', ";
+        $sql .= "id_area           = '" . $aParam['area']."', ";
+        $sql .= "id_cargo          = '" . $aParam['cargo']."', ";
+        $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
+        $sql .= "fecha_alt         = NOW() ";
+        $sql .= "WHERE id          = '" . $aParam['id']."'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
+    
+    
 }
