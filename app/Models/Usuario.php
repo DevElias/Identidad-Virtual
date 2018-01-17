@@ -130,7 +130,7 @@ class Usuario extends BaseModel
     
     public function selectAreas()
     {
-        $query = "SELECT * FROM area WHERE borrado = 0";
+        $query = "SELECT * FROM AREA WHERE borrado = 0";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();
