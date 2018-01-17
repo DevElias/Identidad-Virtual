@@ -162,9 +162,9 @@ class Usuario extends BaseModel
     {
         $sql  = "";
         $sql .= "UPDATE {$this->table} SET ";
-        $sql .= "id_sede           = '" . $aParam['sede']."', ";
-        $sql .= "id_area           = '" . $aParam['area']."', ";
-        $sql .= "id_cargo          = '" . $aParam['cargo']."', ";
+        $sql .= "id_sede           = " . ($aParam['sede'] == '0' ? 'NULL' : $aParam['sede'])  .", ";
+        $sql .= "id_area           = " . ($aParam['area'] == '0' ? 'NULL' : $aParam['area'])  .", ";
+        $sql .= "id_cargo          = " . ($aParam['cargo'] == '0' ? 'NULL' : $aParam['cargo']).", ";
         $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
         $sql .= "fecha_alt         = NOW() ";
         $sql .= "WHERE id          = '" . $aParam['id']."'";
