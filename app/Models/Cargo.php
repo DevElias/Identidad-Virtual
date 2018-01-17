@@ -19,13 +19,15 @@ class Cargo extends BaseModel
     {
         $sql  = "";
         $sql .= "SELECT ";
-        $sql .= "id     as 'ID_Cargo', ";
-        $sql .= "nombre as 'Nombre_Cargo', ";
-        $sql .= "status as 'Status_Cargo', ";
-        $sql .= "fecha_inc as 'Fecha de Inclusion', ";
-        $sql .= "fecha_alt as 'Fecha de Cambio' ";
+        $sql .= "cargo.id     as 'ID_Cargo', ";
+        $sql .= "cargo.nombre as 'Nombre_Cargo', ";
+        $sql .= "cargo.status as 'Status_Cargo', ";
+        $sql .= "sup.nombre as 'Superior_Cargo', ";
+        $sql .= "cargo.fecha_inc as 'Fecha de Inclusion', ";
+        $sql .= "cargo.fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table} ";
-        $sql .= "WHERE borrado = 0 ";
+        $sql .= "Left Join cargo sup ON sup.id = cargo.id_superior ";
+        $sql .= "WHERE cargo.borrado = 0 ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -40,6 +42,7 @@ class Cargo extends BaseModel
         $sql .= "id, ";
         $sql .= "nombre, ";
         $sql .= "status, ";
+        $sql .= "id_superior, ";
         $sql .= "borrado, ";
         $sql .= "id_creador, ";
         $sql .= "id_alterador, ";
@@ -48,6 +51,7 @@ class Cargo extends BaseModel
         $sql .= " NULL, ";
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['status']."', ";
+        $sql .= "'". $aParam['superior']."', ";
         $sql .= " 0, ";
         $sql .= "'". $_SESSION['user']['id']."', ";
         $sql .= " 0, ";
@@ -75,11 +79,31 @@ class Cargo extends BaseModel
     
     public function search($id)
     {
-        $query = "SELECT * FROM {$this->table} WHERE id=:id";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(":id", $id);
+        $sql  = "";
+        $sql .= "SELECT ";
+        $sql .= "cargo.id     as 'ID_Cargo', ";
+        $sql .= "cargo.nombre as 'Nombre_Cargo', ";
+        $sql .= "cargo.status as 'Status_Cargo', ";
+        $sql .= "cargo.id_superior as 'ID_Superior', ";
+        $sql .= "sup.nombre as 'Superior_Cargo', ";
+        $sql .= "cargo.fecha_inc as 'Fecha de Inclusion', ";
+        $sql .= "cargo.fecha_alt as 'Fecha de Cambio' ";
+        $sql .= "FROM {$this->table} ";
+        $sql .= "Left Join cargo sup ON sup.id = cargo.id_superior ";
+        $sql .= "WHERE cargo.id = " . $id;
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function selectCargos()
+    {
+        $query = "SELECT * FROM cargo ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
         $stmt->closeCursor();
         return $result;
     }
@@ -112,6 +136,7 @@ class Cargo extends BaseModel
         $sql .= "UPDATE {$this->table} SET ";
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
+        $sql .= "id_superior       = '" . $aParam['superior']."', ";
         $sql .= "borrado           = 0, ";
         $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
         $sql .= "fecha_alt         = NOW() ";

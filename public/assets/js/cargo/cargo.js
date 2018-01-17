@@ -3,6 +3,7 @@ function GuardarCargo()
 	oData          = new Object();	
 	oData.nombre   = $('#nombre').val();
 	oData.status   = $('#status').val();
+	oData.superior = $('#superior').val();
 	
 	$.ajax({
 		type: "POST",
@@ -43,6 +44,7 @@ function ActualizarCargo()
 	oData.id       = $('#id').val();
 	oData.nombre   = $('#nombre').val();
 	oData.status   = $('#status').val();
+	oData.superior = $('#superior').val();
 	
 	$.ajax({
 		type: "POST",
