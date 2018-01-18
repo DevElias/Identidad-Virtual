@@ -19,13 +19,14 @@
 										<tbody>
 											 <?php foreach ($this->view->sede as $sede):?>
     											 <tr>
-    											 <td><?php echo($sede->Nombre_Sede);?></td>
-    											 <td><?php echo($sede->Pais_Nombre);?></td>
-    											 <td><?php ($sede->Status_Sede == '1' ? $sede->Status_Sede = 'Activo' : $sede->Status_Sede = 'Inactivo'); echo($sede->Status_Sede);?></td>
-    											 <td>
-    											 	<a type="button" href="/sede/show/<?php echo($sede->ID_Sede);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
-    											 	<a type="button" href="/sede/delete/<?php echo($sede->ID_Sede);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
-    											 </td>
+        											 <td><?php echo($sede->Nombre_Sede);?></td>
+        											 <td><?php echo($sede->Pais_Nombre);?></td>
+        											 <td><?php ($sede->Status_Sede == '1' ? $sede->Status_Sede = 'Activo' : $sede->Status_Sede = 'Inactivo'); echo($sede->Status_Sede);?></td>
+        											 <td>
+        											 	<a type="button" href="/sede/show/<?php echo($sede->ID_Sede);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
+        											 	<a type="button" href="/sede/delete/<?php echo($sede->ID_Sede);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+        											 </td>
+        										 </tr>	 
     										 <?php endforeach; ?>
                                         </tbody>
 									</thead>

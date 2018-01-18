@@ -15,22 +15,25 @@
 											<th>Email</th>
 											<th>&Aacute;rea</th>
 											<th>Cargo</th>
+											<th>Pa&iacute;s</th>
 											<th>Status</th>
 											<th></th>
 										</tr>
 										<tbody>
 											 <?php foreach ($this->view->usuario as $usuario):?>
     											 <tr>
-    											  <td align="center"><img class="img-circle-grid" src="<?php session_start(); echo($usuario->Picture_Usuario);?> alt="User Image"></td>
-    											 <td><?php echo($usuario->Nombre_Usuario);?></td>
-    											 <td><?php echo($usuario->Email_Usuario);?></td>
-    											 <td><?php echo($usuario->Area_Usuario);?></td>
-    											 <td><?php echo($usuario->Cargo_Usuario);?></td>
-    											 <td><?php ($usuario->Status_Usuario == '1' ? $usuario->Status_Usuario = 'Activo' : $usuario->Status_Usuario = 'Inactivo'); echo($usuario->Status_Usuario);?></td>
-    											 <td>
-    											 	<a type="button" href="/usuario/show/<?php echo($usuario->ID_Usuario);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
-    											 	<a type="button" href="/usuario/delete/<?php echo($usuario->ID_Usuario);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
-    											 </td>
+        											 <td align="center"><img class="img-circle-grid" src="<?php session_start(); echo($usuario->Picture_Usuario);?> alt="User Image"></td>
+        											 <td><?php echo($usuario->Nombre_Usuario);?></td>
+        											 <td><?php echo($usuario->Email_Usuario);?></td>
+        											 <td><?php echo($usuario->Area_Usuario);?></td>
+        											 <td><?php echo($usuario->Cargo_Usuario);?></td>
+        											 <td><?php echo($usuario->Pais_Usuario);?></td>
+        											 <td><?php ($usuario->Status_Usuario == '1' ? $usuario->Status_Usuario = 'Activo' : $usuario->Status_Usuario = 'Inactivo'); echo($usuario->Status_Usuario);?></td>
+        											 <td>
+        											 	<a type="button" href="/usuario/show/<?php echo($usuario->ID_Usuario);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
+        											 	<a type="button" href="/usuario/delete/<?php echo($usuario->ID_Usuario);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+        											 </td>
+        										 </tr>	 
     										 <?php endforeach; ?>
                                         </tbody>
 									</thead>

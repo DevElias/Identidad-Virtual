@@ -26,11 +26,14 @@ class Usuario extends BaseModel
         $sql .= "usuario.picture as 'Picture_Usuario', ";
         $sql .= "AREA.nombre as 'Area_Usuario', ";
         $sql .= "cargo.nombre as 'Cargo_Usuario', ";
+        $sql .= "pais.nombre as 'Pais_Usuario', ";
         $sql .= "usuario.fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "usuario.fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table} ";
         $sql .= "Left Join AREA on AREA.id = {$this->table}.id_area ";
         $sql .= "Left Join cargo on cargo.id = {$this->table}.id_cargo ";
+        $sql .= "Left Join sede on sede.id = {$this->table}.id_sede ";
+        $sql .= "Left Join pais on pais.id = sede.id_pais ";
         $sql .= "WHERE {$this->table}.borrado = 0 ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
@@ -175,6 +178,26 @@ class Usuario extends BaseModel
         
         return $result;
     }
+    
+    /* Nao esta em uso, aqui lista toda informacao do usuario como Chefe, Cargo do Chefe, etc*/
+    public function AllInfoUser($aParam)
+    {
+        $sql   = "SELECT ";
+        $sql  .= "usuario.nombre AS 'Usuario', ";
+        $sql  .= "cargo.nombre AS 'Cargo', ";
+        $sql  .= "sup.nombre AS 'Superior', ";
+        $sql  .= "jefe.nombre AS 'Jefe' ";
+        $sql  .= "FROM {$this->table} ";
+        $sql  .= "LEFT JOIN cargo ON cargo.id = usuario.id_cargo ";
+        $sql  .= "LEFT JOIN usuario jefe ON jefe.id_cargo = cargo.id_superior ";
+        $sql  .= "LEFT JOIN cargo sup ON sup.id = cargo.id_superior ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
     
     
 }

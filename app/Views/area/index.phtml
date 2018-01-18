@@ -19,13 +19,14 @@
 										<tbody>
 											 <?php foreach ($this->view->area as $area):?>
     											 <tr>
-    											 <td><?php echo($area->Nombre_Area);?></td>
-    											 <td><?php echo($area->Codigo_Area);?></td>
-    											 <td><?php ($area->Status_Area == '1' ? $area->Status_Area= 'Activo' : $area->Status_Area= 'Inactivo'); echo($area->Status_Area);?></td>
-    											 <td>
-    											 	<a type="button" href="/area/show/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
-    											 	<a type="button" href="/area/delete/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
-    											 </td>
+        											 <td><?php echo($area->Nombre_Area);?></td>
+        											 <td><?php echo($area->Codigo_Area);?></td>
+        											 <td><?php ($area->Status_Area == '1' ? $area->Status_Area= 'Activo' : $area->Status_Area= 'Inactivo'); echo($area->Status_Area);?></td>
+        											 <td>
+        											 	<a type="button" href="/area/show/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
+        											 	<a type="button" href="/area/delete/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+        											 </td>
+        										</tr>	 
     										 <?php endforeach; ?>
                                         </tbody>
 									</thead>

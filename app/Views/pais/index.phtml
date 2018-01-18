@@ -19,13 +19,14 @@
 										<tbody>
 											 <?php foreach ($this->view->pais as $pais):?>
     											 <tr>
-    											 <td><?php echo($pais->Nombre_Pais);?></td>
-    											 <td><?php echo($pais->Codigo_Pais);?></td>
-    											 <td><?php ($pais->Status_Pais == '1' ? $pais->Status_Pais = 'Activo' : $pais->Status_Pais = 'Inactivo'); echo($pais->Status_Pais);?></td>
-    											 <td>
-    											 	<a type="button" href="/pais/show/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
-    											 	<a type="button" href="/pais/delete/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
-    											 </td>
+        											 <td><?php echo($pais->Nombre_Pais);?></td>
+        											 <td><?php echo($pais->Codigo_Pais);?></td>
+        											 <td><?php ($pais->Status_Pais == '1' ? $pais->Status_Pais = 'Activo' : $pais->Status_Pais = 'Inactivo'); echo($pais->Status_Pais);?></td>
+        											 <td>
+        											 	<a type="button" href="/pais/show/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
+        											 	<a type="button" href="/pais/delete/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+        											 </td>
+        										</tr>	 
     										 <?php endforeach; ?>
                                         </tbody>
 									</thead>
