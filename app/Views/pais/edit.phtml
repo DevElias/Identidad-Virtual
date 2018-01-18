@@ -58,13 +58,19 @@
 	 	</section>
 	 </div>
 </div>
+<div id="loading-techo"><img src="/loading.gif"></div>
 
 <!-- require Scripts Jquery -->
 
 <script type="text/javascript" src="/assets/js/pais/pais.js""></script>
 <script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
 <script>
+    $(document).ready(function() {
+    	$('#loading-techo').hide();
+    });
+
 	$("#actualizar-pais").click(function() {
+		$('#loading-techo').show();
 		ActualizarPais();
 	});
 </script>
