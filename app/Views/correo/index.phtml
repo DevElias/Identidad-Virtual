@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  		<title>Solicitud de Correo</title>
+  		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  		<link rel="stylesheet" href="/assets/js/bootstrap/css/bootstrap.min.css">
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  		<link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
+  		<link rel="stylesheet" href="/assets/js/iCheck/square/blue.css">
+  		<link rel="stylesheet" type="text/css" href="/assets/css/jquery-confirm.css"/>
+  		<link rel="stylesheet" href="/assets/css/custom.css">
+	</head>
+	<body class="hold-transition">
+			<div class="login-logo">
+            	<a href="#"><img src="/assets/img/logo-180.jpg"  alt="User Image"></a>
+            </div>
+            <div class="login-box-body" id="text-1">
+            	<p class="login-box-msg"><strong>Solicitud de cuentas TECHO/TETO</strong></p>
+            	<strong><p>LEE ESTO ANTES DE CONTINUAR</p></strong>
+            	<p><strong> * </strong> Las solicitudes enviadas se procesan los d&iacute;as LUNES, MI&Eacute;RCOLES Y VIERNES, deben tenerlo en cuenta para planificar sus solicitudes antes de ese d&iacute;a.</p>
+                <p><strong> * </strong> Revisar que el correo que se est&aacute; solicitando, est&eacute; disponible ya que puede haber otra persona o grupo con el mismo nombre. Pueden realizar esto creando un correo en blanco y escribiendo el mail solicitado como destinatario, si no se les ofrece ninguna opci&oacute;n, este no existe.</p>
+                <p><strong> * </strong> Evitar el uso de tildes, &ntilde;, o s&iacute;mbolos especiales en nombres y direcciones de correo. En caso que las necesites puedes realizar aclaraciones acerca de esto en el "Motivo de la solicitud".</p>
+                <p><strong> * </strong> La ELIMINACI&Oacute;N de cuentas es PERMANENTE e IRREVERSIBLE (las cuentas eliminadas no pueden recuperarse).</p>
+                <p><strong> * </strong> Si necesitas una direcci&oacute;n adicional pero esa casilla la revisar&aacute; una persona que ya posee una cuenta, puedes crear un "alias". M&aacute;s informaci&oacute;n:  <a target="_blank" href="https://sites.google.com/a/techo.org/intranet/preguntas-frecuentes#TOC-Qu-es-un-alias-y-c-mo-solicito-crear-uno-">Clic Aqu&iacute;</a></p>
+                <p><strong> * </strong> Puedes solicitar SUSPENDER una cuenta para bloquear el acceso a la misma sin eliminarla.</p>
+                <p><strong> * </strong> Antes de solicitar la CREACI&Oacute;N de una cuenta consulta en <a target="_blank" href="https://sites.google.com/a/techo.org/intranet/herramientas/google-apps/cuentas-de-dominio-techo-org">Intranet TECHO</a> si existe cupo, si existe cupo disponible para tu pa&iacute;s. En caso contrario, deber&aacute;s solicitar la baja de otras cuentas de manera de obtener cupo.</p>
+                <p><strong> * </strong> Se debe realizar una acci&oacute;n por cada solicitud, en caso se solicite m&aacute;s de 1 acci&oacute;n por solicitud, est&aacute; ser&aacute; rechazada.</p>
+                <p><strong> * </strong> El uso de las cuentas TECHO.org se rige por las siguientes pol&iacute;ticas: <a target="_blank" href="https://docs.google.com/document/d/1dmUoVt0ioJVr9OVKzT1HnT10axE3U7P01Ziz-JrpKT8/edit">Clic Aqu&iacute;</a></p>
+                <p><strong> * </strong> Tu direcci&oacute;n de correo electr&oacute;nico <strong><?php session_start(); echo($_SESSION['user']['email']);?></strong> se registrar&aacute; cuando env&iacute;es este formulario. &iquest;No es tuya esta direcci&oacute;n? <a target="_blank" href="https://accounts.google.com/AccountChooser?continue=https://docs.google.com/forms/viewform?bc%3Dtransparent%26embedded%3Dtrue%26f%3D%252522Open%252BSans%252522%25252C%252Bsans-serif%26hl%3Des%26htc%3D%252523eeeeee%26id%3D13j1zHT18mtGDFoN4gtu7LIndDRcU1co8LcKx7O1PYUQ%26lc%3D%252523298cca%26pli%3D1%26tc%3D%252523616161%26ttl%3D0&service=wise">Cambiar de cuenta</a></p>
+             	<p style="color: red"><strong > * </strong>Obligatorio.</p>
+             </div>
+             
+             <div class="login-box-body" id="text-2">
+            	<p class="login-box-msg"><strong>Creaci&oacute;n de Correos</strong></p>
+                <p>Antes de solicitar la CREACI&Oacute;N de una cuenta consulta en <a target="_blank" href="https://sites.google.com/a/techo.org/intranet/herramientas/google-apps/cuentas-de-dominio-techo-org">Intranet TECHO</a> si existe cupo, si existe cupo disponible para tu pa&iacute;s. En caso contrario, deber&aacute;s solicitar la baja de otras cuentas de manera de obtener cupo.</p>
+                <p>Por ejemplo:</p>
+                <p><strong>Nombre:</strong> Informaci&oacute;n,</p>
+                <p><strong>Apellido:</strong> TECHO.</p>
+                <p> Esto mostrar&aacute; como nombre del remitente de la cuenta <strong>info.pais@techo.org</strong>: Informaci&oacute;n TECHO.</p>
+                <p>Solo registrar un correo por solicitud.</p>
+             </div>
+             
+             <div class="login-box-body" id="text-3">
+            	<p class="login-box-msg"><strong>Informaci&oacute;n adicional</strong></p>
+             </div>
+             
+             <div class="login-box-body" id="text-nickname">
+            	<p class="login-box-msg"><strong>Creaci&oacute;n de Alias (nickname)</strong></p>
+            	<p>Un alias te permite tener m&uacute;ltiples direcciones de correo electr&oacute;nico para una misma cuenta de Google.</p>
+             	<p>Recuerda que no podr&aacute;s iniciar sesi&oacute;n con el alias, s&oacute;lo podr&aacute;s hacerlo con la cuenta real a la cual el alias pertenece.</p>
+             	<p>M&aacute;s informaci&oacute;n: <a target="_blank" href="https://sites.google.com/a/techo.org/intranet/preguntas-frecuentes#TOC-Qu-es-un-alias-y-c-mo-solicito-crear-uno-">Intranet TECHO</a></p>
+             	<p>Solo registrar un correo por solicitud.</p>
+             </div>
+             
+             <div class="login-box-body" id="text-modificar">
+            	<p class="login-box-msg"><strong>Modificar</strong></p>
+            	<p>Indique de manera detallada lo que desea modificar.</p>
+             	<p>Solo registrar un correo por solicitud.</p>
+             </div>
+             
+             <div class="login-box-body" id="text-recuperar">
+            	<p class="login-box-msg"><strong>Recuperar Contrase&ntilde;a</strong></p>
+             	<p>Solo registrar un correo por solicitud.</p>
+             </div>
+             
+             <div class="login-box-body" id="text-suspender">
+            	<p class="login-box-msg"><strong>Suspender</strong></p>
+            	<p>Esta operaci&oacute;n impedir&aacute; que se pueda iniciar sesi&oacute;n con la cuenta sin eliminar ninguna informaci&oacute;n de la misma.</p>
+             	<p>Solo registrar un correo por solicitud.</p>
+             </div>
+             
+              <div class="login-box-body" id="text-eliminar">
+            	<p class="login-box-msg"><strong>Eliminar Correo</strong></p>
+            	<p>IMPORTANTE: La ELIMINACI&Oacute;N de cuentas es DEFINITIVA (las cuentas eliminadas no pueden recuperarse) se eliminar&aacute;n:</p>
+             	<p><strong> * </strong>todos los docs y archivos de Google Drive propiedad de la cuenta.</p>
+             	<p><strong> * </strong>todos los calendario y eventos de Calendar de la cuenta.</p>
+             	<p><strong> * </strong>todos los e-mails de la cuenta.</p>
+             	<p><strong> * </strong>todos los sites propiedad de la cuenta.</p>
+             	<p>Solo registrar un correo por solicitud.</p>
+             	<p>Puedes solicitar que se transfieran los archivos de Google Drive que son propiedad de la persona a otra cuenta especific&aacute;ndolo en el campo "Motivo de la solicitud".</p>
+             	<p>Los e-mails NO SON TRANSFERIBLES por los administradores sino que puedes hacerlo desde tu cuenta siguiendo estos pasos: <a target="_blank" href="https://support.google.com/mail/answer/21289?hl=es&visit_id=1-636522471330528530-4066663711&rd=1">Support Google</a></p>
+             	<p>En caso no se solicite un respaldo de los archivos de Google Drive, se har&aacute; un respaldo de manera autom&aacute;tica por un tema de seguridad; sin embargo est&aacute; informaci&oacute;n sera eliminada de manera permanente luego de 6 meses. Deben tener cuidado al realizar una solicitud de eliminaci&oacute;n de una cuenta, ya que s&iacute; est&aacute; se pierde no hay manera de recuperarla. </p>
+             	<p>TE RECOMENDAMOS SOLICITAR UNA SUSPENCI&Oacute;N DE LA CUENTA Y LUEGO DE UN TIEMPO PRUDENTE SOLICITAR LA ELIMINACI&Oacute;N.</p>
+             </div>
+             
+             <div class="login-box-body" id="text-transfer">
+            	<p class="login-box-msg"><strong>Transferir la propiedad de los documentos</strong></p>
+            	<p>Especifique de correo a que correo desea hacer la transferencia. Recuerda que s&oacute;lo se transferir&aacute;n los documentos que son propiedad de la persona, no sus correos electr&oacute;nicos.</p>
+             	<p>M&aacute;s informaci&oacute;n: <a target="_blank" href="https://support.google.com/drive/answer/2494892?hl=es">Support Google</a></p>
+             	<p>Solo registrar un correo por solicitud.</a></p>
+             </div>
+             
+		<div class="login-box">
+			<form>
+    			<div id="dados-1">
+    				<div class="form-group">
+                    	<label for="hacer"> &iquest;Qu&eacute; desea hacer &nbsp;</label><label style="color: red">*</label>
+               			<select  id="hacer" class="form-control" >
+               				<option value="0">-- Elige --</option>
+                    		<option value="1">Crear</option>
+                    		<option value="2">Crear un Alias (nickname)</option>
+                    		<option value="3">Modificar</option>
+                    		<option value="4">Recuperar contrase&ntilde;a</option>
+                    		<option value="5">Suspender (Bloquear)</option>
+                    		<option value="6">Eliminar</option>
+                    		<option value="7">Transferir Documentos</option>
+                    	</select>
+                    </div>
+                    <div class="form-group">
+    					<label for="pais">Pa&iacute;s &nbsp;</label><label style="color: red">*</label>
+    					<select  id="pais" class="form-control" >
+    						<option value="0">-- Elige --</option>
+            					<?php 
+            					      foreach ($this->view->paises as $paises)
+            					   {
+            					       $select .= '<option value="'.$paises->id.'">'.$paises->nombre.'</option>';
+            					   }
+            					 ?>
+            					<?php echo($select);?>
+    					</select>
+    				</div>
+    				<div class="row">
+            			<div class="col-xs-4 col-xs-offset-8">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="part2">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="dados-2">
+    				<div class="form-group">
+                    	<label for="apellido">Apellido(s) (sin tildes ni la letra &ntilde;) &nbsp;</label><label style="color: red">*</label>
+                    	<p>Apellidos para mostrar en el correo.</p>
+               			<input type="text" class="form-control" id="appelido" placeholder="">
+                    </div>
+                   <div class="form-group">
+                    	<label for="nombre">Nombre(s) (sin tildes ni la letra &ntilde;) &nbsp;</label><label style="color: red">*</label>
+                    	<p>Nombres para mostrar en el correo.</p>
+               			<input type="text" class="form-control" id="nombre" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    	<label for="correo">C&oacute;mo le gustaria que fuera su correo? &nbsp;</label><label style="color: red">*</label>
+                    	<p>Este debe ser <strong>nombre.apellido@techo.org</strong> y si es un correo para un pa&iacute;s o regi&oacute;n, debe ser <strong>nombre.pais@techo.org</strong>. </p>
+               			<input type="text" class="form-control" id="correo" placeholder="">
+                    </div>
+                     <div class="form-group">
+                    	<label for="area">&Aacute;rea &nbsp;</label><label style="color: red">*</label>
+                    	<p>El &aacute;rea que ser&aacute; responsable de la gesti&oacute;n de la cuenta.</p>
+               			<select  id="area" class="form-control" >
+    						<option value="0">-- Elige --</option>
+    						<?php 
+    						  foreach ($this->view->areas as $area)
+    						  {
+    						      $ComboArea.= '<option value="'.$area->id .'">'.$area->nombre .'</option>';
+    						  }
+    						 ?>
+    						<?php echo($ComboArea);?>
+    					</select>
+                    </div>
+                    <div class="form-group">
+                    	<label for="rol">Rol &nbsp;</label><label style="color: red">*</label>
+                    	<p>El rol de la persona que ser&aacute; la encargada de gestionar la cuenta.</p>
+               			<select  id="rol" class="form-control" >
+    						<option value="0">-- Elige --</option>
+    						<?php 
+    						foreach ($this->view->cargos as $cargos)
+    						  {
+    						      $ComboCargos.= '<option value="'.$cargos->id .'">'.$cargos->nombre .'</option>';
+    						  }
+    						 ?>
+    						<?php echo($ComboCargos);?>
+    					</select>
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="part1">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="part3">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="dados-3">
+    				<div class="form-group">
+                    	<label for="motivo">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique el motivo de su solicitud.</p>
+               			<input type="text" class="form-control" id="motivo" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <p>Env&iacute;ame una copia de mis respuestas.</p>
+                    	<label class="switch">
+                      		<input type="checkbox" id="copia">
+                      		<span class="slider round"></span>
+                    	</label>
+                    </div>
+                    
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="parteanterior">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-solicitud">Enviar</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="dados-nickname">
+    				<div class="form-group">
+                    	<label for="nickname">Cuenta real &nbsp;</label><label style="color: red">*</label>
+                    	<p>Cuenta real al que se le crear&aacute; el alias. Esta es la cuenta que recibir&aacute; los correos electr&oacute;nicos que se env&iacute;en a la direcci&oacute;n especificada en el alias.</p>
+               			<input type="text" class="form-control" id="correo-real" placeholder="">
+                    </div>
+                   <div class="form-group">
+                    	<label for="nickname">Alias  &nbsp;</label><label style="color: red">*</label>
+                    	<p>Alias a crear.</p>
+               			<input type="text" class="form-control" id="alias" placeholder="">
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="parteanterior-nickname">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="finaliza-nickname">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="motivo-nickname">
+    				<div class="form-group">
+                    	<label for="motivo">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique el motivo de su solicitud.</p>
+               			<input type="text" class="form-control" id="motivo-nickame" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <p>Env&iacute;ame una copia de mis respuestas.</p>
+                    	<label class="switch">
+                      		<input type="checkbox" id="copia-nickname">
+                      		<span class="slider round"></span>
+                    	</label>
+                    </div>
+                    
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="atras-nickname">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-nickname">Enviar</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="dados-modificar">
+    				<div class="form-group">
+                    	<label for="modificar">&iquest;Qu&eacute; desea modificar? &nbsp;</label><label style="color: red">*</label>
+               			<input type="text" class="form-control" id="correo-real" placeholder="">
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="atras-modificar">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="finaliza-modificar">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="motivo-modificar">
+    				<div class="form-group">
+                    	<label for="modificar">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique el motivo de su solicitud.</p>
+               			<input type="text" class="form-control" id="motivo-modificar" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <p>Env&iacute;ame una copia de mis respuestas.</p>
+                    	<label class="switch">
+                      		<input type="checkbox" id="copia-modificar">
+                      		<span class="slider round"></span>
+                    	</label>
+                    </div>
+                    
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="especifica-modificar">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-modificar">Enviar</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="dados-recuperar">
+    				<div class="form-group">
+                    	<label for="recuperar">Correo a recuperar su contrase&ntilde;a &nbsp;</label><label style="color: red">*</label>
+               			<input type="text" class="form-control" id="correo-recuperar" placeholder="">
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="atras-recuperar">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="finaliza-recuperar">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="motivo-recuperar">
+    				<div class="form-group">
+                    	<label for="recuperar">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique el motivo de su solicitud.</p>
+               			<input type="text" class="form-control" id="motivo-recuperar" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <p>Env&iacute;ame una copia de mis respuestas.</p>
+                    	<label class="switch">
+                      		<input type="checkbox" id="copia-recuperar">
+                      		<span class="slider round"></span>
+                    	</label>
+                    </div>
+                    
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="especifica-recuperar">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-recuperar">Enviar</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="dados-suspender">
+    				<div class="form-group">
+                    	<label for="suspender">Correo a suspender &nbsp;</label><label style="color: red">*</label>
+               			<input type="text" class="form-control" id="correo-suspender" placeholder="">
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="atras-suspender">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="finaliza-suspender">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="motivo-suspender">
+    				<div class="form-group">
+                    	<label for="suspender">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique el motivo de su solicitud.</p>
+               			<input type="text" class="form-control" id="motivo-suspender" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <p>Env&iacute;ame una copia de mis respuestas.</p>
+                    	<label class="switch">
+                      		<input type="checkbox" id="copia-suspender">
+                      		<span class="slider round"></span>
+                    	</label>
+                    </div>
+                    
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="especifica-suspender">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-recuperar">Enviar</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="dados-eliminar">
+    				<div class="form-group">
+                    	<label for="eliminar">Correo a eliminar &nbsp;</label><label style="color: red">*</label>
+               			<input type="text" class="form-control" id="correo-eliminar" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    	<label for="eliminar">Deseas transferir los Docs almacenados a otra cuenta?  &nbsp;</label><label style="color: red">*</label><br>
+                    	<p>Con esta opci&oacute;n puedes solicitar que la propiedad de los documentos almacenados en Google Drive se transfieran a otra cuenta.</p>
+                    	<input type="radio" name="transfer" id="si" value="si">S&iacute;<br>
+                    	<input type="radio" name="transfer" id="no" value="no">No<br>
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="atras-eliminar">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="finaliza-eliminar">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="transfer-docs">
+    				<div class="form-group">
+                    	<label for="eliminar">Cuenta de origen &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique la cuenta desde la cual se van a transferir los documentos. Si est&aacute;s solicitando la eliminaci&oacute;n de una cuenta, ingresa nuevamente aqu&iacute; la cuenta que ser&aacute; eliminada.</p>
+               			<input type="text" class="form-control" id="correo-origem" placeholder="">
+                    </div>
+                   <div class="form-group">
+                    	<label for="eliminar">Cuenta de destino &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique la cuenta hacia la cual ser&aacute;n transferidos los documentos.</p>
+               			<input type="text" class="form-control" id="correo-destino" placeholder="">
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="atras-dados-eliminar">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="finaliza-transfer-eliminar">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="motivo-eliminar">
+    				<div class="form-group">
+                    	<label for="eliminar">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique el motivo de su solicitud.</p>
+               			<input type="text" class="form-control" id="motivo-eliminar" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <p>Env&iacute;ame una copia de mis respuestas.</p>
+                    	<label class="switch">
+                      		<input type="checkbox" id="copia-eliminar">
+                      		<span class="slider round"></span>
+                    	</label>
+                    </div>
+                    
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="especifica-eliminar">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-eliminar">Enviar</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="transfer-docs-2">
+    				<div class="form-group">
+                    	<label for="eliminar">Cuenta de origen &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique la cuenta desde la cual se van a transferir los documentos. Si est&aacute;s solicitando la eliminaci&oacute;n de una cuenta, ingresa nuevamente aqu&iacute; la cuenta que ser&aacute; eliminada.</p>
+               			<input type="text" class="form-control" id="correo-origem" placeholder="">
+                    </div>
+                   <div class="form-group">
+                    	<label for="eliminar">Cuenta de destino &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique la cuenta hacia la cual ser&aacute;n transferidos los documentos.</p>
+               			<input type="text" class="form-control" id="correo-destino" placeholder="">
+                    </div>
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="atras-transfer">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="finaliza-transfer">Siguiente</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+    			<div id="motivo-transfer">
+    				<div class="form-group">
+                    	<label for="transfer">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
+                    	<p>Especifique el motivo de su solicitud.</p>
+               			<input type="text" class="form-control" id="motivo-transfer" placeholder="">
+                    </div>
+                    <div class="form-group">
+                    <p>Env&iacute;ame una copia de mis respuestas.</p>
+                    	<label class="switch">
+                      		<input type="checkbox" id="copia-tranfer">
+                      		<span class="slider round"></span>
+                    	</label>
+                    </div>
+                    
+    				<div class="row">
+            			<div class="col-xs-4">
+            				<button type="button" class="btn btn-primary btn-block btn-flat"  id="especifica-transfer">Atr&aacute;s</button>
+            			</div>
+            			<div class="col-xs-4">
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-transfer">Enviar</button>
+            			</div>
+            		</div>	
+    			</div>
+    			
+         	</form>
+		</div>
+	</body>
+</html>
+<script src="/assets/js/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/assets/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/iCheck/icheck.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
+<script>
+    $(document).ready(function() {
+    	$('#text-2').hide();
+    	$('#text-3').hide();
+    	$('#dados-2').hide();
+    	$('#dados-3').hide();
+    	$('#text-nickname').hide();
+    	$('#dados-nickname').hide();
+    	$('#motivo-nickname').hide();
+    	$('#text-modificar').hide();
+    	$('#dados-modificar').hide();
+    	$('#motivo-modificar').hide();
+    	$('#text-recuperar').hide();
+    	$('#dados-recuperar').hide();
+    	$('#motivo-recuperar').hide();
+    	$('#text-suspender').hide();
+    	$('#dados-suspender').hide();
+    	$('#motivo-suspender').hide();
+    	$('#text-eliminar').hide();
+    	$('#dados-eliminar').hide();
+    	$('#text-transfer').hide();
+    	$('#transfer-docs').hide();
+    	$('#motivo-eliminar').hide();
+    	$('#transfer-docs-2').hide();
+    	$('#motivo-transfer').hide();
+    });
+
+
+    $("#part2").click(function() 
+   	{
+   	 	var hacer = $('#hacer').val();
+   	 	
+	   //Crear
+	    if(hacer == 1) 
+		{
+	    	$('#text-1').hide();
+	    	$('#text-2').show();
+	    	$('#dados-1').hide();
+	    	$('#dados-2').show();
+		}
+		//Crear un Alias
+		if(hacer == 2)
+		{
+			$('#text-1').hide();
+			$('#dados-1').hide();
+			$('#text-nickname').show();
+			$('#dados-nickname').show();
+		}
+		//Modificar
+		if(hacer == 3)
+		{
+			$('#text-1').hide();
+			$('#dados-1').hide();
+			$('#text-modificar').show();
+			$('#dados-modificar').show();
+		}
+		//Recuperar
+		if(hacer == 4)
+		{
+			$('#text-1').hide();
+			$('#dados-1').hide();
+			$('#text-recuperar').show();
+			$('#dados-recuperar').show();
+		}
+		//Suspender
+		if(hacer == 5)
+		{
+			$('#text-1').hide();
+			$('#dados-1').hide();
+			$('#text-suspender').show();
+			$('#dados-suspender').show();
+		}
+		//Eliminar
+		if(hacer == 6)
+		{
+			$('#text-1').hide();
+			$('#dados-1').hide();
+			$('#text-eliminar').show();
+			$('#dados-eliminar').show();
+		}
+		//Transfer Docs
+		if(hacer == 7)
+		{
+			$('#text-1').hide();
+			$('#dados-1').hide();
+			$('#transfer-docs-2').show();
+			$('#text-transfer').show();
+		}
+	});
+
+	
+
+    $("#part1").click(function() {
+    	$('#text-1').show();
+    	$('#text-2').hide();
+    	$('#dados-1').show();
+    	$('#dados-2').hide();
+	});
+
+    $("#parteanterior").click(function() {
+    	$('#text-2').show();
+    	$('#dados-2').show();
+    	$('#text-3').hide();
+    	$('#dados-3').hide();
+    	
+	});
+
+	$("#parteanterior-nickname").click(function() {
+		$('#text-nickname').hide();
+		$('#dados-nickname').hide();
+    	$('#dados-1').show();
+    	$('#text-1').show();
+    	
+	});
+
+	$("#part3").click(function() {
+    	$('#text-2').hide();
+    	$('#dados-2').hide();
+    	$('#text-3').show();
+    	$('#dados-3').show();
+    	
+	});
+
+	$("#finaliza-nickname").click(function() {
+    	$('#motivo-nickname').hide();
+    	$('#dados-nickname').hide();
+    	$('#motivo-nickname').show();
+	});
+
+	$("#atras-nickname").click(function() {
+    	$('#motivo-nickname').hide();
+    	$('#dados-nickname').show();
+	});
+
+	$("#atras-modificar").click(function() {
+    	$('#dados-modificar').hide();
+    	$('#text-modificar').hide();
+    	$('#text-1').show();
+    	$('#dados-1').show();
+	});
+
+	$("#finaliza-modificar").click(function() {
+    	$('#dados-modificar').hide();
+    	$('#text-modificar').hide();
+    	$('#motivo-modificar').show();
+	});
+
+	$("#especifica-modificar").click(function() {
+    	$('#motivo-modificar').hide();
+    	$('#dados-modificar').show();
+    	$('#text-modificar').show();
+	});
+
+	$("#atras-recuperar").click(function() {
+    	$('#dados-recuperar').hide();
+    	$('#text-recuperar').hide();
+    	$('#text-1').show();
+    	$('#dados-1').show();
+	});
+
+	$("#finaliza-recuperar").click(function() {
+    	$('#dados-recuperar').hide();
+    	$('#text-recuperar').hide();
+    	$('#motivo-recuperar').show();
+	});
+
+	$("#especifica-recuperar").click(function() {
+    	$('#motivo-recuperar').hide();
+    	$('#dados-recuperar').show();
+    	$('#text-recuperar').show();
+	});
+
+	$("#atras-suspender").click(function() {
+    	$('#dados-suspender').hide();
+    	$('#text-suspender').hide();
+    	$('#text-1').show();
+    	$('#dados-1').show();
+	});
+
+	$("#finaliza-suspender").click(function() {
+    	$('#dados-suspender').hide();
+    	$('#text-suspender').hide();
+    	$('#motivo-suspender').show();
+	});
+
+	$("#especifica-suspender").click(function() {
+    	$('#motivo-suspender').hide();
+    	$('#dados-suspender').show();
+    	$('#text-suspender').show();
+	});
+
+	$("#atras-eliminar").click(function() {
+    	$('#dados-eliminar').hide();
+    	$('#text-eliminar').hide();
+    	$('#text-1').show();
+    	$('#dados-1').show();
+	});
+
+	$("#finaliza-eliminar").click(function() 
+	{
+		if($("#si").is(':checked')) 
+		{  
+			$('#dados-eliminar').hide();
+	    	$('#text-eliminar').hide();
+	    	$('#transfer-docs').show(); 
+        } 
+        else 
+        {  
+        	$('#dados-eliminar').hide();
+	    	$('#text-eliminar').hide();
+	    	$('#motivo-eliminar').show();
+        }  
+	});
+
+	$("#atras-dados-eliminar").click(function() {
+    	$('#transfer-docs').hide();
+    	$('#text-transfer').hide();
+    	$('#dados-eliminar').show();
+    	$('#text-eliminar').show();
+	});
+
+	$("#especifica-eliminar").click(function() {
+		if($("#si").is(':checked')) 
+		{  
+			$('#motivo-eliminar').hide();
+	    	$('#transfer-docs').show();
+	    	$('#text-transfer').show();
+        } 
+        else 
+        {  
+        	$('#motivo-eliminar').hide();
+	    	$('#dados-eliminar').show();
+	    	$('#text-eliminar').show();
+        } 
+	});
+
+	$("#finaliza-transfer-eliminar").click(function() {
+    	$('#transfer-docs').hide();
+    	$('#text-transfer').hide();
+    	$('#motivo-eliminar').show();
+	});
+
+	$("#atras-transfer").click(function() {
+    	$('#transfer-docs-2').hide();
+    	$('#text-transfer').hide();
+    	$('#text-1').show();
+    	$('#dados-1').show();
+	});
+
+	$("#finaliza-transfer").click(function() {
+    	$('#transfer-docs-2').hide();
+    	$('#text-transfer').hide();
+    	$('#motivo-transfer').show();
+	});
+
+	$("#especifica-transfer").click(function() {
+		$('#motivo-transfer').hide();
+		$('#transfer-docs-2').show();
+    	$('#text-transfer').show();
+	});
+
+	
+
+</script>

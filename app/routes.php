@@ -60,4 +60,7 @@ $route[] = ['/usuario/show/{id}', 'UsuariosController@show'];
 /* API Usuarios */
 $route[] = ['/usuario?api=true', 'UsuariosController@index'];
 
+/*Solicitud de Correo Controller*/
+$route[] = ['/correo', 'CorreosController@index'];
+
 return $route;
