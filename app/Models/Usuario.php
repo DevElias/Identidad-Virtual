@@ -161,6 +161,16 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function selectPaises()
+    {
+        $query = "SELECT * FROM pais WHERE borrado = 0";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
     public function ActualizarUsuario($aParam)
     {
         $sql  = "";
