@@ -62,5 +62,12 @@ $route[] = ['/usuario?api=true', 'UsuariosController@index'];
 
 /*Solicitud de Correo Controller*/
 $route[] = ['/correo', 'CorreosController@index'];
+$route[] = ['/correo/crear', 'CorreosController@crear'];
+$route[] = ['/correo/nickname', 'CorreosController@nickname'];
+$route[] = ['/correo/modificar', 'CorreosController@modificar'];
+$route[] = ['/correo/recuperar', 'CorreosController@recuperar'];
+$route[] = ['/correo/suspender', 'CorreosController@suspender'];
+$route[] = ['/correo/eliminar', 'CorreosController@eliminar'];
+$route[] = ['/correo/transferir', 'CorreosController@transferir'];
 
 return $route;

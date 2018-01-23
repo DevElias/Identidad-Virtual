@@ -192,7 +192,7 @@
                     <div class="form-group">
                     <p>Env&iacute;ame una copia de mis respuestas.</p>
                     	<label class="switch">
-                      		<input type="checkbox" id="copia">
+                      		<input type="checkbox" id="copia" value="off">
                       		<span class="slider round"></span>
                     	</label>
                     </div>
@@ -232,7 +232,7 @@
     				<div class="form-group">
                     	<label for="motivo">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique el motivo de su solicitud.</p>
-               			<input type="text" class="form-control" id="motivo-nickame" placeholder="">
+               			<input type="text" class="form-control" id="motivo-nickame-value" placeholder="">
                     </div>
                     <div class="form-group">
                     <p>Env&iacute;ame una copia de mis respuestas.</p>
@@ -255,7 +255,7 @@
     			<div id="dados-modificar">
     				<div class="form-group">
                     	<label for="modificar">&iquest;Qu&eacute; desea modificar? &nbsp;</label><label style="color: red">*</label>
-               			<input type="text" class="form-control" id="correo-real" placeholder="">
+               			<input type="text" class="form-control" id="modify" placeholder="">
                     </div>
     				<div class="row">
             			<div class="col-xs-4">
@@ -271,7 +271,7 @@
     				<div class="form-group">
                     	<label for="modificar">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique el motivo de su solicitud.</p>
-               			<input type="text" class="form-control" id="motivo-modificar" placeholder="">
+               			<input type="text" class="form-control" id="motivo-modificar-value" placeholder="">
                     </div>
                     <div class="form-group">
                     <p>Env&iacute;ame una copia de mis respuestas.</p>
@@ -310,7 +310,7 @@
     				<div class="form-group">
                     	<label for="recuperar">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique el motivo de su solicitud.</p>
-               			<input type="text" class="form-control" id="motivo-recuperar" placeholder="">
+               			<input type="text" class="form-control" id="motivo-recuperar-value" placeholder="">
                     </div>
                     <div class="form-group">
                     <p>Env&iacute;ame una copia de mis respuestas.</p>
@@ -349,7 +349,7 @@
     				<div class="form-group">
                     	<label for="suspender">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique el motivo de su solicitud.</p>
-               			<input type="text" class="form-control" id="motivo-suspender" placeholder="">
+               			<input type="text" class="form-control" id="motivo-suspender-value" placeholder="">
                     </div>
                     <div class="form-group">
                     <p>Env&iacute;ame una copia de mis respuestas.</p>
@@ -364,7 +364,7 @@
             				<button type="button" class="btn btn-primary btn-block btn-flat"  id="especifica-suspender">Atr&aacute;s</button>
             			</div>
             			<div class="col-xs-4">
-              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-recuperar">Enviar</button>
+              				<button type="button" class="btn btn-primary btn-block btn-flat"  id="crear-suspender">Enviar</button>
             			</div>
             		</div>	
     			</div>
@@ -415,7 +415,7 @@
     				<div class="form-group">
                     	<label for="eliminar">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique el motivo de su solicitud.</p>
-               			<input type="text" class="form-control" id="motivo-eliminar" placeholder="">
+               			<input type="text" class="form-control" id="motivo-eliminar-value" placeholder="">
                     </div>
                     <div class="form-group">
                     <p>Env&iacute;ame una copia de mis respuestas.</p>
@@ -439,12 +439,12 @@
     				<div class="form-group">
                     	<label for="eliminar">Cuenta de origen &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique la cuenta desde la cual se van a transferir los documentos. Si est&aacute;s solicitando la eliminaci&oacute;n de una cuenta, ingresa nuevamente aqu&iacute; la cuenta que ser&aacute; eliminada.</p>
-               			<input type="text" class="form-control" id="correo-origem" placeholder="">
+               			<input type="text" class="form-control" id="correo-origem-transfer" placeholder="">
                     </div>
                    <div class="form-group">
                     	<label for="eliminar">Cuenta de destino &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique la cuenta hacia la cual ser&aacute;n transferidos los documentos.</p>
-               			<input type="text" class="form-control" id="correo-destino" placeholder="">
+               			<input type="text" class="form-control" id="correo-destino-transfer" placeholder="">
                     </div>
     				<div class="row">
             			<div class="col-xs-4">
@@ -460,7 +460,7 @@
     				<div class="form-group">
                     	<label for="transfer">Motivo de la solicitud &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique el motivo de su solicitud.</p>
-               			<input type="text" class="form-control" id="motivo-transfer" placeholder="">
+               			<input type="text" class="form-control" id="motivo-transfer-value" placeholder="">
                     </div>
                     <div class="form-group">
                     <p>Env&iacute;ame una copia de mis respuestas.</p>
@@ -488,6 +488,7 @@
 <script src="/assets/js/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/js/iCheck/icheck.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
+<script type="text/javascript" src="/assets/js/correo/correo.js""></script>
 <script>
     $(document).ready(function() {
     	$('#text-2').hide();
@@ -749,6 +750,71 @@
     	$('#text-transfer').show();
 	});
 
-	
+	//Funcoes de gravacao
 
+	//Crear Correo
+	$("#copia").click(function() {
+		$('#copia').val('On');
+	});
+	
+	$("#crear-solicitud").click(function() {
+		CrearCorreo();
+	});
+
+	//Crear Alias
+	$("#copia-nickname").click(function() {
+		$('#copia-nickname').val('On');
+	});
+
+	$("#crear-nickname").click(function() {
+		CrearNickname();
+	});
+
+	//Modificar
+	$("#copia-modificar").click(function() {
+		$('#copia-modificar').val('On');
+	});
+
+	$("#crear-modificar").click(function() {
+		Modificar();
+	});
+
+	//Recuperar Contrasena
+	$("#copia-recuperar").click(function() {
+		$('#copia-recuperar').val('On');
+	});
+
+	$("#crear-recuperar").click(function() {
+		Recuperar();
+	});
+
+	//Suspender
+	$("#copia-suspender").click(function() {
+		$('#copia-suspender').val('On');
+	});
+
+	$("#crear-suspender").click(function() {
+		Suspender();
+	});
+
+	//Eliminar
+	$("#copia-eliminar").click(function() {
+		$('#copia-eliminar').val('On');
+	});
+
+	$("#crear-eliminar").click(function() {
+		Eliminar();
+	});
+
+	//Transferir Documentos
+	$("#copia-tranfer").click(function() {
+		$('#copia-tranfer').val('On');
+	});
+
+	$("#crear-transfer").click(function() {
+		Transferir();
+	});
+
+	//Validation
+	Validation();
 </script>
