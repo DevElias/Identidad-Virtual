@@ -394,7 +394,7 @@
     				<div class="form-group">
                     	<label for="eliminar">Cuenta de origen &nbsp;</label><label style="color: red">*</label>
                     	<p>Especifique la cuenta desde la cual se van a transferir los documentos. Si est&aacute;s solicitando la eliminaci&oacute;n de una cuenta, ingresa nuevamente aqu&iacute; la cuenta que ser&aacute; eliminada.</p>
-               			<input type="text" class="form-control" id="correo-origem" placeholder="">
+               			<input type="text" class="form-control" id="correo-origem" placeholder="" disabled>
                     </div>
                    <div class="form-group">
                     	<label for="eliminar">Cuenta de destino &nbsp;</label><label style="color: red">*</label>
@@ -694,6 +694,7 @@
 			$('#dados-eliminar').hide();
 	    	$('#text-eliminar').hide();
 	    	$('#transfer-docs').show(); 
+	    	$('#correo-origem').val($('#correo-eliminar').val());
         } 
         else 
         {  
