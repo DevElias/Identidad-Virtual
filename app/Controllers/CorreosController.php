@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use Core\BaseController;
 use Core\Container;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class CorreosController extends BaseController
 {
@@ -30,13 +31,100 @@ class CorreosController extends BaseController
         $aParam['rol']      = filter_var($aParam['rol'], FILTER_SANITIZE_STRING);
         $aParam['copia']    = filter_var($aParam['copia'], FILTER_SANITIZE_STRING);
         
+        //Search Info
+        $model = Container::getModel("Correo");
+        $Pais  = (array) $model->searchPais($aParam['pais']);
+        $Area  = (array) $model->searchArea($aParam['area']);
+        $Rol  = (array) $model->searchRol($aParam['rol']);
+        
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-                       
+            $mail = new PHPMailer(true); 
+            
+            $cEmail    = $_SESSION['user']['email'];
+            
+            $mail->IsSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;
+            $mail->Username = 'no-reply@techo.org';
+            $mail->Password = '0CBiyyRg';
+            
+            $html = '<html>
+                        <head>
+                        	<meta charset="utf-8">
+                        	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        	<title>Solicitud de Correo</title>
+                        </head>
+                        <body>
+                        <style>
+                        	* {
+                        		font-size: 14px;
+                        		line-height: 1.8em;
+                        		font-family: arial;
+                        	}
+                        </style>
+                        	<table style="margin:0 auto; max-width:660px;">
+                        		<thead>
+                        			<tr>
+                        				<th><img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_jpg/v1456028699/hmjywirmsbcl3frjdtsn.png" />  </th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicitud de cuentas TECHO/TETO</strong></p><br>
+    										<strong>&#161;Hemos registrado tu Solicitud!</strong></p>
+    										Una vez que tu solicitud sea atendida, te enviaremos un Correo de confirmaci&oacute;n<br>
+    										<p>Crear Correo: <strong> '. $aParam['correo']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Apellido(s): <strong> ' . $aParam['appelido'] .'</strong></p>
+    										<p>Nombre(s): <strong> '   . $aParam['nombre']   .'</strong></p>
+    										<p>&Aacute;rea: <strong> ' . $Area['nombre']     .'</strong></p>
+    										<p>Rol : <strong> '        . $Rol['nombre']      .'</strong></p>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicita&ccedil;&atilde;o de Email TECHO/TETO</strong></p><br>
+    										<strong>Registramos sua Solicita&ccedil;&atilde;o!</strong></p>
+    										Assim que sua Solicita&ccedil;&atilde;o for atendida, te enviaremos un email de confirma&ccedil;&atilde;o<br>
+    										<p>Criar Email: <strong> '. $aParam['correo']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Sobrenome(s): <strong> ' . $aParam['appelido'] .'</strong></p>
+    										<p>Nome(s): <strong> '   . $aParam['nombre']   .'</strong></p>
+    										<p>&Aacute;rea: <strong> ' . $Area['nombre']     .'</strong></p>
+    										<p>Cargo : <strong> '        . $Rol['nombre']      .'</strong></p>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </body>
+                        </html>';
+            
+            $mail->From = 'no-reply@techo.org';
+            $mail->FromName = 'Identidad Virtual - TECHO';
+            
+            $mail->AddAddress($cEmail);
+            
+            $mail->IsHTML(true);
+            
+            
+            $mail->Subject  = "TECHO - Solicitud de Correo"; // Assunto da mensagem
+            $mail->Body = "". $html . "";
+            
+            // Define os anexos (opcional)
+            //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+            
+            // Envia o e-mail
+            $enviado = $mail->Send();
+            
+            // Limpa os destinatários e os anexos
+            $mail->ClearAllRecipients();
+            $mail->ClearAttachments();
         }
         
-        $model  = Container::getModel("Correo");
         $result = $model->CrearCorreo($aParam);
         
         if($result)
@@ -59,13 +147,92 @@ class CorreosController extends BaseController
         $aParam['motivo']    = filter_var($aParam['motivo'], FILTER_SANITIZE_STRING);
         $aParam['copia']     = filter_var($aParam['copia'], FILTER_SANITIZE_STRING);
         
+        //Search Info
+        $model = Container::getModel("Correo");
+        $Pais  = (array) $model->searchPais($aParam['pais']);
+        
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-            //Implamentar...
+            $mail = new PHPMailer(true);
+            
+            $cEmail    = $_SESSION['user']['email'];
+            
+            $mail->IsSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;
+            $mail->Username = 'no-reply@techo.org';
+            $mail->Password = '0CBiyyRg';
+            
+            $html = '<html>
+                        <head>
+                        	<meta charset="utf-8">
+                        	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        	<title>Crear un Alias (Nickname)</title>
+                        </head>
+                        <body>
+                        <style>
+                        	* {
+                        		font-size: 14px;
+                        		line-height: 1.8em;
+                        		font-family: arial;
+                        	}
+                        </style>
+                        	<table style="margin:0 auto; max-width:660px;">
+                        		<thead>
+                        			<tr>
+                        				<th><img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_jpg/v1456028699/hmjywirmsbcl3frjdtsn.png" />  </th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicitud de cuentas TECHO/TETO</strong></p><br>
+    										<strong>&#161;Hemos registrado tu Solicitud!</strong></p>
+    										Una vez que tu solicitud sea atendida, te enviaremos un Correo de confirmaci&oacute;n<br>
+    										<p>Crear un Alias: <strong> '. $aParam['alias']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Correo: <strong> ' . $aParam['cuentareal'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicita&ccedil;&atilde;o de Email TECHO/TETO</strong></p><br>
+    										<strong>Registramos sua Solicita&ccedil;&atilde;o!</strong></p>
+    										Assim que sua Solicita&ccedil;&atilde;o for atendida, te enviaremos un email de confirma&ccedil;&atilde;o<br>
+    										<p>Criar Apelido: <strong> '. $aParam['alias']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Correo: <strong> ' . $aParam['cuentareal'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </body>
+                        </html>';
+            
+            $mail->From = 'no-reply@techo.org';
+            $mail->FromName = 'Identidad Virtual - TECHO';
+            
+            $mail->AddAddress($cEmail);
+            
+            $mail->IsHTML(true);
+            
+            
+            $mail->Subject  = "TECHO - Solicitud de Correo"; // Assunto da mensagem
+            $mail->Body = "". $html . "";
+            
+            // Define os anexos (opcional)
+            //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+            
+            // Envia o e-mail
+            $enviado = $mail->Send();
+            
+            // Limpa os destinatários e os anexos
+            $mail->ClearAllRecipients();
+            $mail->ClearAttachments();
         }
         
-        $model  = Container::getModel("Correo");
         $result = $model->nickname($aParam);
         
         if($result)
@@ -87,13 +254,92 @@ class CorreosController extends BaseController
         $aParam['motivo']    = filter_var($aParam['motivo'], FILTER_SANITIZE_STRING);
         $aParam['copia']     = filter_var($aParam['copia'], FILTER_SANITIZE_STRING);
         
+        //Search Info
+        $model = Container::getModel("Correo");
+        $Pais  = (array) $model->searchPais($aParam['pais']);
+        
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-            //Implamentar...
+            $mail = new PHPMailer(true);
+            
+            $cEmail    = $_SESSION['user']['email'];
+            
+            $mail->IsSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;
+            $mail->Username = 'no-reply@techo.org';
+            $mail->Password = '0CBiyyRg';
+            
+            $html = '<html>
+                        <head>
+                        	<meta charset="utf-8">
+                        	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        	<title>Solicitud de Correo - Modificar</title>
+                        </head>
+                        <body>
+                        <style>
+                        	* {
+                        		font-size: 14px;
+                        		line-height: 1.8em;
+                        		font-family: arial;
+                        	}
+                        </style>
+                        	<table style="margin:0 auto; max-width:660px;">
+                        		<thead>
+                        			<tr>
+                        				<th><img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_jpg/v1456028699/hmjywirmsbcl3frjdtsn.png" />  </th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicitud de cuentas TECHO/TETO</strong></p><br>
+    										<strong>&#161;Hemos registrado tu Solicitud!</strong></p>
+    										Una vez que tu solicitud sea atendida, te enviaremos un Correo de confirmaci&oacute;n<br>
+    										<p>Modificar: <strong> '. $aParam['modify']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicita&ccedil;&atilde;o de Email TECHO/TETO</strong></p><br>
+    										<strong>Registramos sua Solicita&ccedil;&atilde;o!</strong></p>
+    										Assim que sua Solicita&ccedil;&atilde;o for atendida, te enviaremos un email de confirma&ccedil;&atilde;o<br>
+    										<p>Modificar: <strong> '. $aParam['modify']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </body>
+                        </html>';
+            
+            $mail->From = 'no-reply@techo.org';
+            $mail->FromName = 'Identidad Virtual - TECHO';
+            
+            $mail->AddAddress($cEmail);
+            
+            $mail->IsHTML(true);
+            
+            
+            $mail->Subject  = "TECHO - Solicitud de Correo"; // Assunto da mensagem
+            $mail->Body = "". $html . "";
+            
+            // Define os anexos (opcional)
+            //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+            
+            // Envia o e-mail
+            $enviado = $mail->Send();
+            
+            // Limpa os destinatários e os anexos
+            $mail->ClearAllRecipients();
+            $mail->ClearAttachments();
         }
         
-        $model  = Container::getModel("Correo");
         $result = $model->modificar($aParam);
         
         if($result)
@@ -115,13 +361,92 @@ class CorreosController extends BaseController
         $aParam['motivo']    = filter_var($aParam['motivo'], FILTER_SANITIZE_STRING);
         $aParam['copia']     = filter_var($aParam['copia'], FILTER_SANITIZE_STRING);
         
+        //Search Info
+        $model = Container::getModel("Correo");
+        $Pais  = (array) $model->searchPais($aParam['pais']);
+        
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-            //Implamentar...
+            $mail = new PHPMailer(true);
+            
+            $cEmail    = $_SESSION['user']['email'];
+            
+            $mail->IsSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;
+            $mail->Username = 'no-reply@techo.org';
+            $mail->Password = '0CBiyyRg';
+            
+            $html = '<html>
+                        <head>
+                        	<meta charset="utf-8">
+                        	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        	<title>Solicitud de Correo - Recuperar contrase&ntilde;a</title>
+                        </head>
+                        <body>
+                        <style>
+                        	* {
+                        		font-size: 14px;
+                        		line-height: 1.8em;
+                        		font-family: arial;
+                        	}
+                        </style>
+                        	<table style="margin:0 auto; max-width:660px;">
+                        		<thead>
+                        			<tr>
+                        				<th><img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_jpg/v1456028699/hmjywirmsbcl3frjdtsn.png" />  </th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicitud de cuentas TECHO/TETO</strong></p><br>
+    										<strong>&#161;Hemos registrado tu Solicitud!</strong></p>
+    										Una vez que tu solicitud sea atendida, te enviaremos un Correo de confirmaci&oacute;n<br>
+    										<p>Recuperar contrase&ntilde;a: del Correo: <strong> '. $aParam['correo_recuperar']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicita&ccedil;&atilde;o de Email TECHO/TETO</strong></p><br>
+    										<strong>Registramos sua Solicita&ccedil;&atilde;o!</strong></p>
+    										Assim que sua Solicita&ccedil;&atilde;o for atendida, te enviaremos un email de confirma&ccedil;&atilde;o<br>
+    										<p>Recuperar Senha do Email: <strong> '. $aParam['correo_recuperar']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </body>
+                        </html>';
+            
+            $mail->From = 'no-reply@techo.org';
+            $mail->FromName = 'Identidad Virtual - TECHO';
+            
+            $mail->AddAddress($cEmail);
+            
+            $mail->IsHTML(true);
+            
+            
+            $mail->Subject  = "TECHO - Solicitud de Correo"; // Assunto da mensagem
+            $mail->Body = "". $html . "";
+            
+            // Define os anexos (opcional)
+            //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+            
+            // Envia o e-mail
+            $enviado = $mail->Send();
+            
+            // Limpa os destinatários e os anexos
+            $mail->ClearAllRecipients();
+            $mail->ClearAttachments();
         }
         
-        $model  = Container::getModel("Correo");
         $result = $model->recuperar($aParam);
         
         if($result)
@@ -143,13 +468,92 @@ class CorreosController extends BaseController
         $aParam['motivo']    = filter_var($aParam['motivo'], FILTER_SANITIZE_STRING);
         $aParam['copia']     = filter_var($aParam['copia'], FILTER_SANITIZE_STRING);
         
+        //Search Info
+        $model = Container::getModel("Correo");
+        $Pais  = (array) $model->searchPais($aParam['pais']);
+        
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-            //Implamentar...
+            $mail = new PHPMailer(true);
+            
+            $cEmail    = $_SESSION['user']['email'];
+            
+            $mail->IsSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;
+            $mail->Username = 'no-reply@techo.org';
+            $mail->Password = '0CBiyyRg';
+            
+            $html = '<html>
+                        <head>
+                        	<meta charset="utf-8">
+                        	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        	<title>Solicitud de Correo - Supender</title>
+                        </head>
+                        <body>
+                        <style>
+                        	* {
+                        		font-size: 14px;
+                        		line-height: 1.8em;
+                        		font-family: arial;
+                        	}
+                        </style>
+                        	<table style="margin:0 auto; max-width:660px;">
+                        		<thead>
+                        			<tr>
+                        				<th><img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_jpg/v1456028699/hmjywirmsbcl3frjdtsn.png" />  </th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicitud de cuentas TECHO/TETO</strong></p><br>
+    										<strong>&#161;Hemos registrado tu Solicitud!</strong></p>
+    										Una vez que tu solicitud sea atendida, te enviaremos un Correo de confirmaci&oacute;n<br>
+    										<p>Suspender Correo: <strong> '. $aParam['correo_suspender']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicita&ccedil;&atilde;o de Email TECHO/TETO</strong></p><br>
+    										<strong>Registramos sua Solicita&ccedil;&atilde;o!</strong></p>
+    										Assim que sua Solicita&ccedil;&atilde;o for atendida, te enviaremos un email de confirma&ccedil;&atilde;o<br>
+    										<p>Suspender Email: <strong> '. $aParam['correo_suspender']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </body>
+                        </html>';
+            
+            $mail->From = 'no-reply@techo.org';
+            $mail->FromName = 'Identidad Virtual - TECHO';
+            
+            $mail->AddAddress($cEmail);
+            
+            $mail->IsHTML(true);
+            
+            
+            $mail->Subject  = "TECHO - Solicitud de Correo"; // Assunto da mensagem
+            $mail->Body = "". $html . "";
+            
+            // Define os anexos (opcional)
+            //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+            
+            // Envia o e-mail
+            $enviado = $mail->Send();
+            
+            // Limpa os destinatários e os anexos
+            $mail->ClearAllRecipients();
+            $mail->ClearAttachments();
         }
         
-        $model  = Container::getModel("Correo");
         $result = $model->suspender($aParam);
         
         if($result)
@@ -174,13 +578,92 @@ class CorreosController extends BaseController
         $aParam['motivo']           = filter_var($aParam['motivo'], FILTER_SANITIZE_STRING);
         $aParam['copia']            = filter_var($aParam['copia'], FILTER_SANITIZE_STRING);
         
+        //Search Info
+        $model = Container::getModel("Correo");
+        $Pais  = (array) $model->searchPais($aParam['pais']);
+        
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-            //Implamentar...
+            $mail = new PHPMailer(true);
+            
+            $cEmail    = $_SESSION['user']['email'];
+            
+            $mail->IsSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;
+            $mail->Username = 'no-reply@techo.org';
+            $mail->Password = '0CBiyyRg';
+            
+            $html = '<html>
+                        <head>
+                        	<meta charset="utf-8">
+                        	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        	<title>Solicitud de Correo - Eliminar</title>
+                        </head>
+                        <body>
+                        <style>
+                        	* {
+                        		font-size: 14px;
+                        		line-height: 1.8em;
+                        		font-family: arial;
+                        	}
+                        </style>
+                        	<table style="margin:0 auto; max-width:660px;">
+                        		<thead>
+                        			<tr>
+                        				<th><img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_jpg/v1456028699/hmjywirmsbcl3frjdtsn.png" />  </th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicitud de cuentas TECHO/TETO</strong></p><br>
+    										<strong>&#161;Hemos registrado tu Solicitud!</strong></p>
+    										Una vez que tu solicitud sea atendida, te enviaremos un Correo de confirmaci&oacute;n<br>
+    										<p>Eliminar Correo: <strong> '. $aParam['correo_eliminar']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicita&ccedil;&atilde;o de Email TECHO/TETO</strong></p><br>
+    										<strong>Registramos sua Solicita&ccedil;&atilde;o!</strong></p>
+    										Assim que sua Solicita&ccedil;&atilde;o for atendida, te enviaremos un email de confirma&ccedil;&atilde;o<br>
+    										<p>Apagar Email: <strong> '. $aParam['correo_eliminar']   .'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </body>
+                        </html>';
+            
+            $mail->From = 'no-reply@techo.org';
+            $mail->FromName = 'Identidad Virtual - TECHO';
+            
+            $mail->AddAddress($cEmail);
+            
+            $mail->IsHTML(true);
+            
+            
+            $mail->Subject  = "TECHO - Solicitud de Correo"; // Assunto da mensagem
+            $mail->Body = "". $html . "";
+            
+            // Define os anexos (opcional)
+            //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+            
+            // Envia o e-mail
+            $enviado = $mail->Send();
+            
+            // Limpa os destinatários e os anexos
+            $mail->ClearAllRecipients();
+            $mail->ClearAttachments();
         }
         
-        $model  = Container::getModel("Correo");
         $result = $model->eliminar($aParam);
         
         if($result)
@@ -203,13 +686,96 @@ class CorreosController extends BaseController
         $aParam['motivo']           = filter_var($aParam['motivo'], FILTER_SANITIZE_STRING);
         $aParam['copia']            = filter_var($aParam['copia'], FILTER_SANITIZE_STRING);
         
+        //Search Info
+        $model = Container::getModel("Correo");
+        $Pais  = (array) $model->searchPais($aParam['pais']);
+        
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-            //Implamentar...
+            $mail = new PHPMailer(true);
+            
+            $cEmail    = $_SESSION['user']['email'];
+            
+            $mail->IsSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;
+            $mail->Username = 'no-reply@techo.org';
+            $mail->Password = '0CBiyyRg';
+            
+            $html = '<html>
+                        <head>
+                        	<meta charset="utf-8">
+                        	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        	<title>Solicitud de Correo - Transferir</title>
+                        </head>
+                        <body>
+                        <style>
+                        	* {
+                        		font-size: 14px;
+                        		line-height: 1.8em;
+                        		font-family: arial;
+                        	}
+                        </style>
+                        	<table style="margin:0 auto; max-width:660px;">
+                        		<thead>
+                        			<tr>
+                        				<th><img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_jpg/v1456028699/hmjywirmsbcl3frjdtsn.png" />  </th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicitud de cuentas TECHO/TETO</strong></p><br>
+    										<strong>&#161;Hemos registrado tu Solicitud!</strong></p>
+    										Una vez que tu solicitud sea atendida, te enviaremos un Correo de confirmaci&oacute;n<br>
+    										<p><strong>Transferir Documentos: </strong></p>
+                                            <p>Correo Origen: <strong> ' . $aParam['correo_origen'].'</strong></p>
+                                            <p>Correo Destino: <strong> ' . $aParam['correo_destino'].'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>
+                                            <p style="padding-bottom:20px; text-align:center;"><strong>Solicita&ccedil;&atilde;o de Email TECHO/TETO</strong></p><br>
+    										<strong>Registramos sua Solicita&ccedil;&atilde;o!</strong></p>
+    										Assim que sua Solicita&ccedil;&atilde;o for atendida, te enviaremos un email de confirma&ccedil;&atilde;o<br>
+    										<p><strong>Transferir Documentos: </strong></p>
+                                            <p>Email de Origem: <strong> ' . $aParam['correo_origen'].'</strong></p>
+                                            <p>Email de Destino: <strong> ' . $aParam['correo_destino'].'</strong></p>
+    										<p>Pa&iacute;s: <strong> ' . $Pais['nombre']     .'</strong></p>
+    										<p>Motivo: <strong> ' . $aParam['motivo'] .'</strong></p>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </body>
+                        </html>';
+            
+            $mail->From = 'no-reply@techo.org';
+            $mail->FromName = 'Identidad Virtual - TECHO';
+            
+            $mail->AddAddress($cEmail);
+            
+            $mail->IsHTML(true);
+            
+            
+            $mail->Subject  = "TECHO - Solicitud de Correo"; // Assunto da mensagem
+            $mail->Body = "". $html . "";
+            
+            // Define os anexos (opcional)
+            //$mail->AddAttachment("c:/temp/documento.pdf", "novo_nome.pdf");  // Insere um anexo
+            
+            // Envia o e-mail
+            $enviado = $mail->Send();
+            
+            // Limpa os destinatários e os anexos
+            $mail->ClearAllRecipients();
+            $mail->ClearAttachments();
         }
         
-        $model  = Container::getModel("Correo");
         $result = $model->transferir($aParam);
         
         if($result)

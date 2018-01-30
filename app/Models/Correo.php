@@ -496,7 +496,7 @@ class Correo extends BaseModel
         $sql  = "";
         $sql .= "SELECT  * ";
         $sql .= "FROM {$this->table} ";
-        $sql .= "WHERE estado_pyt is null ";
+        $sql .= "WHERE (estado_pyt is null) OR (estado_pyt = 0)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -573,6 +573,39 @@ class Correo extends BaseModel
         $result = $stmt->rowCount();
         $stmt->closeCursor();
         
+        return $result;
+    }
+    
+    public function searchPais($id)
+    {
+        $query = "SELECT * FROM pais WHERE id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function searchArea($id)
+    {
+        $query = "SELECT * FROM AREA WHERE id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function searchRol($id)
+    {
+        $query = "SELECT * FROM cargo WHERE id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
         return $result;
     }
 }

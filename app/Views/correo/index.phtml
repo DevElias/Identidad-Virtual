@@ -484,6 +484,7 @@
 		</div>
 	</body>
 </html>
+<div id="loading-techo"><img src="/loading.gif"></div>
 <script src="/assets/js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/assets/js/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/js/iCheck/icheck.min.js"></script>
@@ -491,6 +492,7 @@
 <script type="text/javascript" src="/assets/js/correo/correo.js""></script>
 <script>
     $(document).ready(function() {
+    	$('#loading-techo').hide();
     	$('#text-2').hide();
     	$('#text-3').hide();
     	$('#dados-2').hide();
@@ -854,6 +856,7 @@
 	
 	$("#crear-solicitud").click(function() {
 		CrearCorreo();
+		$('#loading-techo').show();
 	});
 
 	//Crear Alias
@@ -863,6 +866,7 @@
 
 	$("#crear-nickname").click(function() {
 		CrearNickname();
+		$('#loading-techo').show();
 	});
 
 	//Modificar
@@ -872,6 +876,7 @@
 
 	$("#crear-modificar").click(function() {
 		Modificar();
+		$('#loading-techo').show();
 	});
 
 	//Recuperar Contrasena
@@ -881,6 +886,7 @@
 
 	$("#crear-recuperar").click(function() {
 		Recuperar();
+		$('#loading-techo').show();
 	});
 
 	//Suspender
@@ -890,6 +896,7 @@
 
 	$("#crear-suspender").click(function() {
 		Suspender();
+		$('#loading-techo').show();
 	});
 
 	//Eliminar
@@ -899,6 +906,7 @@
 
 	$("#crear-eliminar").click(function() {
 		Eliminar();
+		$('#loading-techo').show();
 	});
 
 	//Transferir Documentos
@@ -908,6 +916,7 @@
 
 	$("#crear-transfer").click(function() {
 		Transferir();
+		$('#loading-techo').show();
 	});
 
 	//Validation
