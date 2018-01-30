@@ -10,9 +10,9 @@
             
             if($this->client)
             {
-                $this->client->setClientID('195002437870-vr27esfdr89bvull4v78eifo0aktot41.apps.googleusercontent.com');
-                $this->client->setClientSecret('NIaltIvMzqHyFB1vVW5gDdcl');
-                $this->client->setRedirectUri('http://localhost:8080/');
+                $this->client->setClientID('195002437870-rp8bdf09m6uaan83vr7g9gs7cpalavsd.apps.googleusercontent.com');
+                $this->client->setClientSecret('WhuxYHQe2sdbEx3OSaOK-25-');
+                $this->client->setRedirectUri('http://id.techo.org/');
                 $this->client->addScope('email');
                 $this->client->addScope('profile');
             }
