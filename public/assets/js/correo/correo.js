@@ -24,7 +24,7 @@ function CrearCorreo()
 				    content: "Solicitado con éxito.",
 				    buttons: {
 				        ok: function(){
-				            location.href = "/";
+				            location.href = "/correo/concluir";
 				        }
 				    }
 				});
@@ -67,7 +67,7 @@ function CrearNickname()
 				    content: "Solicitado con éxito.",
 				    buttons: {
 				        ok: function(){
-				            location.href = "/";
+				            location.href = "/correo/concluir";
 				        }
 				    }
 				});
@@ -109,7 +109,7 @@ function Modificar()
 				    content: "Solicitado con éxito.",
 				    buttons: {
 				        ok: function(){
-				            location.href = "/";
+				            location.href = "/correo/concluir";
 				        }
 				    }
 				});
@@ -151,7 +151,7 @@ function Recuperar()
 				    content: "Solicitado con éxito.",
 				    buttons: {
 				        ok: function(){
-				            location.href = "/";
+				            location.href = "/correo/concluir";
 				        }
 				    }
 				});
@@ -193,7 +193,7 @@ function Suspender()
 				    content: "Solicitado con éxito.",
 				    buttons: {
 				        ok: function(){
-				            location.href = "/";
+				            location.href = "/correo/concluir";
 				        }
 				    }
 				});
@@ -247,7 +247,7 @@ function Eliminar()
 				    content: "Solicitado con éxito.",
 				    buttons: {
 				        ok: function(){
-				            location.href = "/";
+				            location.href = "/correo/concluir";
 				        }
 				    }
 				});
@@ -290,7 +290,7 @@ function Transferir()
 				    content: "Solicitado con éxito.",
 				    buttons: {
 				        ok: function(){
-				            location.href = "/";
+				            location.href = "/correo/concluir";
 				        }
 				    }
 				});
@@ -319,20 +319,20 @@ function Validation()
 
 		 if(reg.test($("#correo").val()))
 		 {
-			 $("#correo").removeClass("erroData");
+			 $("#correo").removeClass("erroCorreo");
 			 $("#correo").attr("style", "");
-			 $(".error").remove();
+			 $(".errorC").remove();
 			 $('#part3').prop('disabled', false);
 		 } 
 		 else
 		 {
-			 $("#correo").removeClass("erroData");
+			 $("#correo").removeClass("erroCorreo");
 			 $("#correo").attr("style", "");
-			 $(".error").remove();
+			 $(".errorC").remove();
 			 var msg = 'No es un correo v\u00E1lido.';
 			 $( "#correo" ).focus();
-		     $("#correo").addClass("erroData");
-		     $(".erroData").css("border", "1px solid red").after('<p class="error" style="color:red;">' + msg + '</p>');
+		     $("#correo").addClass("erroCorreo");
+		     $(".erroCorreo").css("border", "1px solid red").after('<p class="errorC" style="color:red;">' + msg + '</p>');
 		     $('#part3').prop('disabled', true);
 		 }
 	});
@@ -486,5 +486,61 @@ function Validation()
 		     $('#finaliza-transfer').prop('disabled', true);
 		 }
 	});
+	
+	$("#pais").change(function() 
+	{
+		  if($("#pais").val() != 0)
+		  {
+			  $('#part2').prop('disabled', false);
+		  }
+		  else
+		  {
+			  $('#part2').prop('disabled', true);
+		  }
+	});
 }
+
+function ActualizarCorreo()
+{
+	oData                = new Object();	
+	oData.id             = $('#id').val();
+	oData.contrasena     = $('#contrasena_temporal').val();
+	oData.estadoPersonas = $('#estado_personas').val();
+	oData.estadoPyt      = $('#estado_pyt').val();
+	oData.comentario     = $('#comentario').val();
+	
+	$.ajax({
+		type: "POST",
+		url: "/correo/edit",
+		dataType: "json",
+		data: oData,
+		success: function(oData)
+		{	
+			if(oData['results'])
+			{
+				$.confirm({
+				    content: "Actualizado  con éxito.",
+				    buttons: {
+				        ok: function(){
+				            location.href = "/correo/listado";
+				        }
+				    }
+				});
+			}
+			else
+			{
+				$.confirm({
+				    content: "Erro ao Actualizar.",
+				    buttons: {
+				        ok: function(){
+				            location.href = "/correo/listado";
+				        }
+				    }
+				});
+			}
+		}
+	});
+}
+
+
 	

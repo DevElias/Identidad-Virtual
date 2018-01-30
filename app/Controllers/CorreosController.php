@@ -33,7 +33,7 @@ class CorreosController extends BaseController
         //Enviar Email
         if($aParam['copia'] == 'On')
         {
-            //Implamentar...
+                       
         }
         
         $model  = Container::getModel("Correo");
@@ -211,6 +211,136 @@ class CorreosController extends BaseController
         
         $model  = Container::getModel("Correo");
         $result = $model->transferir($aParam);
+        
+        if($result)
+        {
+            echo json_encode(array("results" => true));
+        }
+        else
+        {
+            echo json_encode(array("results" => false));
+        }
+    }
+    
+    public function concluir()
+    {
+        /* Render View Correos */
+        $this->renderView('correo/final');
+    }
+    
+    public function listado()
+    {
+        $model = Container::getModel("Correo");
+        $this->view->correo = $model->select();
+        
+        /* Render View Listado de Correos */
+        $this->renderView('correo/listado','layout');
+    }
+    
+    public function show($id)
+    {
+        $model = Container::getModel("Correo");
+        $this->view->correo = $model->search($id);
+        
+        //If Create or Reset password
+        if($this->view->correo->hacer == 'Crear' || $this->view->correo->hacer == 'Recuperar contraseÃ±a' || $this->view->correo->hacer == 'Recuperar contraseña')
+        {
+            $this->view->correo->contrasena_temporal = 'Techo'.date ("Y");
+        }
+        
+        /* Render View Editar Correos */
+        $this->renderView('correo/edit', 'layout');
+    }
+    
+    public function aprobar($id)
+    {
+        $model = Container::getModel("Correo");
+        $result = $model->aprobar($id);
+        
+        if($result)
+        {
+            header('Location: /correo/listado');
+        }
+        
+    }
+    
+    public function reprobado($id)
+    {
+        $model = Container::getModel("Correo");
+        $result = $model->reprobado($id);
+        
+        if($result)
+        {
+            header('Location: /correo/listado');
+        }
+        
+    }
+    
+    public function exportar()
+    {
+        $model = Container::getModel("Correo");
+        $result = $model->exportar();
+        $x = 1;
+        
+        ob_start();
+        $df = fopen("php://output", 'w');
+        
+        if($x == 1)
+        {
+            $aDados[0]['email address'] = 'email address';
+            $aDados[0]['first name']    = 'first name';
+            $aDados[0]['last name']     = 'last name';
+            $aDados[0]['password']      = 'password';
+            
+            fputcsv($df, array_keys(reset($aDados)));
+            fputcsv($df, $linha);
+            $x++;
+        }
+        
+        if (count($result) == 0) 
+        {
+            return null;
+        }
+        
+        fputcsv($df, array_keys(reset($result)));
+        
+        foreach ($result as $row) 
+        {
+            $row = (array) $row;
+            fputcsv($df, $row);
+        }
+        
+        $filename = "data_export_" . date("Y-m-d") . ".csv";
+        $now = gmdate("D, d M Y H:i:s");
+        header("Expires: Tue, 29 Jan 2019 06:00:00 GMT");
+        header("Cache-Control: max-age=0, no-cache, must-revalidate, proxy-revalidate");
+        header("Last-Modified: {$now} GMT");
+        
+        // force download
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        
+        // disposition / encoding on response body
+        header("Content-Disposition: attachment;filename={$filename}");
+        header("Content-Transfer-Encoding: binary");
+        
+        fclose($df);
+    }
+    
+    public function edit($aParam)
+    {
+        $aParam = (array) $aParam;
+        
+        $aParam['id']             = filter_var($aParam['id'], FILTER_SANITIZE_STRING);
+        $aParam['contrasena']     = filter_var($aParam['contrasena'], FILTER_SANITIZE_STRING);
+        $aParam['estadoPersonas'] = filter_var($aParam['estadoPersonas'], FILTER_SANITIZE_STRING);
+        $aParam['estadoPyt']      = filter_var($aParam['estadoPyt'], FILTER_SANITIZE_STRING);
+        $aParam['comentario']     = filter_var($aParam['comentario'], FILTER_SANITIZE_STRING);
+        
+        
+        $model  = Container::getModel("Correo");
+        $result = $model->ActualizarCorreo($aParam);
         
         if($result)
         {

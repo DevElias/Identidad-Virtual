@@ -69,5 +69,12 @@ $route[] = ['/correo/recuperar', 'CorreosController@recuperar'];
 $route[] = ['/correo/suspender', 'CorreosController@suspender'];
 $route[] = ['/correo/eliminar', 'CorreosController@eliminar'];
 $route[] = ['/correo/transferir', 'CorreosController@transferir'];
+$route[] = ['/correo/concluir', 'CorreosController@concluir'];
+$route[] = ['/correo/listado', 'CorreosController@listado'];
+$route[] = ['/correo/show/{id}', 'CorreosController@show'];
+$route[] = ['/correo/aprobado/{id}', 'CorreosController@aprobar'];
+$route[] = ['/correo/reprobado/{id}', 'CorreosController@reprobado'];
+$route[] = ['/correo/exportar', 'CorreosController@exportar'];
+$route[] = ['/correo/edit', 'CorreosController@edit'];
 
 return $route;

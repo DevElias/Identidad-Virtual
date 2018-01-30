@@ -514,6 +514,7 @@
     	$('#motivo-eliminar').hide();
     	$('#transfer-docs-2').hide();
     	$('#motivo-transfer').hide();
+    	$('#part2').prop('disabled', true);
     });
 
 
@@ -579,8 +580,6 @@
 		}
 	});
 
-	
-
     $("#part1").click(function() {
     	$('#text-1').show();
     	$('#text-2').hide();
@@ -604,11 +603,106 @@
     	
 	});
 
-	$("#part3").click(function() {
-    	$('#text-2').hide();
-    	$('#dados-2').hide();
-    	$('#text-3').show();
-    	$('#dados-3').show();
+	$("#part3").click(function() 
+	{
+		var count = 0;
+		
+		if($("#appelido").val() != '')
+		{
+			$("#appelido").removeClass("erroData");
+			$("#appelido").attr("style", "");
+			$(".error").remove();
+		}
+		else
+		{
+			count++;
+			$("#appelido").removeClass("erroData");
+			$("#appelido").
+			attr("style", "");
+			$(".error").remove();
+			var appelido = 'Campo Obligatorio.';
+		    $("#appelido").addClass("erroData");
+		    $(".erroData").css("border", "1px solid red").after('<p class="error" style="color:red;">' + appelido + '</p>');
+		}
+
+		if($("#nombre").val() != '')
+		{
+			$("#nombre").removeClass("erroData");
+			$("#nombre").attr("style", "");
+			$(".error").remove();
+		}
+		else
+		{
+			count++;
+			$("#nombre").removeClass("erroData");
+			$("#nombre").
+			attr("style", "");
+			$(".error").remove();
+			var nombre = 'Campo Obligatorio.';
+		    $("#nombre").addClass("erroData");
+		    $(".erroData").css("border", "1px solid red").after('<p class="error" style="color:red;">' + nombre + '</p>');
+		}
+
+		if($("#correo").val() != '')
+		{
+			$("#correo").removeClass("erroData");
+			$("#correo").attr("style", "");
+			$(".error").remove();
+		}
+		else
+		{
+			count++;
+			$("#correo").removeClass("erroData");
+			$("#correo").
+			attr("style", "");
+			$(".error").remove();
+		    $("#correo").addClass("erroData");
+		    $(".erroData").css("border", "1px solid red").after('<p class="error" style="color:red;">' + '</p>');
+		}
+
+		if($("#area").val() != 0)
+		{
+			$("#area").removeClass("erroData");
+			$("#area").attr("style", "");
+			$(".error").remove();
+		}
+		else
+		{
+			count++;
+			$("#area").removeClass("erroData");
+			$("#area").
+			attr("style", "");
+			$(".error").remove();
+			var area = 'Campo Obligatorio';
+		    $("#area").addClass("erroData");
+		    $(".erroData").css("border", "1px solid red").after('<p class="error" style="color:red;">' + area + '</p>');
+		}
+
+		if($("#rol").val() != 0)
+		{
+			$("#rol").removeClass("erroData");
+			$("#rol").attr("style", "");
+			$(".error").remove();
+		}
+		else
+		{
+			count++;
+			$("#rol").removeClass("erroData");
+			$("#rol").
+			attr("style", "");
+			$(".error").remove();
+			var rol = 'Campo Obligatorio';
+		    $("#rol").addClass("erroData");
+		    $(".erroData").css("border", "1px solid red").after('<p class="error" style="color:red;">' + rol + '</p>');
+		}
+
+		if(count == 0)
+		{
+			$('#text-2').hide();
+	    	$('#dados-2').hide();
+	    	$('#text-3').show();
+	    	$('#dados-3').show();
+		}
     	
 	});
 

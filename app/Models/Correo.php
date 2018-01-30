@@ -490,4 +490,89 @@ class Correo extends BaseModel
         
         return $result;
     }
+    
+    public function select()
+    {
+        $sql  = "";
+        $sql .= "SELECT  * ";
+        $sql .= "FROM {$this->table} ";
+        $sql .= "WHERE estado_pyt is null ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function search($id)
+    {
+        $query = "SELECT {$this->table}.*, pais.nombre as 'nombre_pais', AREA.nombre as 'nombre_area', cargo.nombre as 'nombre_cargo' FROM {$this->table} Left Join pais ON pais.id = {$this->table}.id_pais Left Join AREA ON AREA.id = {$this->table}.id_area Left Join cargo ON cargo.id = {$this->table}.id_superior WHERE {$this->table}.id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function aprobar($id)
+    {
+        $sql  = "";
+        $sql .= "UPDATE {$this->table} SET ";
+        $sql .= "estado_personas   = 1, ";
+        $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
+        $sql .= "fecha_alt         = NOW() ";
+        $sql .= "WHERE id          = '" . $id."'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
+    
+    public function reprobado($id)
+    {
+        $sql  = "";
+        $sql .= "UPDATE {$this->table} SET ";
+        $sql .= "estado_personas   = 2, ";
+        $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
+        $sql .= "fecha_alt         = NOW() ";
+        $sql .= "WHERE id          = '" . $id."'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
+    
+    public function exportar()
+    {
+        $query = "SELECT nuevo_correo as 'email_address', nombre as 'first_name', apellido as 'last_name', concat('Techo',YEAR(NOW())) as 'password' FROM {$this->table} WHERE estado_personas = 1 AND hacer = 'Crear' AND estado_pyt is null";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function ActualizarCorreo($aParam)
+    {
+        $sql  = "";
+        $sql .= "UPDATE {$this->table} SET ";
+        $sql .= "contrasena_temporal = '" . $aParam['contrasena']."', ";
+        $sql .= "estado_personas     = '" . $aParam['estadoPersonas']."', ";
+        $sql .= "estado_pyt          = '" . $aParam['estadoPyt']."', ";
+        $sql .= "comentario          = '" . $aParam['comentario']."', ";
+        $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
+        $sql .= "fecha_alt         = NOW() ";
+        $sql .= "WHERE id          = '" . $aParam['id']."'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
 }
