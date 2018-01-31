@@ -608,4 +608,24 @@ class Correo extends BaseModel
         $stmt->closeCursor();
         return $result;
     }
+    
+    public function CheckCorreo($correo)
+    {
+        $query = "SELECT * FROM usuario WHERE email = '" . $correo . "'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        
+        if($result)
+        {
+            $return = true;
+        }
+        else
+        {
+            $return = false;
+        }
+        
+        return $return;
+    }
 }

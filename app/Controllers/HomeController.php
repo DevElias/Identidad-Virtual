@@ -28,9 +28,25 @@ class HomeController extends BaseController
                 $model = Container::getModel("Usuario");
                 $result  = $model->SearchUser($_SESSION['user']['email']);
                 
+                //if not exist, insert
                 if(!$result)
                 {
                     $user    = $model->InsertUser($_SESSION['user']);
+                    
+                    if($user)
+                    {
+                        //Verify email in table correos
+                        $exist = $model->SearchCorreo($_SESSION['user']['email']);
+                        
+                        if($exist)
+                        {
+                            
+                            $exist = (array) $exist;
+                           
+                            //Verify email in table correos
+                            $exist = $model->UpdateUsers($exist);
+                        }
+                    }
                 }
                 
                 //Info del usuario

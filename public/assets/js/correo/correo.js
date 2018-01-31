@@ -323,6 +323,30 @@ function Validation()
 			 $("#correo").attr("style", "");
 			 $(".errorC").remove();
 			 $('#part3').prop('disabled', false);
+			 
+			 //Check in base de dados if exist email
+			 oData                  = new Object();	
+			 oData.correo           = $("#correo").val();
+			 $.ajax({
+					type: "POST",
+					url: "/correo/check",
+					dataType: "json",
+					data: oData,
+					success: function(oData)
+					{	
+						if(oData['results'])
+						{
+							 $("#correo").removeClass("erroCorreo");
+							 $("#correo").attr("style", "");
+							 $(".errorC").remove();
+							 var msg = 'Este Correo ya Existe.';
+							 $( "#correo" ).focus();
+						     $("#correo").addClass("erroCorreo");
+						     $(".erroCorreo").css("border", "1px solid red").after('<p class="errorC" style="color:red;">' + msg + '</p>');
+						     $('#part3').prop('disabled', true);
+						}
+					}
+				});
 		 } 
 		 else
 		 {

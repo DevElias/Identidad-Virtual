@@ -76,5 +76,6 @@ $route[] = ['/correo/aprobado/{id}', 'CorreosController@aprobar'];
 $route[] = ['/correo/reprobado/{id}', 'CorreosController@reprobado'];
 $route[] = ['/correo/exportar', 'CorreosController@exportar'];
 $route[] = ['/correo/edit', 'CorreosController@edit'];
+$route[] = ['/correo/check', 'CorreosController@check'];
 
 return $route;

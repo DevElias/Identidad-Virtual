@@ -208,6 +208,29 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function SearchCorreo($correo)
+    {
+        $query = "SELECT * FROM correo WHERE nuevo_correo  = '" . $correo . "' AND estado_pyt = 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
     
+    public function UpdateUsers($aParam)
+    {
+        $sql  = "";
+        $sql .= "UPDATE {$this->table} SET ";
+        $sql .= "id_area           = " . $aParam['id_area'] .", ";
+        $sql .= "id_cargo          = " . $aParam['id_superior'] ."";
+        $sql .= " WHERE email          = '" . $aParam['nuevo_correo']."'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
     
 }

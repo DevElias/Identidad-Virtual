@@ -917,4 +917,22 @@ class CorreosController extends BaseController
             echo json_encode(array("results" => false));
         }
     }
+    
+    public function check($correo)
+    {
+        $correo = (array) $correo;
+        $correo = $correo['correo'];
+        
+        $model  = Container::getModel("Correo");
+        $result = $model->CheckCorreo($correo);
+        
+        if($result)
+        {
+            echo json_encode(array("results" => true));
+        }
+        else
+        {
+            echo json_encode(array("results" => false));
+        }
+    }
 }
