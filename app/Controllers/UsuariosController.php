@@ -8,6 +8,12 @@ class UsuariosController extends BaseController
 {
     public function index($request)
     {
+        session_start();
+        if(!isset($_SESSION['access_token']))
+        {
+            header('Location: /');
+        }
+        
         $this->setPageTitle('Usuario');
         $model = Container::getModel("Usuario");
         $this->view->usuario = $model->select();

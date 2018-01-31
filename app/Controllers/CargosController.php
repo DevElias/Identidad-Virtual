@@ -8,6 +8,12 @@ class CargosController extends BaseController
 {
     public function index($request)
     {
+        session_start();
+        if(!isset($_SESSION['access_token']))
+        {
+            header('Location: /');
+        }
+        
         $this->setPageTitle('Cargo');
         $model = Container::getModel("Cargo");
         $this->view->cargo = $model->select();

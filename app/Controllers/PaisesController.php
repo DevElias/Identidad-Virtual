@@ -8,6 +8,12 @@ class PaisesController extends BaseController
 {
     public function index($request)
     {
+        session_start();
+        if(!isset($_SESSION['access_token']))
+        {
+            header('Location: /');
+        }
+        
         $this->setPageTitle('Pais');
         $model = Container::getModel("Pais");
         $this->view->pais = $model->select();

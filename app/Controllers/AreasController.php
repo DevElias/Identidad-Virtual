@@ -8,6 +8,12 @@ class AreasController extends BaseController
 {
     public function index($request)
     {
+        session_start();
+        if(!isset($_SESSION['access_token']))
+        {
+            header('Location: /');
+        }
+        
         $this->setPageTitle('Area');
         $model = Container::getModel("Area");
         $this->view->area = $model->select();
