@@ -24,7 +24,7 @@
         											 <td><?php ($area->Status_Area == '1' ? $area->Status_Area= 'Activo' : $area->Status_Area= 'Inactivo'); echo($area->Status_Area);?></td>
         											 <td>
         											 	<a type="button" href="/area/show/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
-        											 	<a type="button" href="/area/delete/<?php echo($area->ID_Area);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+        											 	<a type="button" onclick="Delete(<?php echo($area->ID_Area);?>);" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
         											 </td>
         										</tr>	 
     										 <?php endforeach; ?>
@@ -44,6 +44,7 @@
 
 <script type="text/javascript" src="/assets/js/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/assets/js/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
 <script>
   $(function () {
     $('#listagem').DataTable({
@@ -52,4 +53,27 @@
             }
     });
   });
+</script>
+<script>
+function Delete(id)
+{
+	var area = id
+    $.confirm({
+        content: 'Est\u00E1 seguro de que desea borrar esta \u00C1rea',
+        buttons: {
+            specialKey: {
+                text: 'S\u00ED',
+                action: function(){
+                	window.location.replace("/area/delete/"+area);
+                }
+            },
+            alphabet: {
+                text: 'No',
+                action: function(){
+                    return;
+                }
+            }
+        }
+    });
+}
 </script>

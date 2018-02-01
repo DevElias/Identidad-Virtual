@@ -24,7 +24,7 @@
         											 <td><?php ($pais->Status_Pais == '1' ? $pais->Status_Pais = 'Activo' : $pais->Status_Pais = 'Inactivo'); echo($pais->Status_Pais);?></td>
         											 <td>
         											 	<a type="button" href="/pais/show/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-yellow"><i class="fa fa-edit"></i></a> 
-        											 	<a type="button" href="/pais/delete/<?php echo($pais->ID_Pais);?>" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
+        											 	<a type="button" onclick="Delete(<?php echo($pais->ID_Pais);?>);" class="btn btn-warning bg-red"><i class="fa fa-trash-o"></i></a>
         											 </td>
         										</tr>	 
     										 <?php endforeach; ?>
@@ -44,6 +44,7 @@
 
 <script type="text/javascript" src="/assets/js/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/assets/js/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
 <script>
   $(function () {
     $('#listagem').DataTable({
@@ -52,4 +53,28 @@
             }
     });
   });
+</script>
+
+<script>
+function Delete(id)
+{
+	var pais = id
+    $.confirm({
+        content: 'Est\u00E1 seguro de que desea borrar este Pa\u00EDs',
+        buttons: {
+            specialKey: {
+                text: 'S\u00ED',
+                action: function(){
+                	window.location.replace("/pais/delete/"+pais);
+                }
+            },
+            alphabet: {
+                text: 'No',
+                action: function(){
+                    return;
+                }
+            }
+        }
+    });
+}
 </script>
