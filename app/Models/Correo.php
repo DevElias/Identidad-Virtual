@@ -24,6 +24,7 @@ class Correo extends BaseModel
         $sql .= "email_address, ";
         $sql .= "hacer, ";
         $sql .= "id_pais, ";
+        $sql .= "id_sede, ";
         $sql .= "apellido, ";
         $sql .= "nombre, ";
         $sql .= "nuevo_correo, ";
@@ -52,6 +53,7 @@ class Correo extends BaseModel
         $sql .= "'". $_SESSION['user']['email']."', ";
         $sql .= "'". $aParam['hacer']."', ";
         $sql .= "'". $aParam['pais']."', ";
+        $sql .= "'". $aParam['sede']."', ";
         $sql .= "'". $aParam['appelido']."', ";
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['correo']."', ";
@@ -92,6 +94,7 @@ class Correo extends BaseModel
         $sql .= "email_address, ";
         $sql .= "hacer, ";
         $sql .= "id_pais, ";
+        $sql .= "id_sede, ";
         $sql .= "apellido, ";
         $sql .= "nombre, ";
         $sql .= "nuevo_correo, ";
@@ -120,6 +123,7 @@ class Correo extends BaseModel
         $sql .= "'". $_SESSION['user']['email']."', ";
         $sql .= "'". $aParam['hacer']."', ";
         $sql .= "'". $aParam['pais']."', ";
+        $sql .= "'". $aParam['sede']."', ";
         $sql .= " NULL, "; //apellido
         $sql .= " NULL, "; //nombre
         $sql .= " NULL, "; //nuevo correo
@@ -160,6 +164,7 @@ class Correo extends BaseModel
         $sql .= "email_address, ";
         $sql .= "hacer, ";
         $sql .= "id_pais, ";
+        $sql .= "id_sede, ";
         $sql .= "apellido, ";
         $sql .= "nombre, ";
         $sql .= "nuevo_correo, ";
@@ -188,6 +193,7 @@ class Correo extends BaseModel
         $sql .= "'". $_SESSION['user']['email']."', "; //email_address
         $sql .= "'". $aParam['hacer']."', "; //hacer
         $sql .= "'". $aParam['pais']."', "; //id_pais
+        $sql .= "'". $aParam['sede']."', ";
         $sql .= " NULL, "; //apellido
         $sql .= " NULL, "; //nombre
         $sql .= " NULL, "; //nuevo correo
@@ -228,6 +234,7 @@ class Correo extends BaseModel
         $sql .= "email_address, ";
         $sql .= "hacer, ";
         $sql .= "id_pais, ";
+        $sql .= "id_sede, ";
         $sql .= "apellido, ";
         $sql .= "nombre, ";
         $sql .= "nuevo_correo, ";
@@ -256,6 +263,7 @@ class Correo extends BaseModel
         $sql .= "'". $_SESSION['user']['email']."', "; //email_address
         $sql .= "'". $aParam['hacer']."', "; //hacer
         $sql .= "'". $aParam['pais']."', "; //id_pais
+        $sql .= "'". $aParam['sede']."', ";
         $sql .= " NULL, "; //apellido
         $sql .= " NULL, "; //nombre
         $sql .= " NULL, "; //nuevo correo
@@ -296,6 +304,7 @@ class Correo extends BaseModel
         $sql .= "email_address, ";
         $sql .= "hacer, ";
         $sql .= "id_pais, ";
+        $sql .= "id_sede, ";
         $sql .= "apellido, ";
         $sql .= "nombre, ";
         $sql .= "nuevo_correo, ";
@@ -324,6 +333,7 @@ class Correo extends BaseModel
         $sql .= "'". $_SESSION['user']['email']."', "; //email_address
         $sql .= "'". $aParam['hacer']."', "; //hacer
         $sql .= "'". $aParam['pais']."', "; //id_pais
+        $sql .= "'". $aParam['sede']."', ";
         $sql .= " NULL, "; //apellido
         $sql .= " NULL, "; //nombre
         $sql .= " NULL, "; //nuevo correo
@@ -364,6 +374,7 @@ class Correo extends BaseModel
         $sql .= "email_address, ";
         $sql .= "hacer, ";
         $sql .= "id_pais, ";
+        $sql .= "id_sede, ";
         $sql .= "apellido, ";
         $sql .= "nombre, ";
         $sql .= "nuevo_correo, ";
@@ -392,6 +403,7 @@ class Correo extends BaseModel
         $sql .= "'". $_SESSION['user']['email']."', "; //email_address
         $sql .= "'". $aParam['hacer']."', "; //hacer
         $sql .= "'". $aParam['pais']."', "; //id_pais
+        $sql .= "'". $aParam['sede']."', ";
         $sql .= " NULL, "; //apellido
         $sql .= " NULL, "; //nombre
         $sql .= " NULL, "; //nuevo correo
@@ -432,6 +444,7 @@ class Correo extends BaseModel
         $sql .= "email_address, ";
         $sql .= "hacer, ";
         $sql .= "id_pais, ";
+        $sql .= "id_sede, ";
         $sql .= "apellido, ";
         $sql .= "nombre, ";
         $sql .= "nuevo_correo, ";
@@ -460,6 +473,7 @@ class Correo extends BaseModel
         $sql .= "'". $_SESSION['user']['email']."', "; //email_address
         $sql .= "'". $aParam['hacer']."', "; //hacer
         $sql .= "'". $aParam['pais']."', "; //id_pais
+        $sql .= "'". $aParam['sede']."', ";
         $sql .= " NULL, "; //apellido
         $sql .= " NULL, "; //nombre
         $sql .= " NULL, "; //nuevo correo
@@ -506,7 +520,7 @@ class Correo extends BaseModel
     
     public function search($id)
     {
-        $query = "SELECT {$this->table}.*, pais.nombre as 'nombre_pais', AREA.nombre as 'nombre_area', cargo.nombre as 'nombre_cargo' FROM {$this->table} Left Join pais ON pais.id = {$this->table}.id_pais Left Join AREA ON AREA.id = {$this->table}.id_area Left Join cargo ON cargo.id = {$this->table}.id_superior WHERE {$this->table}.id=:id";
+        $query = "SELECT {$this->table}.*, pais.nombre as 'nombre_pais', sede.nombre as 'nombre_sede', AREA.nombre as 'nombre_area', cargo.nombre as 'nombre_cargo' FROM {$this->table} Left Join pais ON pais.id = {$this->table}.id_pais Left Join sede ON sede.id = {$this->table}.id_sede Left Join AREA ON AREA.id = {$this->table}.id_area Left Join cargo ON cargo.id = {$this->table}.id_superior WHERE {$this->table}.id=:id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
@@ -627,5 +641,16 @@ class Correo extends BaseModel
         }
         
         return $return;
+    }
+    
+    public function SearchSede($id)
+    {
+        $query = "SELECT * FROM sede WHERE id_pais=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
     }
 }

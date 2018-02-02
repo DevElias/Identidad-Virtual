@@ -3,6 +3,7 @@ function CrearCorreo()
 	oData           = new Object();	
 	oData.hacer     = 'Crear';
 	oData.pais      = $('#pais').val();
+	oData.sede      = $('#sede').val();
 	oData.appelido  = $('#appelido').val();
 	oData.nombre    = $('#nombre').val();
 	oData.correo    = $('#correo').val();
@@ -49,6 +50,7 @@ function CrearNickname()
 	oData            = new Object();	
 	oData.hacer      = 'Crear un Alias (nickname)';
 	oData.pais       = $('#pais').val();
+	oData.sede       = $('#sede').val();
 	oData.cuentareal = $('#correo-real').val();
 	oData.alias      = $('#alias').val();
 	oData.motivo     = $('#motivo-nickame-value').val();
@@ -92,6 +94,7 @@ function Modificar()
 	oData            = new Object();	
 	oData.hacer      = 'Modificar';
 	oData.pais       = $('#pais').val();
+	oData.sede       = $('#sede').val();
 	oData.modify     = $('#modify').val();
 	oData.motivo     = $('#motivo-modificar-value').val();
 	oData.copia      = $('#copia-modificar').val();
@@ -134,6 +137,7 @@ function Recuperar()
 	oData                  = new Object();	
 	oData.hacer            = 'Recuperar contraseña';
 	oData.pais             = $('#pais').val();
+	oData.sede             = $('#sede').val();
 	oData.correo_recuperar = $('#correo-recuperar').val();
 	oData.motivo     	   = $('#motivo-recuperar-value').val();
 	oData.copia            = $('#copia-recuperar').val();
@@ -176,6 +180,7 @@ function Suspender()
 	oData                  = new Object();	
 	oData.hacer            = 'Suspender (Bloquear)';
 	oData.pais             = $('#pais').val();
+	oData.sede             = $('#sede').val();
 	oData.correo_suspender = $('#correo-suspender').val();
 	oData.motivo     	   = $('#motivo-suspender-value').val();
 	oData.copia            = $('#copia-suspender').val();
@@ -218,6 +223,7 @@ function Eliminar()
 	oData                  = new Object();	
 	oData.hacer            = 'Eliminar';
 	oData.pais             = $('#pais').val();
+	oData.sede             = $('#sede').val();
 	oData.correo_eliminar  = $('#correo-eliminar').val();
 	
 	if($("#si").is(':checked')) 
@@ -272,6 +278,7 @@ function Transferir()
 	oData                  = new Object();	
 	oData.hacer            = 'Transferir Documentos';
 	oData.pais             = $('#pais').val();
+	oData.sede             = $('#sede').val();
 	oData.correo_origen    = $('#correo-origem-transfer').val();
 	oData.correo_destino   = $('#correo-destino-transfer').val();
 	oData.motivo     	   = $('#motivo-transfer-value').val();
@@ -511,16 +518,37 @@ function Validation()
 		 }
 	});
 	
+	//Listado de Sedes
 	$("#pais").change(function() 
 	{
 		  if($("#pais").val() != 0)
 		  {
-			  $('#part2').prop('disabled', false);
+			  oData              = new Object();	
+			  oData.id           = $('#pais').val();
+			  
+			  $.ajax({
+					type: "POST",
+					url: "/correo/SearchSede",
+					dataType: "html",
+					data: oData,
+					success: function(resp)
+					{	
+						$('#loadSede').html(resp);
+						$('#loadSede').show();
+					}
+				});
+				
 		  }
 		  else
 		  {
 			  $('#part2').prop('disabled', true);
 		  }
+	});
+	
+	//Unlock Button
+	$("#loadSede").change(function() 
+	{
+		 $('#part2').prop('disabled', false);
 	});
 }
 
