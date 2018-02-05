@@ -78,5 +78,6 @@ $route[] = ['/correo/exportar', 'CorreosController@exportar'];
 $route[] = ['/correo/edit', 'CorreosController@edit'];
 $route[] = ['/correo/check', 'CorreosController@check'];
 $route[] = ['/correo/SearchSede', 'CorreosController@SearchSede'];
+$route[] = ['/correo/history', 'CorreosController@history'];
 
 return $route;

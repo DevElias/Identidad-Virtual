@@ -1,3 +1,14 @@
+<?php 
+$menu1 = '';
+$menu2 = '';
+
+if($_SESSION['user']['area'] != 1)
+{
+    $menu1 = '<!--';
+    $menu2 = '-->';
+}
+
+?> 
  <header class="main-header">
       <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -48,11 +59,18 @@
             <i class="fa fa-envelope-o"></i> <span>Solicitud de Correo</span>
           </a>
         </li>
+        <?php echo($menu1);?> 
          <li class="treeview">
           <a href="/correo/listado">
             <i class="fa fa-paper-plane-o"></i> <span>Listado de Correo</span>
           </a>
         </li>
+         <li class="treeview">
+          <a href="/correo/listado">
+            <i class="fa fa-history"></i> <span>Historico de Correo</span>
+          </a>
+        </li>
+         <?php echo($menu2);?> 
         <li class="treeview">
           <a href="/pais">
             <i class="fa fa-globe"></i> <span>Catatros de Paises</span>

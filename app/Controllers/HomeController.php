@@ -31,29 +31,21 @@ class HomeController extends BaseController
                 //if not exist, insert
                 if(!$result)
                 {
-                    $user    = $model->InsertUser($_SESSION['user']);
-                    
-                    if($user)
-                    {
-                        //Verify email in table correos
-                        $exist = $model->SearchCorreo($_SESSION['user']['email']);
-                        
-                        if($exist)
-                        {
-                            
-                            $exist = (array) $exist;
-                           
-                            //Verify email in table correos
-                            $exist = $model->UpdateUsers($exist);
-                        }
-                    }
+                    $user = $model->InsertUser($_SESSION['user']);
+                }
+                else
+                {
+                    //if exist update photo
+                    $photo = $model->UpdateUsers($_SESSION['user']);
                 }
                 
                 //Info del usuario
                 $result  = $model->DataUser($_SESSION['user']['email']);
                 $aUser   = (array) $result[0];
                 
-                $_SESSION['user']['id'] = $aUser['id'];
+                $_SESSION['user']['id']   = $aUser['id'];
+                $_SESSION['user']['area'] = $aUser['id_area'];
+                $_SESSION['user']['pais'] = $aUser['id_pais'];
                 
                 $this->setPageTitle('Home');
                 $this->renderView('home/dashboard', 'layout');

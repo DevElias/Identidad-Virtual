@@ -1,0 +1,96 @@
+<div class="wrapper">
+	<div class="content-wrapper">
+		<section class="content">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box">
+						<div class="box-header">
+							<h3 class="box-title">Historico de Correos</h3>
+							<div class="box-body">
+								<div class="numberlist">
+                                     <ol>
+                                      <?php foreach ($this->view->history as $history):?>
+    								  		<?php 
+    								  		if($history->hacer == 'Crear')
+    								  		{
+    								  		    $agrup .= '<li><a><strong>Hacer: </strong> '         . $history->hacer 
+    								  		           . "<br><strong> Solicitado Por:</strong> "    . $history->email_address 
+    								  		           . "<br><strong> Fecha:</strong> "             . $history->fecha_solicitud
+    								  		           . "<br><strong> Nuevo Correo:</strong> "      . $history->nuevo_correo
+    								  		           . "<br><strong> Realizado PyT:</strong> "     . $history->estado_pyt = 1 ? 'Si' : 'No' .  "<br>" 
+    								  		           .'</a></li>';
+    								  		}
+    								  		
+    								  		if($history->hacer == 'Crear un Alias (nickname)')
+    								  		{
+    								  		    $agrup .= '<li><a><strong>Hacer: </strong> '         . $history->hacer
+            								  		   . "<br><strong> Solicitado Por:</strong> "    . $history->email_address
+            								  		   . "<br><strong> Fecha:</strong> "             . $history->fecha_solicitud
+            								  		   . "<br><strong> Alias:</strong> "             . $history->alias
+            								  		   . "<br><strong> Realizado PyT:</strong> "     . $history->estado_pyt = 1 ? 'Si' : 'No' .  "<br>"
+            								  		   .'</a></li>';
+    								  		}
+    								  		
+    								  		if($history->hacer == 'Modificar')
+    								  		{
+    								  		    $agrup .= '<li><a><strong>Hacer: </strong> '         . $history->hacer
+            								  		   . "<br><strong> Solicitado Por:</strong> "    . $history->email_address
+            								  		   . "<br><strong> Fecha:</strong> "             . $history->fecha_solicitud
+            								  		   . "<br><strong> Alias:</strong> "             . $history->modificar
+            								  		   . "<br><strong> Realizado PyT:</strong> "     . $history->estado_pyt = 1 ? 'Si' : 'No' .  "<br>"
+            								  		   .'</a></li>';
+    								  		}
+    								  		
+    								  		if($history->hacer == 'Recuperar contraseña')
+    								  		{
+    								  		    $agrup .= '<li><a><strong>Hacer: </strong> '         . $history->hacer
+            								  		   . "<br><strong> Solicitado Por:</strong> "    . $history->email_address
+            								  		   . "<br><strong> Fecha:</strong> "             . $history->fecha_solicitud
+            								  		   . "<br><strong> Realizado PyT:</strong> "     . $history->estado_pyt = 1 ? 'Si' : 'No' .  "<br>"
+            								  		   .'</a></li>';
+    								  		}
+    								  		
+    								  		if($history->hacer == 'Suspender (Bloquear)')
+    								  		{
+    								  		    $agrup .= '<li><a><strong>Hacer: </strong> '  . $history->hacer
+    								  		    . "<br><strong> Solicitado Por:</strong> "    . $history->email_address
+    								  		    . "<br><strong> Fecha:</strong> "             . $history->fecha_solicitud
+    								  		    . "<br><strong> Correo a suspender:</strong> ". $history->correo_suspender
+    								  		    . "<br><strong> Realizado PyT:</strong> "     . $history->estado_pyt = 1 ? 'Si' : 'No' .  "<br>"
+    								  		    .'</a></li>';
+    								  		}
+    								  		
+    								  		if($history->hacer == 'Eliminar')
+    								  		{
+    								  		    $agrup .= '<li><a><strong>Hacer: </strong> '         . $history->hacer
+            								  		   . "<br><strong> Solicitado Por:</strong> "    . $history->email_address
+            								  		   . "<br><strong> Fecha:</strong> "             . $history->fecha_solicitud
+            								  		   . "<br><strong> Correo a Eliminar:</strong> " . $history->correo_eliminar
+            								  		   . "<br><strong> Realizado PyT:</strong> "     . $history->estado_pyt = 1 ? 'Si' : 'No' .  "<br>"
+            								  		   .'</a></li>';
+    								  		}
+    								  		
+    								  		if($history->hacer == 'Transferir Documentos')
+    								  		{
+    								  		    $agrup .= '<li><a><strong>Hacer: </strong> '         . $history->hacer
+            								  		   . "<br><strong> Solicitado Por:</strong> "    . $history->email_address
+            								  		   . "<br><strong> Fecha:</strong> "             . $history->fecha_solicitud
+            								  		   . "<br><strong> Cuenta Origen:</strong> "     . $history->cuenta_origen
+            								  		   . "<br><strong> Cuenta Destino:</strong> "    . $history->cuenta_destino
+            								  		   . "<br><strong> Realizado PyT:</strong> "     . $history->estado_pyt = 1 ? 'Si' : 'No' .  "<br>"
+            								  		   .'</a></li>';
+    								  		}
+    								  		
+    								  		?>
+    								 <?php endforeach; ?>
+    								  <?php echo($agrup); ?>
+                                     </ol>
+                                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

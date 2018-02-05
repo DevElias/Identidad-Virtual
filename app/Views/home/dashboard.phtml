@@ -1,3 +1,15 @@
+<?php 
+$menu1 = '';
+$menu2 = '';
+
+if($_SESSION['user']['area'] != 1)
+{
+    $menu1 = '<!--';
+    $menu2 = '-->';
+}
+
+?>
+
 <div class="content-wrapper">
 
     <section class="content">
@@ -19,9 +31,14 @@
            <a class="btn btn-app bg-gray" href="/correo" target="_blank">
             	<i class="fa fa-envelope-o"></i>Solicitud de Correo
            </a>
-           <a class="btn btn-app bg-orange" href="/correo/listado">
+          <?php echo($menu1);?> 
+          <a class="btn btn-app bg-orange" href="/correo/listado">
             	<i class="fa fa-paper-plane-o"></i>Listado de Correo
            </a>
+           <a class="btn btn-app bg-white" href="/correo/history">
+            	<i class="fa fa-history"></i>Historico de Correo
+           </a>
+           <?php echo($menu2);?> 
     </section>
 
 </div>

@@ -936,6 +936,19 @@ class CorreosController extends BaseController
             //Executado por PyT
             if($aParam['estadoPyt'] == 1)
             {
+                //Graba en la base de usuarios
+                $usuario = $model->SearchUser($return['nuevo_correo']);
+                
+                //if not exist, insert
+                if(!$usuario)
+                {
+                    $user = $model->InsertUser($return);
+                }
+                else
+                {
+                    die(print_r('Usuario ya Existe', true));
+                }
+                
                 //Email de Aprovado...
                 switch ($action)
                 {
@@ -1169,5 +1182,14 @@ class CorreosController extends BaseController
         $html .= '</div>';
         
         echo ($html);	      
+    }
+    
+    public function history()
+    {
+        $model = Container::getModel("Correo");
+        $this->view->history = $model->selectAll();
+        
+        /* Render View Correos */
+        $this->renderView('correo/history', 'layout');
     }
 }

@@ -653,4 +653,68 @@ class Correo extends BaseModel
         $stmt->closeCursor();
         return $result;
     }
+    
+    public function SearchUser($email)
+    {
+        $query = "SELECT * FROM usuario WHERE email=:email";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":email", $email);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        if($result == 1)
+        {
+            $ret = true;
+        }
+        else
+        {
+            $ret = false;
+        }
+        return $ret;
+    }
+    
+    public function InsertUser($aParam)
+    {
+        $sql  = "";
+        $sql .= "INSERT INTO usuario (";
+        $sql .= "id, ";
+        $sql .= "id_sede, ";
+        $sql .= "id_area, ";
+        $sql .= "id_cargo, ";
+        $sql .= "nombre, ";
+        $sql .= "email, ";
+        $sql .= "picture, ";
+        $sql .= "status, ";
+        $sql .= "id_alterador, ";
+        $sql .= "fecha_inc, ";
+        $sql .= "fecha_alt) VALUES (";
+        $sql .= " NULL, ";
+        $sql .= "'". $aParam['id_sede']."', ";
+        $sql .= "'". $aParam['id_area']."', ";
+        $sql .= "'". $aParam['id_superior']."', ";
+        $sql .= "'". $aParam['nombre']."', ";
+        $sql .= "'". $aParam['nuevo_correo']."', ";
+        $sql .= "'/sin_imagen.jpg/',";
+        $sql .= " 1, ";
+        $sql .= " 0, ";
+        $sql .= " NOW(), ";
+        $sql .= " '0000-00-00 00:00:00')";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
+    
+    public function selectAll()
+    {
+        $query = "SELECT * FROM correo Order By fecha_solicitud DESC";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
 }

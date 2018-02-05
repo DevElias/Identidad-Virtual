@@ -35,6 +35,12 @@ class Usuario extends BaseModel
         $sql .= "Left Join sede on sede.id = {$this->table}.id_sede ";
         $sql .= "Left Join pais on pais.id = sede.id_pais ";
         $sql .= "WHERE {$this->table}.borrado = 0 ";
+        
+        if($_SESSION['user']['area'] != 1)
+        {
+            $sql .= ' AND pais.id = '. $_SESSION['user']['pais'];
+        }
+        
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -98,7 +104,7 @@ class Usuario extends BaseModel
     
     public function DataUser($email)
     {
-        $query = "SELECT * FROM {$this->table} WHERE email=:email";
+        $query = "SELECT {$this->table}.*, pais.id as 'id_pais' FROM {$this->table} Left Join sede on sede.id = {$this->table}.id_sede Left Join pais on pais.id = sede.id_pais WHERE {$this->table}.email=:email";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":email", $email);
         $stmt->execute();
@@ -222,9 +228,8 @@ class Usuario extends BaseModel
     {
         $sql  = "";
         $sql .= "UPDATE {$this->table} SET ";
-        $sql .= "id_area           = " . $aParam['id_area'] .", ";
-        $sql .= "id_cargo          = " . $aParam['id_superior'] ."";
-        $sql .= " WHERE email          = '" . $aParam['nuevo_correo']."'";
+        $sql .= " picture       = '" . $aParam['picture'] ."' ";
+        $sql .= " WHERE email  = '" . $aParam['email']."'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->rowCount();
