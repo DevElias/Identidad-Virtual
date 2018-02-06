@@ -26,7 +26,7 @@ class Pais extends BaseModel
         $sql .= "fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table} ";
-        $sql .= "WHERE borrado = 0 ";
+        $sql .= "WHERE borrado = 0 Order By {$this->table}.nombre ASC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();

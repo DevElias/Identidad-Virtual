@@ -139,7 +139,7 @@ class Usuario extends BaseModel
     
     public function selectAreas()
     {
-        $query = "SELECT * FROM AREA WHERE borrado = 0 ORDER BY nombre";
+        $query = "SELECT * FROM AREA WHERE borrado = 0 ORDER BY nombre asc";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -161,7 +161,7 @@ class Usuario extends BaseModel
         {
             $sql .= " AND sede.id_pais = " . $_SESSION['user']['pais'];
         }
-        $sql  .= " ORDER BY sede.nombre ";
+        $sql  .= " ORDER BY sede.nombre ASC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -171,7 +171,7 @@ class Usuario extends BaseModel
     
     public function selectCargos()
     {
-        $query = "SELECT * FROM cargo WHERE borrado = 0 ORDER BY nombre";
+        $query = "SELECT * FROM cargo WHERE borrado = 0 ORDER BY nombre ASC";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -181,7 +181,7 @@ class Usuario extends BaseModel
     
     public function selectPaises()
     {
-        $query = "SELECT * FROM pais WHERE borrado = 0 ORDER BY nombre";
+        $query = "SELECT * FROM pais WHERE borrado = 0 ORDER BY nombre ASC";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();

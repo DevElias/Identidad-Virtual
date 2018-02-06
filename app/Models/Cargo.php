@@ -27,7 +27,7 @@ class Cargo extends BaseModel
         $sql .= "cargo.fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table} ";
         $sql .= "Left Join cargo sup ON sup.id = cargo.id_superior ";
-        $sql .= "WHERE cargo.borrado = 0 ";
+        $sql .= "WHERE cargo.borrado = 0 Order By cargo.nombre ASC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -100,7 +100,7 @@ class Cargo extends BaseModel
     
     public function selectCargos()
     {
-        $query = "SELECT * FROM cargo ";
+        $query = "SELECT * FROM cargo Order By cargo.nombre ASC";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();
