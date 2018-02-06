@@ -300,4 +300,15 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function BuscaMenu()
+    {
+        $sql  = "";
+        $sql .= "SELECT * FROM menu WHERE id_usuario = " . $_SESSION['user']['id'];
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
 }

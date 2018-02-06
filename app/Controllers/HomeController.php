@@ -47,8 +47,9 @@ class HomeController extends BaseController
                 $_SESSION['user']['area'] = $aUser['id_area'];
                 $_SESSION['user']['pais'] = $aUser['id_pais'];
                 
-                //Info Menu
-                if(!$_SESSION['user']['menu'])
+                $aMenu = $model->BuscaMenu();
+                
+                if(count($aMenu) == 0)
                 {
                     $aDados['id']   = $_SESSION['user']['id'];
                     $aDados['menu'] = 'skin-blue sidebar-mini sidebar-collapse';
@@ -56,6 +57,12 @@ class HomeController extends BaseController
                     $aReturn = $model->GravaMenu($aDados);
                     $_SESSION['user']['menu'] = $aDados['menu'];
                 }
+                else
+                {
+                    $aMenu = (array) $aMenu[0];
+                    $_SESSION['user']['menu'] = $aMenu['status_menu'];
+                }
+                
                 
                 $this->setPageTitle('Home');
                 $this->renderView('home/dashboard', 'layout');
