@@ -80,4 +80,7 @@ $route[] = ['/correo/check', 'CorreosController@check'];
 $route[] = ['/correo/SearchSede', 'CorreosController@SearchSede'];
 $route[] = ['/correo/history', 'CorreosController@history'];
 
+/*Import XLS to database*/
+$route[] = ['/import', 'ImportController@index'];
+
 return $route;

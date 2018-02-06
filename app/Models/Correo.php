@@ -695,7 +695,7 @@ class Correo extends BaseModel
         $sql .= "'". $aParam['id_superior']."', ";
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['nuevo_correo']."', ";
-        $sql .= "'/sin_imagen.jpg/',";
+        $sql .= "'/sin_imagen.jpg',";
         $sql .= " 1, ";
         $sql .= " 0, ";
         $sql .= " NOW(), ";

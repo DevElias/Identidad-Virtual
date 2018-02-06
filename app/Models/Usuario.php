@@ -149,8 +149,20 @@ class Usuario extends BaseModel
     
     public function selectSedes()
     {
-        $query = "SELECT * FROM sede WHERE borrado = 0 ORDER BY nombre";
-        $stmt = $this->pdo->prepare($query);
+        $sql   = "SELECT ";
+        $sql  .= "sede.*, ";
+        $sql  .= "CONCAT(sede.nombre , ' - ' , pais.nombre) AS sede_completo ";
+        $sql  .= "FROM sede ";
+        $sql  .= "INNER JOIN pais ON pais.id = sede.id_pais ";
+        $sql  .= "WHERE sede.borrado = 0 ";
+        
+        //Oficina Internacional
+        if($_SESSION['user']['pais'] != 5)
+        {
+            $sql .= " AND sede.id_pais = " . $_SESSION['user']['pais'];
+        }
+        $sql  .= " ORDER BY sede.nombre ";
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
         $stmt->closeCursor();
@@ -230,6 +242,40 @@ class Usuario extends BaseModel
         $sql .= "UPDATE {$this->table} SET ";
         $sql .= " picture       = '" . $aParam['picture'] ."' ";
         $sql .= " WHERE email  = '" . $aParam['email']."'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
+    
+    public function ImportUser($correo, $nombre)
+    {
+        $sql  = "";
+        $sql .= "INSERT INTO {$this->table} (";
+        $sql .= "id, ";
+        $sql .= "id_sede, ";
+        $sql .= "id_area, ";
+        $sql .= "id_cargo, ";
+        $sql .= "nombre, ";
+        $sql .= "email, ";
+        $sql .= "picture, ";
+        $sql .= "status, ";
+        $sql .= "id_alterador, ";
+        $sql .= "fecha_inc, ";
+        $sql .= "fecha_alt) VALUES (";
+        $sql .= " NULL, ";
+        $sql .= " 6, ";
+        $sql .= " NULL, ";
+        $sql .= " NULL, ";
+        $sql .= "'". $nombre."', ";
+        $sql .= "'". $correo."', ";
+        $sql .= "'/sin_imagen.jpg',";
+        $sql .= " 1, ";
+        $sql .= " 0, ";
+        $sql .= " NOW(), ";
+        $sql .= " '0000-00-00 00:00:00')";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->rowCount();
