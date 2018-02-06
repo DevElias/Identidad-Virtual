@@ -284,4 +284,20 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function GravaMenu($aDados)
+    {
+        $sql  = "";
+        $sql .= "INSERT INTO menu (";
+        $sql .= "status_menu, ";
+        $sql .= "id_usuario) VALUES (";
+        $sql .= "'". $aDados['menu']."', ";
+        $sql .=      $aDados['id']. ")";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
+    
 }

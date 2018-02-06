@@ -83,4 +83,9 @@ $route[] = ['/correo/history', 'CorreosController@history'];
 /*Import XLS to database*/
 $route[] = ['/import', 'ImportController@index'];
 
+/*Status Menu dataBase*/
+$route[] = ['/menu/status', 'MenuController@StatusMenu'];
+$route[] = ['/menu/change', 'MenuController@ChangeStatus'];
+
+
 return $route;

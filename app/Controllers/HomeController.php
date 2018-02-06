@@ -47,6 +47,16 @@ class HomeController extends BaseController
                 $_SESSION['user']['area'] = $aUser['id_area'];
                 $_SESSION['user']['pais'] = $aUser['id_pais'];
                 
+                //Info Menu
+                if(!$_SESSION['user']['menu'])
+                {
+                    $aDados['id']   = $_SESSION['user']['id'];
+                    $aDados['menu'] = 'skin-blue sidebar-mini sidebar-collapse';
+                    
+                    $aReturn = $model->GravaMenu($aDados);
+                    $_SESSION['user']['menu'] = $aDados['menu'];
+                }
+                
                 $this->setPageTitle('Home');
                 $this->renderView('home/dashboard', 'layout');
             }

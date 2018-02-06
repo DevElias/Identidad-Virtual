@@ -44,5 +44,4 @@ class ImportController extends BaseController
         
 //         $this->renderView('import/index');
     }
-    
 }
