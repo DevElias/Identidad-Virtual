@@ -22,6 +22,7 @@ class Area extends BaseModel
         $sql .= "id     as 'ID_Area', ";
         $sql .= "nombre as 'Nombre_Area', ";
         $sql .= "codigo as 'Codigo_Area', ";
+        $sql .= "detalle as 'Detalle_Area', ";
         $sql .= "status as 'Status_Area', ";
         $sql .= "fecha_inc as 'Fecha de Inclusion', ";
         $sql .= "fecha_alt as 'Fecha de Cambio' ";
@@ -41,6 +42,7 @@ class Area extends BaseModel
         $sql .= "id, ";
         $sql .= "nombre, ";
         $sql .= "codigo, ";
+        $sql .= "detalle, ";
         $sql .= "status, ";
         $sql .= "borrado, ";
         $sql .= "id_creador, ";
@@ -50,6 +52,7 @@ class Area extends BaseModel
         $sql .= " NULL, ";
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['codigo']."', ";
+        $sql .= "'". $aParam['detalle']."', ";
         $sql .= "'". $aParam['status']."', ";
         $sql .= " 0, ";
         $sql .= "'". $_SESSION['user']['id']."', ";
@@ -115,6 +118,7 @@ class Area extends BaseModel
         $sql .= "UPDATE {$this->table} SET ";
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
         $sql .= "codigo            = '" . $aParam['codigo']."', ";
+        $sql .= "detalle           = '" . $aParam['detalle']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
         $sql .= "borrado           = 0, ";
         $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";

@@ -4,6 +4,7 @@ function GuardarArea()
 	oData.nombre   = $('#nombre').val();
 	oData.codigo   = $('#codigo').val();
 	oData.status   = $('#status').val();
+	oData.detalle  = $('#detalle').val();
 	
 	$.ajax({
 		type: "POST",
@@ -45,6 +46,7 @@ function ActualizarArea()
 	oData.nombre   = $('#nombre').val();
 	oData.codigo   = $('#codigo').val();
 	oData.status   = $('#status').val();
+	oData.detalle  = $('#detalle').val();
 	
 	$.ajax({
 		type: "POST",

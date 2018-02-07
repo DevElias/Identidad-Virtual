@@ -64,9 +64,10 @@ class AreasController extends BaseController
     {
         $aParam = (array) $aParam;
         
-        $aParam['nombre'] = filter_var($aParam['nombre'], FILTER_SANITIZE_STRING);
-        $aParam['codigo'] = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
-        $aParam['status'] = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
+        $aParam['nombre']  = filter_var($aParam['nombre'], FILTER_SANITIZE_STRING);
+        $aParam['codigo']  = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
+        $aParam['status']  = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
+        $aParam['detalle'] = filter_var($aParam['detalle'], FILTER_SANITIZE_STRING);
         
         $model  = Container::getModel("Area");
         $result = $model->GuardarArea($aParam);
@@ -109,6 +110,7 @@ class AreasController extends BaseController
         $aParam['nombre'] = filter_var($aParam['nombre'], FILTER_SANITIZE_STRING);
         $aParam['codigo'] = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
         $aParam['status'] = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
+        $aParam['detalle'] = filter_var($aParam['detalle'], FILTER_SANITIZE_STRING);
         
         $model  = Container::getModel("Area");
         $result = $model->ActualizarArea($aParam);

@@ -4,6 +4,7 @@ function GuardarCargo()
 	oData.nombre   = $('#nombre').val();
 	oData.status   = $('#status').val();
 	oData.superior = $('#superior').val();
+	oData.detalle  = $('#detalle').val();
 	
 	if($('#superior').val() != 0)
 	 {
@@ -64,6 +65,7 @@ function ActualizarCargo()
 	oData.nombre   = $('#nombre').val();
 	oData.status   = $('#status').val();
 	oData.superior = $('#superior').val();
+	oData.detalle  = $('#detalle').val();
 	
 	$.ajax({
 		type: "POST",

@@ -13,14 +13,7 @@
         	 						<label for="exampleInputEmail1">Nombre</label>
         	 						<input type="nome" class="form-control" placeholder="nombre" id="nombre">
 	 							</div>
-                                <div class="form-group">
-                                	<label for="cargo">Status</label>
-                               		<select  id="status" class="form-control" >
-                                    	<option value="1">Activo</option>
-                                    	<option value="2">Inactivo</option>
-                                    </select>
-                               </div>
-                               <div class="form-group">
+	 							<div class="form-group">
 	 								<label for="superior">Cargo Superior</label>
 	 								<select  id="superior" class="form-control" >
 	 									<option value="0">-- Seleccionar --</option>
@@ -33,6 +26,17 @@
         	 							<?php echo($select);?>
         	 						</select>
         	 					</div>
+        	 					<div class="form-group">
+        	 						<label for="exampleInputEmail1">Cargo Detalle</label>
+        	 						<input type="nome" class="form-control" placeholder="Detalle" id="detalle">
+	 							</div>
+                                <div class="form-group">
+                                	<label for="cargo">Status</label>
+                               		<select  id="status" class="form-control" >
+                                    	<option value="1">Activo</option>
+                                    	<option value="2">Inactivo</option>
+                                    </select>
+                               </div>
                                <div class="box-footer">
                                <div class="col-xs-6">
                                		<a id="guardar-cargo" class="btn btn-block btn-primary bg-green"><i></i>Guardar</a>

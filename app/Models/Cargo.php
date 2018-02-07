@@ -41,6 +41,7 @@ class Cargo extends BaseModel
         $sql .= "INSERT INTO {$this->table} (";
         $sql .= "id, ";
         $sql .= "nombre, ";
+        $sql .= "detalle, ";
         $sql .= "status, ";
         $sql .= "id_superior, ";
         $sql .= "borrado, ";
@@ -50,6 +51,7 @@ class Cargo extends BaseModel
         $sql .= "fecha_alt) VALUES (";
         $sql .= " NULL, ";
         $sql .= "'". $aParam['nombre']."', ";
+        $sql .= "'". $aParam['detalle']."', ";
         $sql .= "'". $aParam['status']."', ";
         $sql .= "'". $aParam['superior']."', ";
         $sql .= " 0, ";
@@ -83,6 +85,7 @@ class Cargo extends BaseModel
         $sql .= "SELECT ";
         $sql .= "cargo.id     as 'ID_Cargo', ";
         $sql .= "cargo.nombre as 'Nombre_Cargo', ";
+        $sql .= "cargo.detalle as 'Detalle_Cargo', ";
         $sql .= "cargo.status as 'Status_Cargo', ";
         $sql .= "cargo.id_superior as 'ID_Superior', ";
         $sql .= "sup.nombre as 'Superior_Cargo', ";
@@ -135,6 +138,7 @@ class Cargo extends BaseModel
         $sql  = "";
         $sql .= "UPDATE {$this->table} SET ";
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
+        $sql .= "detalle           = '" . $aParam['detalle']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
         $sql .= "id_superior       = '" . $aParam['superior']."', ";
         $sql .= "borrado           = 0, ";
