@@ -68,7 +68,7 @@ class RegionController extends BaseController
         $aParam['codigo'] = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
         $aParam['status'] = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
         
-        $model  = Container::getModel("region");
+        $model  = Container::getModel("Region");
         $result = $model->GuardarRegion($aParam);
         
         if($result)
