@@ -18,6 +18,19 @@
                                     <input type="codigo" class="form-control" placeholder="codigo" id="codigo">
                                 </div>
                                 <div class="form-group">
+	 								<label for="region">Regi&oacute;n</label>
+	 								<select  id="region" class="form-control" >
+	 									<option value="0">-- Seleccionar --</option>
+        	 							<?php 
+        	 							   foreach ($this->view->region as $region)
+        	 							   {
+        	 							       $select .= '<option value="'.$region->id.'">'.$region->nombre.'</option>';
+        	 							   }
+        	 							 ?>
+        	 							<?php echo($select);?>
+        	 						</select>
+        	 					</div>
+                                <div class="form-group">
                                 	<label for="status">Status</label>
                                		<select  id="status" class="form-control" >
                                     	<option value="1">Activo</option>

@@ -57,6 +57,8 @@ class PaisesController extends BaseController
     public function add()
     {
         $this->setPageTitle('Pais');
+        $model = Container::getModel("Pais");
+        $this->view->region = $model->selectRegion();
         $this->renderView('pais/add', 'layout');
     }
     
@@ -67,6 +69,7 @@ class PaisesController extends BaseController
         $aParam['nombre'] = filter_var($aParam['nombre'], FILTER_SANITIZE_STRING);
         $aParam['codigo'] = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
         $aParam['status'] = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
+        $aParam['region'] = filter_var($aParam['region'], FILTER_SANITIZE_STRING);
         
         $model  = Container::getModel("Pais");
         $result = $model->GuardarPais($aParam);
@@ -95,7 +98,9 @@ class PaisesController extends BaseController
     public function show($id)
     {
         $model = Container::getModel("Pais");
-        $this->view->pais = $model->search($id);
+        $this->view->pais   = $model->search($id);
+        $this->view->region = $model->selectRegion();
+        
         
         /* Render View Paises */
         $this->renderView('pais/edit', 'layout');
@@ -109,6 +114,7 @@ class PaisesController extends BaseController
         $aParam['nombre'] = filter_var($aParam['nombre'], FILTER_SANITIZE_STRING);
         $aParam['codigo'] = filter_var($aParam['codigo'], FILTER_SANITIZE_STRING);
         $aParam['status'] = filter_var($aParam['status'], FILTER_SANITIZE_STRING);
+        $aParam['region'] = filter_var($aParam['region'], FILTER_SANITIZE_STRING);
         
         $model  = Container::getModel("Pais");
         $result = $model->ActualizarPais($aParam);

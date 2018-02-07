@@ -16,6 +16,26 @@
                                     <input type="codigo" class="form-control" placeholder="codigo" id="codigo" value="<?php echo($this->view->pais->codigo);?>">
                                 </div>
                                 <div class="form-group">
+	 								<label for="region">Regi&oacute;n</label>
+	 								<select  id="region" class="form-control" >
+	 									<option value="0">-- Seleccionar --</option>
+        	 							<?php 
+        	 							   foreach ($this->view->region as $region)
+        	 							   {
+        	 							       if($this->view->pais->id_region == $region->id)
+        	 							      {
+        	 							          $select .= '<option selected value="'.$region->id.'">'.$region->nombre.'</option>';
+        	 							      }
+        	 							      else
+        	 							      {
+        	 							          $select .= '<option value="'.$region->id.'">'.$region->nombre.'</option>';
+        	 							      }
+        	 							   }
+        	 							 ?>
+        	 							<?php echo($select);?>
+        	 						</select>
+        	 					</div>
+                                <div class="form-group">
                                 <?php 
                                     if($this->view->pais->STATUS == 0)
                                     {

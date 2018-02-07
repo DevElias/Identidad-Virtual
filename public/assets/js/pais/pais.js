@@ -4,6 +4,7 @@ function GuardarPais()
 	oData.nombre   = $('#nombre').val();
 	oData.codigo   = $('#codigo').val();
 	oData.status   = $('#status').val();
+	oData.region   = $('#region').val();
 	
 	$.ajax({
 		type: "POST",
@@ -45,6 +46,7 @@ function ActualizarPais()
 	oData.nombre   = $('#nombre').val();
 	oData.codigo   = $('#codigo').val();
 	oData.status   = $('#status').val();
+	oData.region   = $('#region').val();
 	
 	$.ajax({
 		type: "POST",

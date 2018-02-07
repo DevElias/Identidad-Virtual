@@ -86,6 +86,7 @@ class Pais extends BaseModel
         $sql .= "id, ";
         $sql .= "nombre, ";
         $sql .= "codigo, ";
+        $sql .= "id_region, ";
         $sql .= "status, ";
         $sql .= "borrado, ";
         $sql .= "id_creador, ";
@@ -95,6 +96,7 @@ class Pais extends BaseModel
         $sql .= " NULL, ";
         $sql .= "'". $aParam['nombre']."', ";
         $sql .= "'". $aParam['codigo']."', ";
+        $sql .= "'". $aParam['region']."', ";
         $sql .= "'". $aParam['status']."', ";
         $sql .= " 0, ";
         $sql .= "'". $_SESSION['user']['id']."', ";
@@ -115,6 +117,7 @@ class Pais extends BaseModel
         $sql .= "UPDATE {$this->table} SET ";
         $sql .= "nombre            = '" . $aParam['nombre']."', ";
         $sql .= "codigo            = '" . $aParam['codigo']."', ";
+        $sql .= "id_region         = '" . $aParam['region']."', ";
         $sql .= "status            = '" . $aParam['status']."', ";
         $sql .= "borrado           = 0, ";
         $sql .= "id_alterador      = '" . $_SESSION['user']['id']."', ";
@@ -125,6 +128,16 @@ class Pais extends BaseModel
         $result = $stmt->rowCount();
         $stmt->closeCursor();
         
+        return $result;
+    }
+    
+    public function selectRegion()
+    {
+        $query = "SELECT * FROM region WHERE borrado = 0";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
         return $result;
     }
 }
