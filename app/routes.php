@@ -87,5 +87,13 @@ $route[] = ['/import', 'ImportController@index'];
 $route[] = ['/menu/status', 'MenuController@StatusMenu'];
 $route[] = ['/menu/change', 'MenuController@ChangeStatus'];
 
+/*Region Controller*/
+$route[] = ['/region', 'RegionController@index'];
+$route[] = ['/region/add', 'RegionController@add'];
+$route[] = ['/region/save', 'RegionController@save'];
+$route[] = ['/region/edit', 'RegionController@edit'];
+$route[] = ['/region/delete/{id}', 'RegionController@delete'];
+$route[] = ['/region/show/{id}', 'RegionController@show'];
+
 
 return $route;
