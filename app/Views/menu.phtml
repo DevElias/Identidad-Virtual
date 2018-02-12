@@ -18,11 +18,21 @@ if($_SESSION['user']['area'] != 1)
       <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
       <link rel="stylesheet" href="/assets/css/custom.css">
       <link rel="stylesheet" href="/assets/css/jquery-confirm.css"/>
-      
-      <a href="/home" class="logo">
-        <img src="/assets/img/novo.jpg"  alt="User Image">
-      </a>
-      
+      <?php 
+      if($_SESSION['user']['menu'] == 'skin-blue sidebar-mini sidebar-collapse')
+      {
+          $logo = " <a href='/home' class='logo'>
+          <img src='/mini_techo.jpg' width='20'  alt='User Image'>
+          </a>";
+      }
+      else
+      {
+         $logo = " <a href='/home' class='logo'>
+          <img src='/techo.png' width='170'  alt='User Image'>
+          </a>";
+      }
+      echo($logo);
+      ?>
         <nav class="navbar navbar-static-top">
           <a href="#" class="sidebar-toggle" id="menu" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
