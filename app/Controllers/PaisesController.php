@@ -51,7 +51,7 @@ class PaisesController extends BaseController
         }
         
         /* Render View Paises */
-        $this->renderView('pais/index', 'layout');
+        $this->renderView('pais/index', 'layout_idvirtual');
     }
     
     public function add()
@@ -59,7 +59,7 @@ class PaisesController extends BaseController
         $this->setPageTitle('Pais');
         $model = Container::getModel("Pais");
         $this->view->region = $model->selectRegion();
-        $this->renderView('pais/add', 'layout');
+        $this->renderView('pais/add', 'layout_idvirtual');
     }
     
     public function save($aParam)
@@ -103,7 +103,7 @@ class PaisesController extends BaseController
         
         
         /* Render View Paises */
-        $this->renderView('pais/edit', 'layout');
+        $this->renderView('pais/edit', 'layout_idvirtual');
     }
     
     public function edit($aParam)

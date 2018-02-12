@@ -28,7 +28,7 @@ class UsuariosController extends BaseController
         }
         
         /* Render View Paises */
-        $this->renderView('usuario/index', 'layout');
+        $this->renderView('usuario/index', 'layout_idvirtual');
     }
     
     public function delete($id)
@@ -52,7 +52,7 @@ class UsuariosController extends BaseController
         $this->view->cargos = $model->selectCargos();
         
         /* Render View Paises */
-        $this->renderView('usuario/edit', 'layout');
+        $this->renderView('usuario/edit', 'layout_idvirtual');
     }
     
     public function edit($aParam)

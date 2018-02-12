@@ -807,7 +807,7 @@ class CorreosController extends BaseController
         $this->view->correo = $model->select();
         
         /* Render View Listado de Correos */
-        $this->renderView('correo/listado','layout');
+        $this->renderView('correo/listado','layout_idvirtual');
     }
     
     public function show($id)
@@ -822,7 +822,7 @@ class CorreosController extends BaseController
         }
         
         /* Render View Editar Correos */
-        $this->renderView('correo/edit', 'layout');
+        $this->renderView('correo/edit', 'layout_idvirtual');
     }
     
     public function aprobar($id)
@@ -1190,6 +1190,6 @@ class CorreosController extends BaseController
         $this->view->history = $model->selectAll();
         
         /* Render View Correos */
-        $this->renderView('correo/history', 'layout');
+        $this->renderView('correo/history', 'layout_idvirtual');
     }
 }

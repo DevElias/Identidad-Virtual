@@ -51,13 +51,13 @@ class RegionController extends BaseController
         }
         
         /* Render View Paises */
-        $this->renderView('region/index', 'layout');
+        $this->renderView('region/index', 'layout_idvirtual');
     }
     
     public function add()
     {
         $this->setPageTitle('Region');
-        $this->renderView('region/add', 'layout');
+        $this->renderView('region/add', 'layout_idvirtual');
     }
     
     public function save($aParam)
@@ -98,7 +98,7 @@ class RegionController extends BaseController
         $this->view->region = $model->search($id);
         
         /* Render View Paises */
-        $this->renderView('region/edit', 'layout');
+        $this->renderView('region/edit', 'layout_idvirtual');
     }
     
     public function edit($aParam)

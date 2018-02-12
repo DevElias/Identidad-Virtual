@@ -50,17 +50,55 @@ if($_SESSION['user']['area'] != 1)
       <ul class="sidebar-menu">
         <li class="header">MEN&Uacute; NAVEGACI&Oacute;N</li>
         <li class="treeview">
-          <a href="/home">
+          <a href="/menu_idvirtual">
             <i class="fa fa-home"></i> <span>Home</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="/menu_idvirtual" target="_blank">
-            <i class="fa fa-users"></i> <span>Identidad Virtual</span>
+          <a href="/correo" target="_blank">
+            <i class="fa fa-envelope-o"></i> <span>Solicitud de Correo</span>
           </a>
+        </li>
+        <?php echo($menu1);?> 
          <li class="treeview">
-          <a href="#" target="_blank">
-            <i class="fa fa-balance-scale"></i> <span>Planificaci&oacute;n</span>
+          <a href="/correo/listado">
+            <i class="fa fa-paper-plane-o"></i> <span>Listado de Correo</span>
+          </a>
+        </li>
+         <li class="treeview">
+          <a href="/correo/listado">
+            <i class="fa fa-history"></i> <span>Historico de Correo</span>
+          </a>
+        </li>
+         <?php echo($menu2);?> 
+        <li class="treeview">
+          <a href="/pais">
+            <i class="fa fa-globe"></i> <span>Paises</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/sede">
+            <i class="fa fa-map-marker"></i> <span>Sedes</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/region">
+            <i class="fa fa-map-signs"></i> <span>Regiones</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/area">
+            <i class="fa fa-building"></i> <span>Areas</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/cargo">
+            <i class="fa fa-building"></i> <span>Cargos</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="/usuario">
+            <i class="fa fa-group"></i> <span>Usuarios</span>
           </a>
         </li>
         <li class="treeview">

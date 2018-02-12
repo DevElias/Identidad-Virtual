@@ -51,7 +51,7 @@ class CargosController extends BaseController
         }
         
         /* Render View Paises */
-        $this->renderView('cargo/index', 'layout');
+        $this->renderView('cargo/index', 'layout_idvirtual');
     }
     
     public function add()
@@ -59,7 +59,7 @@ class CargosController extends BaseController
         $this->setPageTitle('Cargo');
         $model = Container::getModel("Cargo");
         $this->view->cargo = $model->select();
-        $this->renderView('cargo/add', 'layout');
+        $this->renderView('cargo/add', 'layout_idvirtual');
     }
     
     public function save($aParam)
@@ -103,7 +103,7 @@ class CargosController extends BaseController
         $this->view->TodosCargos = $model->selectCargos();
         
         /* Render View Paises */
-        $this->renderView('cargo/edit', 'layout');
+        $this->renderView('cargo/edit', 'layout_idvirtual');
     }
     
     public function edit($aParam)

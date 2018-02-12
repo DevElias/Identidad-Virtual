@@ -95,5 +95,7 @@ $route[] = ['/region/edit', 'RegionController@edit'];
 $route[] = ['/region/delete/{id}', 'RegionController@delete'];
 $route[] = ['/region/show/{id}', 'RegionController@show'];
 
+/*Menus*/
+$route[] = ['/menu_idvirtual', 'MenuController@home'];
 
 return $route;

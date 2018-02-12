@@ -34,4 +34,20 @@ class MenuController extends BaseController
         
     }
     
+    public function home()
+    {
+        
+        session_start();
+        if(!isset($_SESSION['access_token']))
+        {
+            header('Location: /');
+        }
+        $this->setPageTitle('Home');
+        
+        /* Render View Paises 
+         * layout de la identidad Virtual
+         * */
+        $this->renderView('home/home_idvirtual', 'layout_idvirtual');
+    }
+    
 }

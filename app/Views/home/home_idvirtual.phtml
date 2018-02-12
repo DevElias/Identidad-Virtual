@@ -1,0 +1,49 @@
+<?php 
+$menu1 = '';
+$menu2 = '';
+
+if($_SESSION['user']['area'] != 1)
+{
+    $menu1 = '<!--';
+    $menu2 = '-->';
+}
+
+?>
+
+<div class="content-wrapper">
+
+    <section class="content">
+            <a class="btn btn-app bg-white" href="/pais">
+            	<i class="fa fa-globe"></i>Paises
+           </a>
+           <a class="btn btn-app bg-white" href="/sede">
+            	<i class="fa fa-map-marker"></i>Sedes
+           </a>
+           <a class="btn btn-app bg-white" href="/region">
+            	<i class="fa fa-map-signs"></i>Regiones
+           </a>
+           <a class="btn btn-app bg-white" href="/area">
+            	<i class="fa fa-building"></i>Areas
+           </a>
+           <a class="btn btn-app bg-white" href="/cargo">
+            <i class="fa fa-briefcase"></i>Cargos
+           </a>
+           <a class="btn btn-app bg-white" href="/usuario">
+            	<i class="fa fa-users"></i>Usuarios
+           </a>
+           <a class="btn btn-app bg-white" href="/correo" target="_blank">
+            	<i class="fa fa-envelope-o"></i>Solicitud de Correo
+           </a>
+          <?php echo($menu1);?> 
+          <a class="btn btn-app bg-white" href="/correo/listado">
+            	<i class="fa fa-paper-plane-o"></i>Listado de Correo
+           </a>
+           <a class="btn btn-app bg-white" href="/correo/history">
+            	<i class="fa fa-history"></i>Historico de Correo
+           </a>
+           <?php echo($menu2);?> 
+    </section>
+
+</div>
+
+<div class="control-sidebar-bg"></div>

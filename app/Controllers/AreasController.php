@@ -51,13 +51,13 @@ class AreasController extends BaseController
         }
         
         /* Render View Paises */
-        $this->renderView('area/index', 'layout');
+        $this->renderView('area/index', 'layout_idvirtual');
     }
     
     public function add()
     {
         $this->setPageTitle('Area');
-        $this->renderView('area/add', 'layout');
+        $this->renderView('area/add', 'layout_idvirtual');
     }
     
     public function save($aParam)
@@ -99,7 +99,7 @@ class AreasController extends BaseController
         $this->view->area = $model->search($id);
         
         /* Render View Paises */
-        $this->renderView('area/edit', 'layout');
+        $this->renderView('area/edit', 'layout_idvirtual');
     }
     
     public function edit($aParam)

@@ -1,47 +1,12 @@
-<?php 
-$menu1 = '';
-$menu2 = '';
-
-if($_SESSION['user']['area'] != 1)
-{
-    $menu1 = '<!--';
-    $menu2 = '-->';
-}
-
-?>
-
 <div class="content-wrapper">
 
     <section class="content">
-            <a class="btn btn-app bg-blue" href="/pais">
-            	<i class="fa fa-globe"></i>Paises
+            <a class="btn btn-app bg-blue" href="/menu_idvirtual" target="_blank">
+            	<i class="fa fa-users"></i>Identidad Virtual
            </a>
-           <a class="btn btn-app bg-purple" href="/sede">
-            	<i class="fa fa-map-marker"></i>Sedes
+            <a class="btn btn-app bg-green href="#" target="_blank">
+            	<i class="fa fa-balance-scale"></i>Planificaci&oacute;n
            </a>
-           <a class="btn btn-app bg-aqua" href="/region">
-            	<i class="fa fa-map-signs"></i>Regiones
-           </a>
-           <a class="btn btn-app bg-yellow" href="/area">
-            	<i class="fa fa-building"></i>Areas
-           </a>
-           <a class="btn btn-app bg-red" href="/cargo">
-            <i class="fa fa-briefcase"></i>Cargos
-           </a>
-           <a class="btn btn-app bg-green" href="/usuario">
-            	<i class="fa fa-users"></i>Usuarios
-           </a>
-           <a class="btn btn-app bg-gray" href="/correo" target="_blank">
-            	<i class="fa fa-envelope-o"></i>Solicitud de Correo
-           </a>
-          <?php echo($menu1);?> 
-          <a class="btn btn-app bg-orange" href="/correo/listado">
-            	<i class="fa fa-paper-plane-o"></i>Listado de Correo
-           </a>
-           <a class="btn btn-app bg-white" href="/correo/history">
-            	<i class="fa fa-history"></i>Historico de Correo
-           </a>
-           <?php echo($menu2);?> 
     </section>
 
 </div>

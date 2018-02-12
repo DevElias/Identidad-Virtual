@@ -51,7 +51,7 @@ class SedesController extends BaseController
         }
         
         /* Render View Paises */
-        $this->renderView('sede/index', 'layout');
+        $this->renderView('sede/index', 'layout_idvirtual');
     }
     
     public function add()
@@ -59,7 +59,7 @@ class SedesController extends BaseController
         $this->setPageTitle('Sede');
         $model = Container::getModel("Pais");
         $this->view->paises = $model->select();
-        $this->renderView('sede/add', 'layout');
+        $this->renderView('sede/add', 'layout_idvirtual');
     }
     
     public function save($aParam)
@@ -101,7 +101,7 @@ class SedesController extends BaseController
         $this->view->pais = $model->selectPaises();
         
         /* Render View Paises */
-        $this->renderView('sede/edit', 'layout');
+        $this->renderView('sede/edit', 'layout_idvirtual');
     }
     
     public function edit($aParam)
