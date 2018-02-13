@@ -82,14 +82,11 @@ class HomeController extends BaseController
                         //Convert the binary data into hexadecimal representation.
                         $token = bin2hex($token);
                         
-                        //capture ip request
-                        $ip    = $_SERVER["REMOTE_ADDR"];
-                        
                         $aParam['appid']    = $_SESSION['appid'];
                         $aParam['redirect'] = $_SESSION['redirect'];
                         $aParam['idUser']   = $_SESSION['user']['id'];
                         $aParam['token']    = $token;
-                        $aParam['ip']       = $ip;
+                        $aParam['ip']       = $_SERVER["REMOTE_ADDR"];
                         $aParam['start']    = date('Y-m-d H:i');
                         $aParam['end']      = date('Y-m-d H:i', strtotime('+1 year'));
                         
