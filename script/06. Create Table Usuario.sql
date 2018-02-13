@@ -2,9 +2,9 @@ USE techo_id;
 
 CREATE TABLE usuario (
    id INT(10) NOT NULL AUTO_INCREMENT,
-   id_sede INT(1) DEFAULT NULL COMMENT 'ID Sede',
-   id_area INT(1) DEFAULT NULL COMMENT 'ID Area',
-   id_cargo INT(1) DEFAULT NULL COMMENT 'ID Cargo',
+   id_sede INT(10) DEFAULT NULL COMMENT 'ID Sede',
+   id_area INT(10) DEFAULT NULL COMMENT 'ID Area',
+   id_cargo INT(10) DEFAULT NULL COMMENT 'ID Cargo',
    nombre VARCHAR(100) NOT NULL COLLATE utf8_general_ci COMMENT 'Nombre de los usuarios',
    email VARCHAR(100) NOT NULL COLLATE utf8_general_ci COMMENT 'Email de los usuarios',
    picture VARCHAR(200) NOT NULL COLLATE utf8_general_ci COMMENT 'Foto de los usuarios',
