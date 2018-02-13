@@ -152,4 +152,15 @@ class Cargo extends BaseModel
         
         return $result;
     }
+    
+    public function CheckToken($token)
+    {
+        $sql  = "";
+        $sql .= "SELECT * FROM token WHERE access_token = '" . $token. "'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        return $result;
+    }
 }

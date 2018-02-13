@@ -9,46 +9,63 @@ class SedesController extends BaseController
     public function index($request)
     {
         session_start();
+        
+        $aRequest = (array) $request;
+        $this->setPageTitle('Sede');
+        $model = Container::getModel("Sede");
+        
+        /* Api Sedes */
+        /* URL de Cosumo:
+         * http://localhost:8080/sede?api=true
+         * http://localhost:8080/sede?api=true&id=1&nombre=Teste 01
+         * */
+        
+        if($aRequest['api'] === 'true'&& $aRequest['method'] == 'GET')
+        {
+            if($aRequest['token'])
+            {
+                //Verifica se a aplicacao esta registrada
+                $app  = $model->CheckToken($aRequest['token']);
+                
+                if($app)
+                {
+                    $this->view->sede = $model->select();
+                    
+                    if(count($aRequest) > 3)
+                    {
+                        $i = 0;
+                        foreach ($aRequest as $key => $value)
+                        {
+                            if($key == 'api' || $key == 'method' || $key == 'token')
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                $aDados[$i]['field'] = $key;
+                                $aDados[$i]['value'] = $value;
+                            }
+                            $i ++;
+                        }
+                        
+                        $return = $model->SearchAPI($aDados);
+                        die(print_r(json_encode($return), true));
+                    }
+                    die(print_r(json_encode($this->view->sede), true));
+                }
+                else
+                {
+                    die(print_r('Your Application does not have permission', true));
+                }
+            }
+        }
+        
         if(!isset($_SESSION['access_token']))
         {
             header('Location: /');
         }
-        
-        $this->setPageTitle('Sede');
-        $model = Container::getModel("Sede");
+      
         $this->view->sede = $model->select();
-        
-        /* Api Sedes */
-        /* URL de Cosumo:  
-         * http://localhost:8080/sede?api=true 
-         * http://localhost:8080/sede?api=true&id=1&nombre=Teste 01
-         * */
-        
-        $aRequest = (array) $request;
-        if($aRequest['api'] === 'true'&& $aRequest['method'] == 'GET')
-        {
-            if(count($aRequest) > 2)
-            {
-                $i = 0;
-                foreach ($aRequest as $key => $value)
-                {
-                    if($key == 'api' || $key == 'method')
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        $aDados[$i]['field'] = $key;
-                        $aDados[$i]['value'] = $value;
-                    }
-                    $i ++;
-                }
-                
-                $return = $model->SearchAPI($aDados);
-                die(print_r(json_encode($return), true));
-            }
-            die(print_r(json_encode($this->view->sede), true));
-        }
         
         /* Render View Paises */
         $this->renderView('sede/index', 'layout_idvirtual');

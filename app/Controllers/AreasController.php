@@ -53,6 +53,10 @@ class AreasController extends BaseController
                     }
                     die(print_r(json_encode($this->view->area), true));
                 }
+                else
+                {
+                    die(print_r('Your Application does not have permission', true));
+                }
             }
         }
         
