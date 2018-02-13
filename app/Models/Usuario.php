@@ -339,4 +339,15 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function CheckApp($appID)
+    {
+        $sql  = "";
+        $sql .= "SELECT * FROM apps WHERE id_app = '" . $appID . "'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
 }

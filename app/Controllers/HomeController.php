@@ -68,31 +68,44 @@ class HomeController extends BaseController
                 //redirect and register token
                 if(isset($_SESSION['appid']) && isset($_SESSION['redirect']))
                 {
-                    //Generate a random string.
-                    $token = openssl_random_pseudo_bytes(16);
+                    //Verifica se a aplicacao esta registrada
+                    $app  = $model->CheckApp($_SESSION['appid']);
                     
-                    //Convert the binary data into hexadecimal representation.
-                    $token = bin2hex($token);
-                    
-                    //capture ip request
-                    $ip    = $_SERVER["REMOTE_ADDR"];
-                    
-                    $aParam['appid']    = $_SESSION['appid'];
-                    $aParam['redirect'] = $_SESSION['redirect'];
-                    $aParam['idUser']   = $_SESSION['user']['id'];
-                    $aParam['token']    = $token;
-                    $aParam['ip']       = $ip;
-                    $aParam['start']    = date('Y-m-d H:i');
-                    $aParam['end']      = date('Y-m-d H:i', strtotime('+1 year'));
-                    
-                    $return  = $model->GeraToken($aParam);
-                    
-                    if($return)
+                    if($app)
                     {
+                        //Generate a random string.
+                        $token = openssl_random_pseudo_bytes(16);
+                        
+                        //Convert the binary data into hexadecimal representation.
+                        $token = bin2hex($token);
+                        
+                        //capture ip request
+                        $ip    = $_SERVER["REMOTE_ADDR"];
+                        
+                        $aParam['appid']    = $_SESSION['appid'];
+                        $aParam['redirect'] = $_SESSION['redirect'];
+                        $aParam['idUser']   = $_SESSION['user']['id'];
+                        $aParam['token']    = $token;
+                        $aParam['ip']       = $ip;
+                        $aParam['start']    = date('Y-m-d H:i');
+                        $aParam['end']      = date('Y-m-d H:i', strtotime('+1 year'));
+                        
+                        $return  = $model->GeraToken($aParam);
+                        
+                        if($return)
+                        {
+                            unset($_SESSION['appid']);
+                            unset($_SESSION['redirect']);
+                            header('Location: ' . $aParam['redirect'] . "?token=" . $aParam['token']);
+                            return;
+                        }
+                    }
+                    else 
+                    {
+                        unset($_SESSION['access_token']);
                         unset($_SESSION['appid']);
                         unset($_SESSION['redirect']);
-                        header('Location: ' . $aParam['redirect'] . "?token=" . $aParam['token']);
-                        return;
+                        die(print_r('Your Application does not have permission', true));
                     }
                 }
                 
