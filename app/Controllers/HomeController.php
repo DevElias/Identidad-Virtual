@@ -93,9 +93,12 @@ class HomeController extends BaseController
                         
                         if($Check)
                         {
+                            $aToken = $model->infoToken($_SESSION['user']['id']);
+                            $aToken = (array) $aToken[0];
+                            
                             unset($_SESSION['appid']);
                             unset($_SESSION['redirect']);
-                            header('Location: ' . $aParam['redirect'] . "?token=" . $aParam['token']);
+                            header('Location: ' . $aParam['redirect'] . "?token=" . $aToken['access_token']);
                             return;
                         }
                         else

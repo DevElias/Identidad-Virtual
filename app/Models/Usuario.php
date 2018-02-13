@@ -361,4 +361,15 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function InfoToken($idUser)
+    {
+        $sql  = "";
+        $sql .= "SELECT * FROM token WHERE id_usuario = '" . $idUser. "'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
 }

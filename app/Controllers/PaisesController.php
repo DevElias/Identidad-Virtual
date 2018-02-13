@@ -9,46 +9,63 @@ class PaisesController extends BaseController
     public function index($request)
     {
         session_start();
+        
+        $aRequest = (array) $request;
+        $this->setPageTitle('Pais');
+        $model = Container::getModel("Pais");
+        
+        /* Api Paises */
+        /* URL de Cosumo:
+         * http://localhost:8080/pais?api=true
+         * http://localhost:8080/pais?api=true&id=2&nombre=Brasil
+         */
+        
+        if($aRequest['api'] === 'true' && $aRequest['method'] == 'GET')
+        {
+            if($aRequest['token'])
+            {
+                //Verifica se a aplicacao esta registrada
+                $app  = $model->CheckToken($aRequest['token']);
+                
+                if($app)
+                {
+                    $this->view->pais = $model->select();
+                    
+                    if(count($aRequest) > 3)
+                    {
+                        $i = 0;
+                        foreach ($aRequest as $key => $value)
+                        {
+                            if($key == 'api' || $key == 'method' || $key == 'token')
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                $aDados[$i]['field'] = $key;
+                                $aDados[$i]['value'] = $value;
+                            }
+                            $i ++;
+                        }
+                        
+                        $return = $model->SearchAPI($aDados);
+                        die(print_r(json_encode($return), true));
+                    }
+                    die(print_r(json_encode($this->view->pais), true));
+                }
+                else
+                {
+                    die(print_r('Your Application does not have permission', true));
+                }
+            }
+        }
+        
         if(!isset($_SESSION['access_token']))
         {
             header('Location: /');
         }
         
-        $this->setPageTitle('Pais');
-        $model = Container::getModel("Pais");
         $this->view->pais = $model->select();
-        
-        /* Api Paises */
-        /* URL de Cosumo:  
-         * http://localhost:8080/pais?api=true 
-         * http://localhost:8080/pais?api=true&id=2&nombre=Brasil
-         */
-        
-        $aRequest = (array) $request;
-        if($aRequest['api'] === 'true'&& $aRequest['method'] == 'GET')
-        {
-            if(count($aRequest) > 2)
-            {
-                $i = 0;
-                foreach ($aRequest as $key => $value)
-                {
-                    if($key == 'api' || $key == 'method')
-                    {
-                        continue;
-                    }
-                    else 
-                    {
-                        $aDados[$i]['field'] = $key;
-                        $aDados[$i]['value'] = $value;
-                    }
-                    $i ++;
-                }
-                
-                $return = $model->SearchAPI($aDados);
-                die(print_r(json_encode($return), true));
-            }
-            die(print_r(json_encode($this->view->pais), true));
-        }
         
         /* Render View Paises */
         $this->renderView('pais/index', 'layout_idvirtual');
