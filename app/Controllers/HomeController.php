@@ -73,6 +73,9 @@ class HomeController extends BaseController
                     
                     if($app)
                     {
+                        //Verifica ja existe um token na base para o usuario logado
+                        $Check  = $model->CheckExist($_SESSION['user']['id']);
+                        
                         //Generate a random string.
                         $token = openssl_random_pseudo_bytes(16);
                         
@@ -90,14 +93,25 @@ class HomeController extends BaseController
                         $aParam['start']    = date('Y-m-d H:i');
                         $aParam['end']      = date('Y-m-d H:i', strtotime('+1 year'));
                         
-                        $return  = $model->GeraToken($aParam);
                         
-                        if($return)
+                        if($Check)
                         {
                             unset($_SESSION['appid']);
                             unset($_SESSION['redirect']);
                             header('Location: ' . $aParam['redirect'] . "?token=" . $aParam['token']);
                             return;
+                        }
+                        else
+                        {
+                            $return  = $model->GeraToken($aParam);
+                            
+                            if($return)
+                            {
+                                unset($_SESSION['appid']);
+                                unset($_SESSION['redirect']);
+                                header('Location: ' . $aParam['redirect'] . "?token=" . $aParam['token']);
+                                return;
+                            }
                         }
                     }
                     else 
