@@ -6,6 +6,7 @@ $route[] = ['/logout', 'LoginController@logout'];
 
 /*Home Controller*/
 $route[] = ['/home', 'HomeController@index'];
+$route[] = ['/home/save', 'HomeController@save'];
 
 /*Paises Controller*/
 $route[] = ['/pais', 'PaisesController@index'];

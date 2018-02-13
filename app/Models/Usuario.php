@@ -311,4 +311,32 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function GeraToken($aParam)
+    {
+        $sql  = "";
+        $sql .= "INSERT INTO token (";
+        $sql .= "id, ";
+        $sql .= "id_app, ";
+        $sql .= "id_usuario, ";
+        $sql .= "redirect, ";
+        $sql .= "access_token, ";
+        $sql .= "ip_request, ";
+        $sql .= "start_session, ";
+        $sql .= "timeout_session) VALUES (";
+        $sql .= " NULL, ";
+        $sql .= "'". $aParam['appid']."', ";
+        $sql .= "'". $aParam['idUser']."', ";
+        $sql .= "'". $aParam['redirect']."', ";
+        $sql .= "'". $aParam['token']."', ";
+        $sql .= "'". $aParam['ip']."', ";
+        $sql .= "'". $aParam['start']."', ";
+        $sql .= "'". $aParam['end']."') ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        
+        return $result;
+    }
+    
 }

@@ -9,6 +9,7 @@ class HomeController extends BaseController
     public function index()
     {
         session_start();
+        
         if(!isset($_SESSION['access_token']))
         {
             header('Location: /');
@@ -47,6 +48,7 @@ class HomeController extends BaseController
                 $_SESSION['user']['area'] = $aUser['id_area'];
                 $_SESSION['user']['pais'] = $aUser['id_pais'];
                 
+                //Verify menu in database
                 $aMenu = $model->BuscaMenu();
                 
                 if(count($aMenu) == 0)
@@ -63,10 +65,48 @@ class HomeController extends BaseController
                     $_SESSION['user']['menu'] = $aMenu['status_menu'];
                 }
                 
+                //redirect and register token
+                if(isset($_SESSION['appid']) && isset($_SESSION['redirect']))
+                {
+                    //Generate a random string.
+                    $token = openssl_random_pseudo_bytes(16);
+                    
+                    //Convert the binary data into hexadecimal representation.
+                    $token = bin2hex($token);
+                    
+                    //capture ip request
+                    $ip    = $_SERVER["REMOTE_ADDR"];
+                    
+                    $aParam['appid']    = $_SESSION['appid'];
+                    $aParam['redirect'] = $_SESSION['redirect'];
+                    $aParam['idUser']   = $_SESSION['user']['id'];
+                    $aParam['token']    = $token;
+                    $aParam['ip']       = $ip;
+                    $aParam['start']    = date('Y-m-d H:i');
+                    $aParam['end']      = date('Y-m-d H:i', strtotime('+1 year'));
+                    
+                    $return  = $model->GeraToken($aParam);
+                    
+                    if($return)
+                    {
+                        unset($_SESSION['appid']);
+                        unset($_SESSION['redirect']);
+                        header('Location: ' . $aParam['redirect'] . "?token=" . $aParam['token']);
+                        return;
+                    }
+                }
                 
                 $this->setPageTitle('Home');
                 $this->renderView('home/dashboard', 'layout');
             }
         }
+    }
+    
+    public function save($aParam)
+    {
+        $aParam = (array) $aParam;
+        
+        $_SESSION['appid']    =  $aParam['id'];
+        $_SESSION['redirect'] =  $aParam['redirect'];
     }
 }

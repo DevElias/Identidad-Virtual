@@ -50,25 +50,44 @@
 <script src="/assets/js/iCheck/icheck.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
 <script>
-  $(function () {
-    $('#esqueci-senha').click(function() {
-      $('#form-login').addClass('hide');
-      $('#form-esqueci').removeClass('hide');
-    });
-    $('#voltar-login').click(function() {
-      $('#form-login').removeClass('hide');
-      $('#form-esqueci').addClass('hide');
-    });
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-  
-  $( "#btn-esqueci" ).click(function() {
-	  EsqueciSenha();
-	});
+$(document).ready(function() {
+
+	var link = window.location.href;
+	
+	if(link.indexOf("appid") != -1)
+	{
+		var url   = window.location.search.replace("?", "");
+		
+		var items = url.split("&");
+
+		var array = {
+		  'appid' : items[0],
+		  'redirect' : items[1]
+		}
+
+		var id = array.appid.split('=');
+		var id = id[1]; // appID
+		
+		var redirect = array.redirect.split('=');
+		var redirect = redirect[1]; // Redirect
+
+	 	oData = new Object();	
+	 	oData.id       = id;
+	 	oData.redirect = redirect;
+
+	 	$.ajax({
+	 		type: "POST",
+	 		url: "/home/save",
+	 		dataType: "json",
+	 		data: oData,
+	 		success: function(oData)
+	 		{	
+				
+	 		}
+	 	});
+	}
+    
+});
 </script>
 </body>
 </html>
