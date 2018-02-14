@@ -9,14 +9,8 @@ class UsuariosController extends BaseController
     public function index($request)
     {
         session_start();
-        if(!isset($_SESSION['access_token']))
-        {
-            header('Location: /');
-        }
-        
         $this->setPageTitle('Usuario');
         $model = Container::getModel("Usuario");
-        $this->view->usuario = $model->select();
         
         /* Api Usuarios */
         /* URL de Cosumo:  http://localhost:8080/usuario?api=true */
@@ -24,10 +18,51 @@ class UsuariosController extends BaseController
         $aRequest = (array) $request;
         if($aRequest['api'] === 'true'&& $aRequest['method'] == 'GET')
         {
-            die(print_r(json_encode($this->view->usuario), true));
+            if($aRequest['token'])
+            {
+                //Verifica se a aplicacao esta registrada
+                $app  = $model->CheckToken($aRequest['token']);
+                
+                if($app)
+                {
+                    $this->view->usuario = $model->select();
+                    
+                    if(count($aRequest) > 3)
+                    {
+                        $i = 0;
+                        foreach ($aRequest as $key => $value)
+                        {
+                            if($key == 'api' || $key == 'method' || $key == 'token')
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                $aDados[$i]['field'] = $key;
+                                $aDados[$i]['value'] = $value;
+                            }
+                            $i ++;
+                        }
+                        
+                        $return = $model->SearchAPI($aDados);
+                        die(print_r(json_encode($return), true));
+                    }
+                    die(print_r(json_encode($this->view->usuario), true));
+                }
+                else
+                {
+                    die(print_r('Your Application does not have permission', true));
+                }
+            }
         }
         
-        /* Render View Paises */
+        if(!isset($_SESSION['access_token']))
+        {
+            header('Location: /');
+        }
+        
+        $this->view->usuario = $model->select();
+        
         $this->renderView('usuario/index', 'layout_idvirtual');
     }
     
