@@ -4,7 +4,7 @@
             <a class="btn btn-app bg-blue" href="/menu_idvirtual" target="_blank">
             	<i class="fa fa-users"></i>Identidad Virtual
            </a>
-            <a class="btn btn-app bg-blue" href="http://herramientas.techo.org/aff/ws_soap/views/home.php" target="_blank">
+            <a class="btn btn-app bg-blue" href="<?php session_start();  $url='http://herramientas.techo.org/aff/ws_soap/views/home.php?id=' . $_SESSION['user']['id']; echo($url);?>" target="_blank">
             	<i class="fa fa-money"></i>Nivel
            </a>
             <a class="btn btn-app bg-blue href="#" target="_blank">

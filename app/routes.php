@@ -3,6 +3,7 @@
 /*Login Controller*/
 $route[] = ['/', 'LoginController@index'];
 $route[] = ['/logout', 'LoginController@logout'];
+$route[] = ['/api', 'HomeController@access'];
 
 /*Home Controller*/
 $route[] = ['/home', 'HomeController@index'];

@@ -129,11 +129,38 @@ class HomeController extends BaseController
         }
     }
     
+    //Metodo de Login com Redirect
     public function save($aParam)
     {
         $aParam = (array) $aParam;
         
         $_SESSION['appid']    =  $aParam['id'];
         $_SESSION['redirect'] =  $aParam['redirect'];
+    }
+    
+    //Metodo de Acesso para as Aplicacoes via CURL sem Redirect
+    public function access($aParam)
+    {
+        $aParam = (array) $aParam;
+        
+        if(isset($aParam['appid']))
+        {
+            $model = Container::getModel("Usuario");
+            //Verifica se a aplicacao esta registrada
+            $app  = $model->CheckApp($aParam['appid']);
+            
+            if($app)
+            {
+                $result  = $model->search($aParam['id']);
+                
+                $aUser   = json_encode($result);
+                
+                die(print_r($aUser, true));
+            }
+            else
+            {
+                die(print_r('Your Application does not have permission', true));
+            }
+        }
     }
 }
