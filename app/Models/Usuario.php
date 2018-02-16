@@ -318,7 +318,6 @@ class Usuario extends BaseModel
         $sql .= "id, ";
         $sql .= "id_app, ";
         $sql .= "id_usuario, ";
-        $sql .= "redirect, ";
         $sql .= "access_token, ";
         $sql .= "ip_request, ";
         $sql .= "start_session, ";
@@ -326,7 +325,6 @@ class Usuario extends BaseModel
         $sql .= " NULL, ";
         $sql .= "'". $aParam['appid']."', ";
         $sql .= "'". $aParam['idUser']."', ";
-        $sql .= "'". $aParam['redirect']."', ";
         $sql .= "'". $aParam['token']."', ";
         $sql .= "'". $aParam['ip']."', ";
         $sql .= "'". $aParam['start']."', ";
@@ -339,10 +337,10 @@ class Usuario extends BaseModel
         return $result;
     }
     
-    public function CheckApp($appID)
+    public function CheckApp($appID, $redirect)
     {
         $sql  = "";
-        $sql .= "SELECT * FROM apps WHERE id_app = '" . $appID . "'";
+        $sql .= "SELECT * FROM apps WHERE id_app = '" . $appID . "' AND redirect = '" . $redirect . "'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->rowCount();
@@ -353,7 +351,7 @@ class Usuario extends BaseModel
     public function CheckExist($idUser)
     {
         $sql  = "";
-        $sql .= "SELECT * FROM token WHERE id_usuario = '" . $idUser. "'";
+        $sql .= "SELECT * FROM token WHERE id_usuario = '" . $idUser. "' AND id_app != 'Local - Login TECHO'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->rowCount();
@@ -401,6 +399,39 @@ class Usuario extends BaseModel
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->rowCount();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function DadosToken($token)
+    {
+        $sql  = "";
+        $sql .= "SELECT * FROM token WHERE access_token = '" . $token. "'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function AllToken($idUser)
+    {
+        $sql  = "";
+        $sql .= "SELECT * FROM token WHERE id_usuario = '" . $idUser. "'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
+    public function DeleteToken($id)
+    {
+        $query .= "DELETE FROM token ";
+        $query .= "WHERE id=:id ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $result = $stmt->execute();
         $stmt->closeCursor();
         return $result;
     }

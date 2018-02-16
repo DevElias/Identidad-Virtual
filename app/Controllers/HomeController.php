@@ -69,7 +69,7 @@ class HomeController extends BaseController
                 if(isset($_SESSION['appid']) && isset($_SESSION['redirect']))
                 {
                     //Verifica se a aplicacao esta registrada
-                    $app  = $model->CheckApp($_SESSION['appid']);
+                    $app  = $model->CheckApp($_SESSION['appid'], $_SESSION['redirect']);
                     
                     if($app)
                     {
@@ -90,15 +90,16 @@ class HomeController extends BaseController
                         $aParam['start']    = date('Y-m-d H:i');
                         $aParam['end']      = date('Y-m-d H:i', strtotime('+1 year'));
                         
-                        
                         if($Check)
                         {
                             $aToken = $model->infoToken($_SESSION['user']['id']);
                             $aToken = (array) $aToken[0];
                             
+                            $redirect = $_SESSION['redirect'];
+                            
                             unset($_SESSION['appid']);
                             unset($_SESSION['redirect']);
-                            header('Location: ' . $aParam['redirect'] . "?token=" . $aToken['access_token']);
+                            header('Location: ' . $redirect. "?token=" . $aToken['access_token']);
                             return;
                         }
                         else
@@ -122,6 +123,48 @@ class HomeController extends BaseController
                         die(print_r('Your Application does not have permission', true));
                     }
                 }
+                else 
+                {
+                    if(!$_SESSION['user']['token'])
+                    {
+                        //Verifica todos os Token deste usuarios e apaga os velhos
+                        $listToken  = $model->AllToken($_SESSION['user']['id']);
+                        
+                        for($i=0; $i < count($listToken); $i++)
+                        {
+                            $register = (array) $listToken[$i];
+                            
+                            if($register['id_app'] == 'Local - Login TECHO')
+                            {
+                                $aRetorno  = $model->DeleteToken($register['id']);
+                            }
+                        }
+                        
+                        //Generate a random string.
+                        $token = openssl_random_pseudo_bytes(16);
+                        
+                        //Convert the binary data into hexadecimal representation.
+                        $token = bin2hex($token);
+                        
+                        $aToken['appid']    = 'Local - Login TECHO';
+                        $aToken['idUser']   = $_SESSION['user']['id'];
+                        $aToken['token']    = $token;
+                        $aToken['ip']       = $_SERVER["REMOTE_ADDR"];
+                        $aToken['start']    = date('Y-m-d H:i');
+                        $aToken['end']      = date('Y-m-d H:i', strtotime('+1 day'));
+                        
+                        //Gera um Token Novo, ou seja um NOVO token por usuario sempre
+                        $aRet  = $model->GeraToken($aToken);
+                        
+                        if($aRet)
+                        {
+                            $aDados = $model->DadosToken($token);
+                            $aDados = (array) $aDados;
+                            
+                            $_SESSION['user']['token'] = $aDados['access_token'];
+                        }
+                    }
+                }
                 
                 $this->setPageTitle('Home');
                 $this->renderView('home/dashboard', 'layout');
@@ -141,19 +184,24 @@ class HomeController extends BaseController
     //Metodo de Acesso para as Aplicacoes via CURL sem Redirect
     public function access($aParam)
     {
+        session_start();
+        
         $aParam = (array) $aParam;
         
-        if(isset($aParam['appid']))
+        if(isset($aParam['token']))
         {
             $model = Container::getModel("Usuario");
             //Verifica se a aplicacao esta registrada
-            $app  = $model->CheckApp($aParam['appid']);
+            $app  = $model->CheckToken($aParam['token']);
             
             if($app)
             {
-                $result  = $model->search($aParam['id']);
+                $aDados   = $model->DadosToken($aParam['token']);
+                $aDados   = (array) $aDados;
                 
-                $aUser   = json_encode($result);
+                $aUsuario = $model->search($aDados['id_usuario']);
+                
+                $aUser   = json_encode($aUsuario);
                 
                 die(print_r($aUser, true));
             }
