@@ -436,4 +436,15 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function SelectApps()
+    {
+        $sql  = "";
+        $sql .= "SELECT * FROM apps";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
 }

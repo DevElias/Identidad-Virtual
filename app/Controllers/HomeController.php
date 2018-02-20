@@ -166,6 +166,9 @@ class HomeController extends BaseController
                     }
                 }
                 
+                $aApps = $model->SelectApps();
+                $this->view->apps = $aApps;
+                
                 $this->setPageTitle('Home');
                 $this->renderView('home/dashboard', 'layout');
             }

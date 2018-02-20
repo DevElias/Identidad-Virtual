@@ -4,12 +4,10 @@
             <a class="btn btn-app bg-blue" href="/menu_idvirtual" target="_blank">
             	<i class="fa fa-users"></i>Identidad Virtual
            </a>
-            <a class="btn btn-app bg-blue" href="<?php session_start();  $url='http://herramientas.techo.org/aff/ws_soap/views/home.php?token=' . $_SESSION['user']['token']; echo($url);?>" target="_blank">
-            	<i class="fa fa-money"></i>Nivel
-           </a>
-            <a class="btn btn-app bg-blue href="#" target="_blank">
-            	<i class="fa fa-balance-scale"></i>Planificaci&oacute;n
-           </a>
+            <?php session_start();   foreach ($this->view->apps as $apps):?>
+		 		<?php $link .= '<a class="btn btn-app bg-blue" href="'.$apps->link . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a>';?>
+ 			<?php endforeach; ?>
+ 			<?php echo($link)?>
     </section>
 
 </div>
