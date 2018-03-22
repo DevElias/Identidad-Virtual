@@ -6,14 +6,14 @@
            </a>
             <?php session_start();   foreach ($this->view->apps as $apps):?>
             <?php 
-                //Reloj de Puntaje id Pais
-                if($apps->id_app != '')
+                 //Calculadora de Puntajeid Pais
+                if($apps->app == 'Calculadora de Puntaje')
                 {
-                    $info = $_SESSION['user']['token'];
+                    $info = $_SESSION['user']['pais'];
                 }
                 else
                 {
-                    $info = '';
+                    $info = $_SESSION['user']['token'];
                 }
                 
               ?>
