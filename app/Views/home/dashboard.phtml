@@ -5,7 +5,19 @@
             	<i class="fa fa-users"></i>Identidad Virtual
            </a>
             <?php session_start();   foreach ($this->view->apps as $apps):?>
-		 		<?php $link .= '<a class="btn btn-app bg-blue" href="'.$apps->link . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a>';?>
+            <?php 
+                //Reloj de Puntaje id Pais
+                if($apps->id_app != '')
+                {
+                    $info = $_SESSION['user']['token'];
+                }
+                else
+                {
+                    $info = '';
+                }
+                
+              ?>
+		 		<?php $link .= '<a class="btn btn-app bg-blue" href="'.$apps->link . $info. '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a>';?>
  			<?php endforeach; ?>
  			<?php echo($link)?>
     </section>
