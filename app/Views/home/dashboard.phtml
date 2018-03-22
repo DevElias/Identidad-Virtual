@@ -9,7 +9,7 @@
                  //Calculadora de Puntajeid Pais
                 if($apps->app == 'Calculadora de Puntaje')
                 {
-                    $info = $_SESSION['user']['pais'];
+                    $info = $_SESSION['user']['pais'] . '&token='.$_SESSION['user']['token'];
                 }
                 else
                 {
