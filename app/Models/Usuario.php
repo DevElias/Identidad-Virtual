@@ -36,7 +36,13 @@ class Usuario extends BaseModel
         $sql .= "Left Join pais on pais.id = sede.id_pais ";
         $sql .= "WHERE {$this->table}.borrado = 0 ";
         
-        if($_SESSION['user']['area'] != 1)
+        //Por hora esta assim, Fer (Calculadora de Puntaje), depois temos que criar um modulo de acessos
+        if(($_SESSION['user']['pais'] == 5) && ($_SESSION['user']['area'] != 1))
+        {
+            $sql .=" AND usuario.id > 122";
+        }
+        
+        if($_SESSION['user']['pais'] != 5)
         {
             $sql .= ' AND pais.id = '. $_SESSION['user']['pais'];
         }
