@@ -112,7 +112,7 @@ class Sede extends BaseModel
         }
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        $result = $stmt->fetch();
+        $result = $stmt->fetchAll();
         $stmt->closeCursor();
         return $result;
     }
