@@ -110,6 +110,7 @@ class Sede extends BaseModel
             }
             
         }
+        $query .= " ORDER BY {$this->table}.nombre ASC";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();
