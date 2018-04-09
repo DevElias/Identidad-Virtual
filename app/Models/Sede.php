@@ -21,6 +21,7 @@ class Sede extends BaseModel
         $sql .= "SELECT ";
         $sql .= "{$this->table}.id     as 'ID_Sede', ";
         $sql .= "{$this->table}.nombre as 'Nombre_Sede', ";
+        $sql .= "pais.id as 'Pais_ID', ";
         $sql .= "pais.nombre as 'Pais_Nombre', ";
         $sql .= "{$this->table}.status as 'Status_Sede', ";
         $sql .= "{$this->table}.fecha_inc as 'Fecha de Inclusion', ";
