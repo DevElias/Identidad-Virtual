@@ -28,7 +28,7 @@ class Sede extends BaseModel
         $sql .= "{$this->table}.fecha_alt as 'Fecha de Cambio' ";
         $sql .= "FROM {$this->table} ";
         $sql .= "Inner Join pais on pais.id = {$this->table}.id_pais ";
-        $sql .= "WHERE {$this->table}.borrado = 0 ";
+        $sql .= "WHERE {$this->table}.borrado = 0  ORDER BY {$this->table}.id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
