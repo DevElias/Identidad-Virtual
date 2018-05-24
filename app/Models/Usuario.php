@@ -128,7 +128,7 @@ class Usuario extends BaseModel
     
     public function search($id)
     {
-        $query = "SELECT {$this->table}.*, pais.id as 'id_pais' FROM {$this->table} INNER JOIN sede ON sede.id = {$this->table}.id_sede INNER JOIN pais ON pais.id = sede.id_pais WHERE {$this->table}.id=:id";
+        $query = "SELECT {$this->table}.*, pais.id as 'id_pais' FROM {$this->table} LEFT JOIN sede ON sede.id = {$this->table}.id_sede LEFT JOIN pais ON pais.id = sede.id_pais WHERE {$this->table}.id=:id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
