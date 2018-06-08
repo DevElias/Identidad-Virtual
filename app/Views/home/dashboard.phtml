@@ -16,8 +16,14 @@
                     $info = $_SESSION['user']['token'];
                 }
                 
+                //Admin Planificacion
+                if ($apps->app == 'Admin Planificacion')
+                {
+                    $hidden = 'hidden';
+                }
+                
               ?>
-		 		<?php $link .= '<a class="btn btn-app bg-blue" href="'.$apps->link . $info. '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a>';?>
+		 		<?php $link .= '<a class="btn btn-app bg-blue '. $hidden .'" href="'.$apps->link . $info. '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a>';?>
  			<?php endforeach; ?>
  			<?php echo($link)?>
     </section>
