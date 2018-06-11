@@ -69,8 +69,9 @@ if($_SESSION['user']['area'] != 1)
             <i class="fa fa-users"></i> <span>Identidad Virtual</span>
           </a>
         </li> 
-         <?php session_start();   foreach ($this->view->apps as $apps):?>
-		 		<?php $link .= '<li class="treeview"><a href="'.$apps->link . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a></li>';?>
+         	<?php session_start();   foreach ($this->view->apps as $apps):?>
+         	<?php if($apps->app == 'Admin Planificacion'){ $hidden = 'hidden';}?>
+		 	<?php $link .= '<li class="treeview"'.$hidden.'><a href="'.$apps->link . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a></li>';?>
  			<?php endforeach; ?>
  			<?php echo($link)?>
         <li class="treeview">
