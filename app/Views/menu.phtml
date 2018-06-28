@@ -71,7 +71,7 @@ if($_SESSION['user']['area'] != 1)
         </li> 
          	<?php session_start();   foreach ($this->view->apps as $apps):?>
          	<?php if($apps->app == 'Admin Planificacion'){ $hidden = 'hidden';}?>
-		 	<?php $link .= '<li class="treeview"'.$hidden.'><a href="'.$apps->link . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a></li>';?>
+		 	<?php $link .= '<li class="treeview"'.$hidden.'><a href="'.$apps->link . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i><span>' . $apps->app . '</span></a></li>';?>
  			<?php endforeach; ?>
  			<?php echo($link)?>
         <li class="treeview">
