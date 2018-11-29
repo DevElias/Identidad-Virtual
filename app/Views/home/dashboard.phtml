@@ -26,8 +26,34 @@
 		 		<?php $link .= '<a class="btn btn-app bg-blue '. $hidden .'" href="'.$apps->link . $info. '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a>';?>
  			<?php endforeach; ?>
  			<?php echo($link)?>
+ 			<div class="form-group">
+				<input type="hidden" class="form-control" id="myId" value="<?php session_start(); echo($_SESSION['user']['id']);?>">
+			</div>
     </section>
 
 </div>
 
 <div class="control-sidebar-bg"></div>
+<script type="text/javascript" src="/assets/js/jquery-confirm.js"></script>
+<script>
+$(document).ready(function() {
+	//Capturar id do usuario logado
+	  oData    = new Object();	
+	  oData.id = $('#myId').val();
+
+	  //Verifica se o Usuario tem configurado as infos
+	 	 $.ajax({
+	 			type: "POST",
+	 			url: "/home/CheckInfo",
+	 			dataType: "json",
+	 			data: oData,
+	 			success: function(resp)
+	 			{	
+		 			if(resp['results'] == false)
+		 			{
+		 				console.log('ta NULL');
+		 			}
+	 			}
+	 		}); 
+});
+</script>

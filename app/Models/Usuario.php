@@ -447,4 +447,14 @@ class Usuario extends BaseModel
         return $result;
     }
     
+    public function checkInfo($id)
+    {
+        $query = "SELECT * FROM usuario WHERE id = " . $id;
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+    
 }

@@ -111,4 +111,24 @@ class UsuariosController extends BaseController
             echo json_encode(array("results" => false));
         }
     }
+    
+    public function checkinfo($aParam)
+    {
+        $aParam = (array) $aParam;
+        
+        $model  = Container::getModel("Usuario");
+        $result = $model->checkInfo($aParam['id']);
+        
+        if($result)
+        {
+            if(empty($result[0]->id_sede))
+            {
+                echo json_encode(array("results" => false));
+            }
+            else
+            {
+                echo json_encode(array("results" => true));
+            }
+        }
+    }
 }

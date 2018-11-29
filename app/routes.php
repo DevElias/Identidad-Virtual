@@ -100,4 +100,7 @@ $route[] = ['/region/show/{id}', 'RegionController@show'];
 /*Menus*/
 $route[] = ['/menu_idvirtual', 'MenuController@home'];
 
+/*Custom Widnows info usuarios */
+$route[] = ['/home/CheckInfo', 'UsuariosController@checkinfo'];
+
 return $route;
