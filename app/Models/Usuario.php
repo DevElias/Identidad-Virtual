@@ -38,7 +38,7 @@ class Usuario extends BaseModel
         
         if($_SESSION['user']['pais'] != 5)
         {
-            $sql .= ' AND pais.id = '. $_SESSION['user']['pais'];
+            $sql .= ' AND pais.id = '. $_SESSION['user']['pais'] . ' OR usuario.id_sede is null ';
         }
         
         $stmt = $this->pdo->prepare($sql);
