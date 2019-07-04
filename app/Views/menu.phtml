@@ -70,7 +70,7 @@ if($_SESSION['user']['area'] != 1)
           </a>
         </li> 
          	<?php session_start();   foreach ($this->view->apps as $apps):?>
-         	<?php if($apps->app == 'Admin Planificacion'){ $hidden = 'hidden';}?>
+         	<?php if($apps->app == 'Admin Planificacion'){ $hidden = 'hidden';}else{$hidden = '';}?>
          	<?php if($apps->app == 'Calculadora de Puntaje'){$complete = $_SESSION['user']['pais'] . '&token=';}?>
 		 	<?php $link .= '<li class="treeview"'.$hidden.'><a href="'.$apps->link . $complete . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i><span>' . $apps->app . '</span></a></li>';?>
  			<?php endforeach; ?>
