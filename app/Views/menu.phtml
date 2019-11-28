@@ -75,6 +75,12 @@ if($_SESSION['user']['area'] != 1)
 			<?php if($apps->app == 'Nivel'){$link .= '<li class="treeview"'.$hidden.'><a href="'.$apps->link . '" target="_blank"> <i class="' .$apps->class . '"></i><span>' . $apps->app . '</span></a></li>';}else{?>
 		 	<?php $link .= '<li class="treeview"'.$hidden.'><a href="'.$apps->link . $complete . $_SESSION['user']['token'] . '" target="_blank"> <i class="' .$apps->class . '"></i><span>' . $apps->app . '</span></a></li>';}?>
  			<?php endforeach; ?>
+ 			<?php 
+ 			if(($_SESSION['user']['pais'] == 1 && $_SESSION['user']['sede'] == 2) || $_SESSION['user']['email'] == 'elias.lima@techo.org')
+ 			{
+ 			    $link .= '<li class="treeview"><a href="http://tetobrasil.org/" target="_blank"> <i class="fa fa-internet-explorer"></i><span>' . 'Intranet TETO' . '</span></a></li>';
+ 			}
+ 			?>
  			<?php echo($link)?>
         <li class="treeview">
           <a href="/logout">
