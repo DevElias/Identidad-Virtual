@@ -47,6 +47,7 @@ class HomeController extends BaseController
                 $_SESSION['user']['id']   = $aUser['id'];
                 $_SESSION['user']['area'] = $aUser['id_area'];
                 $_SESSION['user']['pais'] = $aUser['id_pais'];
+                $_SESSION['user']['sede'] = $aUser['id_sede'];
                 
                 //Verify menu in database
                 $aMenu = $model->BuscaMenu();

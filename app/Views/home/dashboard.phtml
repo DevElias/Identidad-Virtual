@@ -37,10 +37,17 @@
 					{
 						$link .= '<a class="btn btn-app bg-blue '. $hidden .'" href="'.$apps->link . $info. '" target="_blank"> <i class="' .$apps->class . '"></i>' . $apps->app . '</a>';
 					}
-					
-					
 				?>
  			<?php endforeach; ?>
+ 			
+ 			<?php 
+ 			// Intranet TETO BRASIL
+ 			if(($_SESSION['user']['pais'] == 1 && $_SESSION['user']['sede'] == 2) || $_SESSION['user']['email'] == 'elias.lima@techo.org')
+ 			{
+ 			    $link .= '<a class="btn btn-app bg-blue" href="http://tetobrasil.org/" target="_blank"> <i class="fa fa-internet-explorer"></i>' . 'Intranet TETO' . '</a>';
+ 			}
+ 			?>
+ 			
  			<?php echo($link)?>
  			<div class="form-group">
 				<input type="hidden" class="form-control" id="myId" value="<?php session_start(); echo($_SESSION['user']['id']);?>">

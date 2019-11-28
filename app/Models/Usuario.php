@@ -104,7 +104,7 @@ class Usuario extends BaseModel
     
     public function DataUser($email)
     {
-        $query = "SELECT {$this->table}.*, pais.id as 'id_pais' FROM {$this->table} Left Join sede on sede.id = {$this->table}.id_sede Left Join pais on pais.id = sede.id_pais WHERE {$this->table}.email=:email";
+        $query = "SELECT {$this->table}.*, pais.id as 'id_pais', sede.id as 'id_sede' FROM {$this->table} Left Join sede on sede.id = {$this->table}.id_sede Left Join pais on pais.id = sede.id_pais WHERE {$this->table}.email=:email";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":email", $email);
         $stmt->execute();
