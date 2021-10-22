@@ -1,6 +1,9 @@
-﻿<?php
+<?php
     $googleClient = new Google_Client();
     $auth = new GoogleAuth($googleClient);
+	
+	//echo('<pre>');
+	//	die(print_r($auth, true));
     
     if($auth->checkRedirectCode())
     {
@@ -12,7 +15,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ID Virtual | Login</title>
+  <title>Plataforma de Login | TECHO</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="/assets/js/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -20,30 +23,47 @@
   <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/assets/js/iCheck/square/blue.css">
   <link rel="stylesheet" type="text/css" href="/assets/css/jquery-confirm.css"/>
-
+  <style> 
+	@media(max-width: 728px){
+		.hide-mobile{
+			display:none !important; 
+		}
+	}
+  </style>
 </head>
 <body class="hold-transition">
-<div class="login-box">
+	<section>
+		<div class="container-fluid">
+			 <div class="row">
+					<div class="col-12 col-md-8 hide-mobile" style="background-image: url('https://login.techo.org/image-techo.jpg'); min-height: 100vh;">
+					</div>
+					<div class="col-12 col-md-4" style="background:#fff;">
+						<div class="login-box">
+							<?php if(!$auth->isLoggedIn()): ?>
+									<div class="login-logo">
+													<a href="#"><img src="/assets/img/logo-180.jpg"  alt="User Image"></a>
+											</div>
+												<div class="login-box-body" id="form-login">
+													<p class="login-box-msg">Iniciar sesión para acceder al sistema</p>
+															<form>
+																<div class="row">
+																	<div class="">
+																		<a type="button" class="btn btn-primary btn-block btn-flat" href="<?php echo $auth->getAuthUrl();?>"><i class="fa fa-google" aria-hidden="true"></i> Ingresa con tu correo TECHO</a>
+																	</div>
+																</div>
+															</form>
+												</div>
+							<?php else:?>		
+								<?php header('Location: /home');?>	
+							<?php endif;?>	
+								
+							</div>
+					</div>
+			 </div>
+		</div>
+	
+	</section>
 
-<?php if(!$auth->isLoggedIn()): ?>
-		<div class="login-logo">
-            <a href="#"><img src="/assets/img/logo-180.jpg"  alt="User Image"></a>
-        </div>
-          <div class="login-box-body" id="form-login">
-            <p class="login-box-msg">Iniciar sesión para acceder al sistema</p>
-                <form>
-                  <div class="row">
-                    <div class="">
-                      <a type="button" class="btn btn-primary btn-block btn-flat" href="<?php echo $auth->getAuthUrl();?>">Entrar</a>
-                    </div>
-                  </div>
-                </form>
-          </div>
-<?php else:?>		
-	<?php header('Location: /home');?>	
-<?php endif;?>	
-  
-</div>
 
 <script src="/assets/js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/assets/js/bootstrap/js/bootstrap.min.js"></script>
@@ -53,7 +73,7 @@
 $(document).ready(function() {
 
 	var link = window.location.href;
-	
+		
 	if(link.indexOf("appid") != -1)
 	{
 		var url   = window.location.search.replace("?", "");
@@ -74,7 +94,7 @@ $(document).ready(function() {
 	 	oData = new Object();	
 	 	oData.id       = id;
 	 	oData.redirect = redirect;
-
+		
 	 	$.ajax({
 	 		type: "POST",
 	 		url: "/home/save",

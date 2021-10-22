@@ -12,9 +12,9 @@
             {
                 $this->client->setClientID('195002437870-rp8bdf09m6uaan83vr7g9gs7cpalavsd.apps.googleusercontent.com');
                 $this->client->setClientSecret('WhuxYHQe2sdbEx3OSaOK-25-');
-                $this->client->setRedirectUri('http://id.techo.org/');
+                $this->client->setRedirectUri('https://login.techo.org');
                 $this->client->addScope('email');
-                $this->client->addScope('profile');
+            //    $this->client->addScope('profile');
             }
         }
         
@@ -30,10 +30,17 @@
         
         public function checkRedirectCode()
         {
+		//	echo('<pre>');
+		//	die(print_r($_GET, true));
+			
             if(isset($_GET['code']))
             {
                 $this->client->authenticate($_GET['code']);
+                							
+                $aDados = $this->client->getAccessToken();
+				
                 $this->setToken($this->client->getAccessToken());
+                
                 $this->setUser($this->getPayload());
                 
                 $payload = $this->getPayload();
@@ -51,6 +58,7 @@
 		
 		public function setUser($user)
 		{
+            
 			$_SESSION['user'] = $user;
 		}
 		
@@ -66,17 +74,13 @@
         
         public function getPayload()
         {
+            
             $payload = $this->client->verifyIdToken();
             
             if($payload)
             {
                 return $payload;
             }
-        }
-        
-        public function Elias()
-        {
-            return 'Elias deu merda cara';
         }
     }
 ?>
