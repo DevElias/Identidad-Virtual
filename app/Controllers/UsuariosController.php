@@ -131,4 +131,32 @@ class UsuariosController extends BaseController
             }
         }
     }
+	
+	public function getUser($request)
+    {   
+        $aRequest = (array) $request;
+        $model = Container::getModel("Usuario");
+		
+        if($aRequest['api'] === 'true' && $aRequest['method'] == 'GET')
+        {
+            if(!empty($aRequest['token']))
+            {
+                $app  = $model->CheckToken($aRequest['token']);
+
+                if($app)
+                {
+					$email = $aRequest['email'];
+                    $response = $model->getUser($email);
+
+                    if (empty($response)) {
+                        die(print_r('mail not found'));
+                    }
+                    else {
+                        die(print_r(json_encode($response), true));
+                    }
+                }
+            }
+        }     
+          
+    }
 }

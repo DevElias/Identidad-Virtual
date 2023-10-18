@@ -456,5 +456,15 @@ class Usuario extends BaseModel
         $stmt->closeCursor();
         return $result;
     }
+	
+	 public function getUser($email)
+    {
+        $query = "SELECT * FROM usuario WHERE email = '" . $email . "'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+	}
     
 }
